@@ -25,7 +25,7 @@ class HomePage extends StatelessWidget {
             const SizedBox(height: 35),
             ElevatedButton(
               child: const Text('School'),
-              onPressed: () => Navigator.pushNamed(context, SchoolModule.home),
+              onPressed: () => Navigator.pushNamed(context, SchoolModule.register),
             ),
           ],
         ),

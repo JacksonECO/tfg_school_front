@@ -1,16 +1,19 @@
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:tfg_front/src/components/modal_alert.dart';
 import 'package:tfg_front/src/core/helpers/custom_exception.dart';
 import 'package:tfg_front/src/module/school/model/school_model.dart';
-import 'package:tfg_front/src/module/school/module/login/login_service.dart';
+import 'package:tfg_front/src/module/school/service/login_service.dart';
 
-class SchoolLoginController {
-  final SchoolLoginService _service = Modular.get<SchoolLoginService>();
+class ProfileController {
+  final SchoolProfileService _service = Modular.get<SchoolProfileService>();
+
+  ProfileController({
+    this.newSchool = true,
+  });
 
   final SchoolModel school = SchoolModel.clean();
+  final bool newSchool;
   final form = GlobalKey<FormState>();
 
   String? verifyPassword(String? confirmPassword) {
