@@ -37,7 +37,10 @@ class InputRegister extends StatelessWidget {
         children: [
           Padding(
             padding: const EdgeInsets.only(left: 10, bottom: 4),
-            child: Text(title),
+            child: Text(
+              title,
+              style: context.style.robotoRegular.copyWith(fontSize: 14),
+            ),
           ),
           TextFormField(
             autovalidateMode: AutovalidateMode.onUserInteraction,

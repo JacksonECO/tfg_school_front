@@ -1,5 +1,4 @@
 import 'package:dio/dio.dart';
-import 'package:tfg_front/src/core/helpers/constants.dart';
 
 abstract class CustomHttp {
   Future<Response<T>> get<T>(

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:tfg_front/src/components/button.dart';
+import 'package:tfg_front/src/components/click.dart';
 import 'package:tfg_front/src/components/input_register.dart';
 import 'package:tfg_front/src/core/formatter/cep_input_formatter.dart';
 import 'package:tfg_front/src/core/formatter/cnpj_input_formatter.dart';
@@ -8,6 +9,7 @@ import 'package:tfg_front/src/core/formatter/phone_input_formatter.dart';
 import 'package:tfg_front/src/core/helpers/context_extension.dart';
 import 'package:tfg_front/src/module/school/controller/profile_controller.dart';
 import 'package:validatorless/validatorless.dart';
+import 'package:flutter_mobx/flutter_mobx.dart';
 
 class ProfileWidget extends StatelessWidget {
   final ProfileController controller;
@@ -173,6 +175,47 @@ class ProfileWidget extends StatelessWidget {
                       ),
                     ],
                   ),
+                  const SizedBox(height: 16),
+                  Observer(builder: (_) {
+                    return Row(
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Text(
+                          'Logotipo:',
+                          style: context.style.robotoRegular.copyWith(fontSize: 14),
+                        ),
+                        const SizedBox(width: 16),
+                        if (controller.image?.image == null)
+                          IconButton(
+                            onPressed: controller.getImage,
+                            icon: const Icon(
+                              Icons.add_photo_alternate_outlined,
+                              size: 18,
+                            ),
+                          )
+                        else
+                          Click(
+                            onTap: controller.getImage,
+                            child: Image.memory(
+                              controller.image!.image!,
+                              height: 150,
+                              // width: 50,
+                              fit: BoxFit.cover,
+                            ),
+                          )
+
+                        // ListTile(
+                        //   title: const Text('Logo'),
+                        //   trailing:
+                        //   // leading: const Icon(Icons.photo_library),
+                        //   onTap: () async {
+
+                        //   },
+                        // ),
+                      ],
+                    );
+                  }),
                   const SizedBox(height: 16),
                   Button(
                     text: controller.newSchool ? 'CRIAR CONTAS' : 'SALVAR',
