@@ -1,7 +1,10 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:tfg_front/src/components/modal_alert.dart';
 import 'package:tfg_front/src/core/helpers/custom_exception.dart';
+import 'package:tfg_front/src/model/auth_model.dart';
 import 'package:tfg_front/src/module/home/home_module.dart';
 import 'package:tfg_front/src/module/school/school_module.dart';
 import 'package:tfg_front/src/module/user/user_module.dart';
@@ -24,11 +27,15 @@ class LoginController {
   Future<void> login() async {
     if (form.currentState!.validate()) {
       try {
+        Map<String, dynamic>? user;
         if (isSchool) {
-          await _service.loginSchool(email, password);
+          user = await _service.loginSchool(email, password);
         } else {
-          await _service.loginUser(email, password);
+          user = await _service.loginUser(email, password);
         }
+
+        Modular.get<AuthModel>().set(AuthModel.fromMap(user!));
+
         Modular.to.pushReplacementNamed(
           isSchool ? SchoolModule.initialRoute : UserModule.initialRoute,
         );

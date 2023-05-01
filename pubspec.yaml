@@ -49,6 +49,7 @@ dependencies:
 
   drop_down_list: ^0.0.5
   dio: ^5.1.1
+  sweet_cookie: ^0.0.5
   # badges: ^3.0.3
 
 dev_dependencies:

@@ -6,22 +6,25 @@ import 'package:tfg_front/src/module/school/model/school_model.dart';
 class LoginService {
   final _dio = Modular.get<CustomHttp>();
 
-  Future<void> loginSchool(String email, String password) async {
-    await _dio.post(
-      '/school/login',
-      data: {'email': email, 'password': password},
-    );
-  }
+  Future<Map<String, dynamic>?> loginSchool(String email, String password) async =>
+      (await _dio.post<Map<String, dynamic>>(
+        '/school/login',
+        data: {'email': email, 'password': password},
+      ))
+          .data;
 
-  Future<void> registerSchool(SchoolModel school, FileModel? image) async {
-    await _dio.post(
-      '/school/register',
-      data: {
-        ...school.toMap(),
-        if (image != null) 'newLogo': image.toMap(),
-      },
-    );
-  }
+  Future<Map<String, dynamic>?> registerSchool(
+    SchoolModel school,
+    FileModel? image,
+  ) async =>
+      (await _dio.post<Map<String, dynamic>>(
+        '/school/register',
+        data: {
+          ...school.toMap(),
+          if (image != null) 'newLogo': image.toMap(),
+        },
+      ))
+          .data;
 
   loginUser(String email, String password) {}
 }

@@ -10,8 +10,10 @@ class LoginPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Center(
-        child: LoginWidget(
-          controller: controller,
+        child: SingleChildScrollView(
+          child: LoginWidget(
+            controller: controller,
+          ),
         ),
       ),
     );

@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:tfg_front/src/core/helpers/constants.dart';
 import 'package:tfg_front/src/core/theme/theme_config.dart';
-import 'package:tfg_front/src/module/web_module.dart';
+import 'package:tfg_front/web_module.dart';
 
 void main() {
   runApp(ModularApp(
