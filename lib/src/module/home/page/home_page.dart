@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:tfg_front/src/module/home/home_module.dart';
 import 'package:tfg_front/src/module/school/school_module.dart';
 import 'package:tfg_front/src/module/user/user_module.dart';
 
@@ -20,12 +21,22 @@ class HomePage extends StatelessWidget {
           children: [
             ElevatedButton(
               child: const Text('User'),
-              onPressed: () => Navigator.pushNamed(context, UserModule.home),
+              onPressed: () => Navigator.pushNamed(context, UserModule.initialRoute),
             ),
             const SizedBox(height: 35),
             ElevatedButton(
               child: const Text('School'),
-              onPressed: () => Navigator.pushNamed(context, SchoolModule.register),
+              onPressed: () => Navigator.pushNamed(context, SchoolModule.registerRoute),
+            ),
+            const SizedBox(height: 35),
+            ElevatedButton(
+              child: const Text('Login School'),
+              onPressed: () => Navigator.pushNamed(context, HomeModule.loginSchoolRoute),
+            ),
+            const SizedBox(height: 35),
+            ElevatedButton(
+              child: const Text('Login User'),
+              onPressed: () => Navigator.pushNamed(context, HomeModule.loginUserRoute),
             ),
           ],
         ),

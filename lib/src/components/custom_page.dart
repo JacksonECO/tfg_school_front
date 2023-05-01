@@ -19,7 +19,7 @@ class CustomPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: HeaderWidget(),
+      appBar: appBar ?? HeaderWidget(),
       body: CustomScrollView(
         slivers: [
           if (body != null) ...[

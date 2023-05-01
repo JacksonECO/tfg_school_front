@@ -4,8 +4,8 @@ import 'package:tfg_front/src/module/school/page/register_page.dart';
 import 'package:tfg_front/src/module/school/service/login_service.dart';
 
 class SchoolModule extends Module {
-  static String home = '/school/';
-  static String register = '${home}register';
+  static const String initialRoute = '/school/';
+  static const String registerRoute = '${initialRoute}register';
 
   @override
   List<Bind> get binds => [
@@ -15,7 +15,7 @@ class SchoolModule extends Module {
   @override
   List<ModularRoute> get routes => [
         ChildRoute(
-          '/register',
+          registerRoute.split('/school').last,
           child: (_, __) => RegisterPage(
             controller: ProfileController(),
           ),

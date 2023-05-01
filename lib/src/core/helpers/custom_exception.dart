@@ -1,15 +1,16 @@
 import 'dart:developer';
 
 class CustomException implements Exception {
-  final String message;
+  late final String message;
   final Object? error;
   final StackTrace? stackTrace;
 
   CustomException({
-    this.message = 'Aconteceu um erro inesperado, tente novamente mais tarde!',
+    String? message,
     this.error,
     this.stackTrace,
   }) {
+    this.message = message ?? 'Aconteceu um erro inesperado, tente novamente mais tarde!';
     log('$runtimeType => $message', error: error, stackTrace: stackTrace);
   }
 
