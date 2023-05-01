@@ -1,6 +1,7 @@
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:tfg_front/src/core/helpers/custom_http.dart';
 import 'package:tfg_front/src/model/file_model.dart';
+import 'package:tfg_front/src/model/user_model.dart';
 import 'package:tfg_front/src/module/school/model/school_model.dart';
 
 class LoginService {
@@ -32,5 +33,7 @@ class LoginService {
   }
 
   loginUser(String email, String password) {}
+
+  registerUser(UserModel user, FileModel? image) {}
   // Future<Map<String, dynamic>?> registerUser(UserModel user, FileModel? image) async{}
 }

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:tfg_front/src/core/helpers/context_extension.dart';
 import 'package:tfg_front/src/model/auth_model.dart';
+import 'package:tfg_front/src/module/school/school_module.dart';
 
 class LeadingMenuWidget extends StatelessWidget {
   LeadingMenuWidget({super.key});
@@ -37,11 +38,16 @@ class LeadingMenuWidget extends StatelessWidget {
               Text(user.name!),
               const SizedBox(height: 6),
               const Divider(height: 0),
-              const ExpansionTile(
-                title: Text('Alunos'),
+              ExpansionTile(
+                title: const Text('Alunos'),
                 children: [
-                  ListTile(title: Text('Matricular Aluno')),
-                  ListTile(title: Text('Listar Alunos')),
+                  ListTile(
+                    title: const Text('Matricular Aluno'),
+                    onTap: () {
+                      Modular.to.pushNamed(SchoolModule.studentRoute);
+                    },
+                  ),
+                  const ListTile(title: Text('Listar Alunos')),
                 ],
               ),
               const ExpansionTile(
