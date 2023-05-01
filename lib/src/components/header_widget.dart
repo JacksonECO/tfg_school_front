@@ -1,5 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_modular/flutter_modular.dart';
 import 'package:tfg_front/src/core/theme/custom_colors.dart';
+import 'package:tfg_front/src/model/auth_model.dart';
+import 'package:tfg_front/src/model/auth_role_enum.dart';
+import 'package:tfg_front/src/module/school/school_module.dart';
+import 'package:tfg_front/src/module/user/user_module.dart';
 
 class HeaderWidget extends AppBar {
   HeaderWidget({super.key})
@@ -23,10 +28,25 @@ class HeaderWidget extends AppBar {
                   fontWeight: FontWeight.bold,
                 ),
               ),
-              _button('Início'),
-              _button('Cronograma'),
-              _button('Cursos'),
-              _button('FAQ'),
+              _button('Início', () {
+                final user = Modular.get<AuthModel>();
+
+                switch (user.authRole) {
+                  case AuthRoleEnum.admin:
+                    Modular.to.navigate(SchoolModule.initialRoute);
+                    break;
+                  case AuthRoleEnum.teacher:
+                  case AuthRoleEnum.student:
+                  case AuthRoleEnum.tutor:
+                    Modular.to.navigate(UserModule.initialRoute);
+                    break;
+                  default:
+                    Modular.to.navigate('/');
+                }
+              }),
+              _button('Cronograma', () {}),
+              _button('Cursos', () {}),
+              _button('FAQ', () {}),
             ],
           ),
           actions: [
@@ -41,7 +61,7 @@ class HeaderWidget extends AppBar {
           ],
         );
 
-  static Widget _button(String title) {
+  static Widget _button(String title, Function()? onPressed) {
     return Padding(
       padding: const EdgeInsets.only(left: 20),
       child: TextButton(
@@ -54,7 +74,7 @@ class HeaderWidget extends AppBar {
             return Colors.white;
           }),
         ),
-        onPressed: () {},
+        onPressed: onPressed,
         child: Text(title),
       ),
     );

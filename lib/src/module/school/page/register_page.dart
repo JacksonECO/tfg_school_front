@@ -13,6 +13,8 @@ class RegisterPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return CustomPage(
+      showLeading: false,
+      showAppBar: false,
       body: [
         ProfileWidget(controller: controller),
       ],

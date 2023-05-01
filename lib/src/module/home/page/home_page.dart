@@ -34,7 +34,7 @@ class _HomePageState extends State<HomePage> {
             const SizedBox(height: 35),
             ElevatedButton(
               child: const Text('School'),
-              onPressed: () => Navigator.pushNamed(context, SchoolModule.registerRoute),
+              onPressed: () => Navigator.pushNamed(context, SchoolModule.initialRoute),
             ),
             const SizedBox(height: 35),
             ElevatedButton(

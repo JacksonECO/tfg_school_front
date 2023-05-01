@@ -4,13 +4,17 @@ enum AuthRoleEnum {
   student('Estudante'),
   tutor('Tutor');
 
-  const AuthRoleEnum(String name);
+  final String name;
+  const AuthRoleEnum(this.name);
 
   static AuthRoleEnum? fromName(String? valueName) {
     if (valueName == null) return null;
     try {
-      return AuthRoleEnum.values.firstWhere((e) => e.name == valueName);
-    } catch (_) {
+      return AuthRoleEnum.values.firstWhere((e) {
+        return e.name == valueName;
+      });
+    } catch (e) {
+      print(e);
       return null;
     }
   }

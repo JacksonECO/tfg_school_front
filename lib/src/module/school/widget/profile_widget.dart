@@ -72,6 +72,7 @@ class ProfileWidget extends StatelessWidget {
                   InputRegister(
                     title: 'Escola',
                     hintText: 'Nome completo da escola',
+                    initialValue: controller.school.name,
                     onChanged: (v) => controller.school.name = v,
                     validator: Validatorless.required('Campo obrigatório'),
                   ),
@@ -82,6 +83,7 @@ class ProfileWidget extends StatelessWidget {
                         child: InputRegister(
                           title: 'Email',
                           hintText: 'escola@host.com',
+                          initialValue: controller.school.email,
                           onChanged: (v) => controller.school.email = v,
                           validator: Validatorless.multiple([
                             Validatorless.required('Campo obrigatório'),
@@ -94,6 +96,7 @@ class ProfileWidget extends StatelessWidget {
                         child: InputRegister(
                           title: 'Telefone',
                           hintText: '(00) 0000-0000',
+                          initialValue: controller.school.phone,
                           onChanged: (v) => controller.school.phone = v,
                           validator: Validatorless.multiple([
                             Validatorless.required('Campo obrigatório'),
@@ -114,6 +117,7 @@ class ProfileWidget extends StatelessWidget {
                         child: InputRegister(
                           title: 'CNPJ',
                           hintText: '00.000.000/0000-00',
+                          initialValue: controller.school.cnpj,
                           onChanged: (v) => controller.school.cnpj = v,
                           validator: Validatorless.multiple([
                             Validatorless.required('Campo obrigatório'),
@@ -132,6 +136,7 @@ class ProfileWidget extends StatelessWidget {
                         child: InputRegister(
                           title: 'CEP',
                           hintText: '00000-000',
+                          initialValue: controller.school.cep,
                           onChanged: (v) => controller.school.cep = v,
                           validator: Validatorless.multiple([
                             Validatorless.required('Campo obrigatório'),
@@ -145,36 +150,37 @@ class ProfileWidget extends StatelessWidget {
                       ),
                     ],
                   ),
-                  Row(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Expanded(
-                        child: InputRegister(
-                          title: 'Senha',
-                          hintText: '********',
-                          obscureText: true,
-                          onChanged: (v) => controller.school.password = v,
-                          validator: Validatorless.multiple([
-                            Validatorless.required('Campo obrigatório'),
-                            Validatorless.min(6, 'Mínimo 6 caracteres'),
-                          ]),
+                  if (controller.newSchool)
+                    Row(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Expanded(
+                          child: InputRegister(
+                            title: 'Senha',
+                            hintText: '********',
+                            obscureText: true,
+                            onChanged: (v) => controller.school.password = v,
+                            validator: Validatorless.multiple([
+                              Validatorless.required('Campo obrigatório'),
+                              Validatorless.min(6, 'Mínimo 6 caracteres'),
+                            ]),
+                          ),
                         ),
-                      ),
-                      const SizedBox(width: 16),
-                      Expanded(
-                        child: InputRegister(
-                          title: 'Confirme sua Senha',
-                          hintText: '********',
-                          obscureText: true,
-                          validator: Validatorless.multiple([
-                            Validatorless.required('Campo obrigatório'),
-                            Validatorless.min(6, 'Mínimo 6 caracteres'),
-                            controller.verifyPassword,
-                          ]),
+                        const SizedBox(width: 16),
+                        Expanded(
+                          child: InputRegister(
+                            title: 'Confirme sua Senha',
+                            hintText: '********',
+                            obscureText: true,
+                            validator: Validatorless.multiple([
+                              Validatorless.required('Campo obrigatório'),
+                              Validatorless.min(6, 'Mínimo 6 caracteres'),
+                              controller.verifyPassword,
+                            ]),
+                          ),
                         ),
-                      ),
-                    ],
-                  ),
+                      ],
+                    ),
                   const SizedBox(height: 16),
                   Observer(builder: (_) {
                     return Row(
@@ -186,7 +192,25 @@ class ProfileWidget extends StatelessWidget {
                           style: context.style.robotoRegular.copyWith(fontSize: 14),
                         ),
                         const SizedBox(width: 16),
-                        if (controller.image?.image == null)
+                        if (controller.image?.image != null)
+                          Click(
+                            onTap: controller.getImage,
+                            child: Image.memory(
+                              controller.image!.image!,
+                              height: 150,
+                              fit: BoxFit.cover,
+                            ),
+                          )
+                        else if (controller.school.logo != null && controller.school.logo != '')
+                          Click(
+                            onTap: controller.getImage,
+                            child: Image.network(
+                              controller.school.logo!,
+                              height: 150,
+                              fit: BoxFit.cover,
+                            ),
+                          )
+                        else
                           IconButton(
                             onPressed: controller.getImage,
                             icon: const Icon(
@@ -194,25 +218,6 @@ class ProfileWidget extends StatelessWidget {
                               size: 18,
                             ),
                           )
-                        else
-                          Click(
-                            onTap: controller.getImage,
-                            child: Image.memory(
-                              controller.image!.image!,
-                              height: 150,
-                              // width: 50,
-                              fit: BoxFit.cover,
-                            ),
-                          )
-
-                        // ListTile(
-                        //   title: const Text('Logo'),
-                        //   trailing:
-                        //   // leading: const Icon(Icons.photo_library),
-                        //   onTap: () async {
-
-                        //   },
-                        // ),
                       ],
                     );
                   }),

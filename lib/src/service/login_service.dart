@@ -26,5 +26,11 @@ class LoginService {
       ))
           .data;
 
+  Future<SchoolModel> getSchool() async {
+    final response = await _dio.get<Map<String, dynamic>>('/school/me');
+    return SchoolModel.fromMap(response.data!);
+  }
+
   loginUser(String email, String password) {}
+  // Future<Map<String, dynamic>?> registerUser(UserModel user, FileModel? image) async{}
 }

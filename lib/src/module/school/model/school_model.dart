@@ -1,18 +1,16 @@
 import 'dart:convert';
-
-import 'package:dson_adapter/dson_adapter.dart';
-import 'package:flutter/foundation.dart';
+import 'dart:developer';
 
 class SchoolModel {
   int? id;
   String name;
   String cnpj;
-  Map? logo;
+  String? logo;
   String? social;
   String cep;
   String phone;
   String email;
-  String password;
+  String? password;
   DateTime? createdAt;
   DateTime? updatedAt;
 
@@ -20,14 +18,14 @@ class SchoolModel {
     this.id,
     required this.name,
     required this.cnpj,
-    required this.logo,
-    required this.social,
+    this.logo,
+    this.social,
     required this.cep,
     required this.phone,
     required this.email,
-    required this.password,
-    required this.createdAt,
-    required this.updatedAt,
+    this.password,
+    this.createdAt,
+    this.updatedAt,
   });
 
   factory SchoolModel.clean() {
@@ -50,7 +48,7 @@ class SchoolModel {
     int? id,
     String? name,
     String? cnpj,
-    Map? logo,
+    String? logo,
     String? social,
     String? cep,
     String? phone,
@@ -91,7 +89,24 @@ class SchoolModel {
   }
 
   factory SchoolModel.fromMap(Map<String, dynamic> map) {
-    return const DSON().fromJson(map, SchoolModel.new);
+    try {
+      return SchoolModel(
+        id: map['id'] as int,
+        name: map['name'] as String,
+        cnpj: map['cnpj'] as String,
+        logo: map['logo'] as String?,
+        social: map['social'] != null ? map['social'] as String : null,
+        cep: map['cep'] as String,
+        phone: map['phone'] as String,
+        email: map['email'] as String,
+        // password: map['password'] as String?,
+        // createdAt: map['createdAt'] != null ? DateTime.fromMillisecondsSinceEpoch(map['createdAt'] as int) : null,
+        // updatedAt: map['updatedAt'] != null ? DateTime.fromMillisecondsSinceEpoch(map['updatedAt'] as int) : null,
+      );
+    } catch (e, s) {
+      log('Error on SchoolModel.fromMap: ', error: e, stackTrace: s);
+      rethrow;
+    }
   }
 
   String toJson() => json.encode(toMap());
@@ -111,7 +126,7 @@ class SchoolModel {
     return other.id == id &&
         other.name == name &&
         other.cnpj == cnpj &&
-        mapEquals(other.logo, logo) &&
+        other.logo == logo &&
         other.social == social &&
         other.cep == cep &&
         other.phone == phone &&

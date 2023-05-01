@@ -40,5 +40,9 @@ class ThemeConfig {
       errorStyle: CustomTextStyle.i.robotoItalic.copyWith(color: Colors.red, fontSize: 14),
       contentPadding: const EdgeInsets.symmetric(horizontal: 20, vertical: 5),
     ),
+    dividerColor: Colors.black,
+    dividerTheme: const DividerThemeData(
+      color: Colors.black,
+    ),
   );
 }

@@ -10,7 +10,7 @@ class AuthModel {
   String? name;
   String? email;
   String? photoUrl;
-  AuthRoleEnum? typeUser;
+  AuthRoleEnum? authRole;
   String? tokenJwt;
 
   AuthModel({
@@ -19,7 +19,7 @@ class AuthModel {
     this.name,
     this.email,
     this.photoUrl,
-    this.typeUser,
+    this.authRole,
     this.tokenJwt,
   });
 
@@ -36,7 +36,7 @@ class AuthModel {
       'name': name,
       'email': email,
       'photoUrl': photoUrl,
-      'typeUser': typeUser?.name,
+      'authRole': authRole?.name,
       'tokenJwt': tokenJwt,
     };
   }
@@ -48,7 +48,7 @@ class AuthModel {
       name: map['name'] as String?,
       email: map['email'] as String?,
       photoUrl: map['photoUrl'] as String?,
-      typeUser: AuthRoleEnum.fromName(map['typeUser'] as String?),
+      authRole: AuthRoleEnum.fromName(map['authRole'] as String?),
       tokenJwt: map['tokenJwt'] as String? ?? map['token'] as String?,
     );
   }
@@ -60,7 +60,7 @@ class AuthModel {
 
   @override
   String toString() {
-    return 'AuthModel(userId: $userId, schoolId: $schoolId, name: $name, email: $email, photoUrl: $photoUrl, typeUser: $typeUser, tokenJwt: $tokenJwt)';
+    return 'AuthModel(userId: $userId, schoolId: $schoolId, name: $name, email: $email, photoUrl: $photoUrl, authRole: $authRole, tokenJwt: $tokenJwt)';
   }
 
   void clear() {
@@ -69,7 +69,7 @@ class AuthModel {
     name = null;
     email = null;
     photoUrl = null;
-    typeUser = null;
+    authRole = null;
     tokenJwt = null;
     SweetCookie.clear();
   }
@@ -80,7 +80,7 @@ class AuthModel {
     name = user.name;
     email = user.email;
     photoUrl = user.photoUrl;
-    typeUser = user.typeUser;
+    authRole = user.authRole;
     tokenJwt = user.tokenJwt;
 
     updateStorage();
