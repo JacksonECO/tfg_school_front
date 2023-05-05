@@ -5,11 +5,14 @@ import 'package:flutter_modular/flutter_modular.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:tfg_front/src/components/modal_alert.dart';
 import 'package:tfg_front/src/core/helpers/custom_exception.dart';
+import 'package:tfg_front/src/model/auth_role_enum.dart';
 import 'package:tfg_front/src/model/file_model.dart';
 import 'package:tfg_front/src/model/user_model.dart';
+import 'package:tfg_front/src/module/school/model/class_model.dart';
 import 'package:tfg_front/src/module/school/school_module.dart';
 
 import 'package:mobx/mobx.dart';
+import 'package:tfg_front/src/service/class_service.dart';
 import 'package:tfg_front/src/service/login_service.dart';
 import 'package:tfg_front/src/service/user_service.dart';
 part 'profile_user_controller.g.dart';
@@ -19,6 +22,7 @@ class ProfileUserController = _ProfileUserControllerBase with _$ProfileUserContr
 abstract class _ProfileUserControllerBase with Store {
   final _service = Modular.get<LoginService>();
   final _serviceUser = Modular.get<UserService>();
+  final _serviceSchool = Modular.get<ClassService>();
   final ImagePicker _imagePicker = Modular.get<ImagePicker>();
 
   _ProfileUserControllerBase({
@@ -32,6 +36,7 @@ abstract class _ProfileUserControllerBase with Store {
       user = UserModel();
       newUser = true;
     }
+    getClass();
   }
 
   late UserModel user;
@@ -39,6 +44,9 @@ abstract class _ProfileUserControllerBase with Store {
   final bool isStudent;
   final form = GlobalKey<FormState>();
   bool hasDate = false;
+
+  @observable
+  ObservableList<ClassModel> classes = ObservableList();
 
   @observable
   FileModel? image;
@@ -71,11 +79,17 @@ abstract class _ProfileUserControllerBase with Store {
   Future<void> register() async {
     try {
       if (form.currentState!.validate()) {
-        await _service.registerUser(user, image);
+        if (isStudent) {
+          user.role = AuthRoleEnum.student;
+        } else {
+          user.role = AuthRoleEnum.teacher;
+        }
+
+        final info = await _service.registerUser(user, image);
 
         await ModalAlert.show(
           'Cadastro',
-          "Escola registrada com sucesso!",
+          info?['message'] ?? "Aluno registrado com sucesso!",
         );
         Modular.to.navigate(SchoolModule.initialRoute);
       }
@@ -84,10 +98,11 @@ abstract class _ProfileUserControllerBase with Store {
         'Cadastro',
         e.message,
       );
-    } catch (_) {
+    } catch (e) {
+      debugPrint(e.toString());
       ModalAlert.show(
         'Cadastro',
-        "Falha ao registrar escola!",
+        "Falha ao registrar aluno!",
       );
     }
   }
@@ -119,5 +134,11 @@ abstract class _ProfileUserControllerBase with Store {
         "Falha ao pegar imagem!",
       );
     }
+  }
+
+  Future<void> getClass() async {
+    try {
+      classes = (await _serviceSchool.allClass()).asObservable();
+    } catch (_) {}
   }
 }

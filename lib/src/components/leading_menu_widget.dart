@@ -20,7 +20,6 @@ class LeadingMenuWidget extends StatelessWidget {
         color: context.colors.secondary,
         border: const Border(
           right: BorderSide(color: Colors.black, width: 3),
-          bottom: BorderSide(color: Colors.black, width: 3),
         ),
       ),
       child: Column(
@@ -70,12 +69,12 @@ class LeadingMenuWidget extends StatelessWidget {
             children: [
               const SizedBox(height: 50),
               ListTile(
-                leading: Icon(Icons.support_agent),
+                leading: const Icon(Icons.support_agent),
                 title: const Text('Suporte'),
                 onTap: () {},
               ),
               ListTile(
-                leading: Icon(Icons.settings),
+                leading: const Icon(Icons.settings),
                 title: const Text('Configuração'),
                 onTap: () {},
               ),

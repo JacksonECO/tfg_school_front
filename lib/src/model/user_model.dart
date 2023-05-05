@@ -1,5 +1,7 @@
 import 'dart:convert';
 
+import 'package:tfg_front/src/model/auth_role_enum.dart';
+
 class UserModel {
   int? id;
   int? schoolId;
@@ -7,7 +9,7 @@ class UserModel {
   String? name;
   String? registration;
   DateTime? birthDate;
-  String? role;
+  AuthRoleEnum? role;
   String? phone;
   String? email;
   String? cpf;
@@ -19,6 +21,24 @@ class UserModel {
   String? city;
   DateTime? createdAt;
   DateTime? updatedAt;
+
+  String? get birthString {
+    if (birthDate == null) return null;
+    return '${birthDate?.day.toString().padLeft(2, '0')}/${birthDate?.month.toString().padLeft(2, '0')}/${birthDate?.year}';
+  }
+
+  set birthString(String? value) {
+    try {
+      final date = value!.split('/');
+      birthDate = DateTime(
+        int.parse(date[2]),
+        int.parse(date[1]),
+        int.parse(date[0]),
+      );
+    } catch (_) {
+      birthDate = null;
+    }
+  }
 
   UserModel({
     this.id,
@@ -48,7 +68,7 @@ class UserModel {
     String? name,
     String? registration,
     DateTime? birthDate,
-    String? role,
+    AuthRoleEnum? role,
     String? phone,
     String? email,
     String? cpf,
@@ -86,23 +106,23 @@ class UserModel {
   Map<String, dynamic> toMap() {
     return <String, dynamic>{
       'id': id,
-      'schoolId': schoolId,
-      'classId': classId,
+      'school_id': schoolId,
+      'class_id': classId,
       'name': name,
       'registration': registration,
-      // 'birthDate': birthDate?.millisecondsSinceEpoch,
-      'role': role,
+      'birth_date': birthDate?.toIso8601String(),
+      'role': role?.name,
       'phone': phone,
       'email': email,
       'cpf': cpf,
       'rg': rg,
       'password': password,
-      'profilePicture': profilePicture,
+      'profile_picture': profilePicture,
       'cep': cep,
       'address': address,
       'city': city,
-      // 'createdAt': createdAt?.millisecondsSinceEpoch,
-      // 'updatedAt': updatedAt?.millisecondsSinceEpoch,
+      'created_at': createdAt?.toIso8601String(),
+      'updated_at': updatedAt?.toIso8601String(),
     };
   }
 
@@ -113,19 +133,19 @@ class UserModel {
       classId: map['classId'] != null ? map['classId'] as int : null,
       name: map['name'] != null ? map['name'] as String : null,
       registration: map['registration'] != null ? map['registration'] as String : null,
-      // birthDate: map['birthDate'] != null ? DateTime.fromMillisecondsSinceEpoch(map['birthDate'] as int) : null,
-      role: map['role'] != null ? map['role'] as String : null,
+      birthDate: DateTime.tryParse(map['birthDate'] as String? ?? ''),
+      role: AuthRoleEnum.fromName(map['role'] as String?),
       phone: map['phone'] != null ? map['phone'] as String : null,
       email: map['email'] != null ? map['email'] as String : null,
       cpf: map['cpf'] != null ? map['cpf'] as String : null,
       rg: map['rg'] != null ? map['rg'] as String : null,
       password: map['password'] != null ? map['password'] as String : null,
-      profilePicture: map['profilePicture'] != null ? map['profilePicture'] as String : null,
+      profilePicture: map['profile_picture'] != null ? map['profile_picture'] as String : null,
       cep: map['cep'] != null ? map['cep'] as String : null,
       address: map['address'] != null ? map['address'] as String : null,
       city: map['city'] != null ? map['city'] as String : null,
-      // createdAt: map['createdAt'] != null ? DateTime.fromMillisecondsSinceEpoch(map['createdAt'] as int) : null,
-      // updatedAt: map['updatedAt'] != null ? DateTime.fromMillisecondsSinceEpoch(map['updatedAt'] as int) : null,
+      createdAt: DateTime.tryParse(map['createdAt'] as String? ?? ''),
+      updatedAt: DateTime.tryParse(map['updatedAt'] as String? ?? ''),
     );
   }
 
@@ -142,47 +162,46 @@ class UserModel {
   @override
   bool operator ==(covariant UserModel other) {
     if (identical(this, other)) return true;
-  
-    return 
-      other.id == id &&
-      other.schoolId == schoolId &&
-      other.classId == classId &&
-      other.name == name &&
-      other.registration == registration &&
-      other.birthDate == birthDate &&
-      other.role == role &&
-      other.phone == phone &&
-      other.email == email &&
-      other.cpf == cpf &&
-      other.rg == rg &&
-      other.password == password &&
-      other.profilePicture == profilePicture &&
-      other.cep == cep &&
-      other.address == address &&
-      other.city == city &&
-      other.createdAt == createdAt &&
-      other.updatedAt == updatedAt;
+
+    return other.id == id &&
+        other.schoolId == schoolId &&
+        other.classId == classId &&
+        other.name == name &&
+        other.registration == registration &&
+        other.birthDate == birthDate &&
+        other.role == role &&
+        other.phone == phone &&
+        other.email == email &&
+        other.cpf == cpf &&
+        other.rg == rg &&
+        other.password == password &&
+        other.profilePicture == profilePicture &&
+        other.cep == cep &&
+        other.address == address &&
+        other.city == city &&
+        other.createdAt == createdAt &&
+        other.updatedAt == updatedAt;
   }
 
   @override
   int get hashCode {
     return id.hashCode ^
-      schoolId.hashCode ^
-      classId.hashCode ^
-      name.hashCode ^
-      registration.hashCode ^
-      birthDate.hashCode ^
-      role.hashCode ^
-      phone.hashCode ^
-      email.hashCode ^
-      cpf.hashCode ^
-      rg.hashCode ^
-      password.hashCode ^
-      profilePicture.hashCode ^
-      cep.hashCode ^
-      address.hashCode ^
-      city.hashCode ^
-      createdAt.hashCode ^
-      updatedAt.hashCode;
+        schoolId.hashCode ^
+        classId.hashCode ^
+        name.hashCode ^
+        registration.hashCode ^
+        birthDate.hashCode ^
+        role.hashCode ^
+        phone.hashCode ^
+        email.hashCode ^
+        cpf.hashCode ^
+        rg.hashCode ^
+        password.hashCode ^
+        profilePicture.hashCode ^
+        cep.hashCode ^
+        address.hashCode ^
+        city.hashCode ^
+        createdAt.hashCode ^
+        updatedAt.hashCode;
   }
 }

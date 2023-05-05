@@ -47,18 +47,23 @@ class HeaderWidget extends AppBar {
               _button('Cronograma', () {}),
               _button('Cursos', () {}),
               _button('FAQ', () {}),
+              _button('Sair', () {
+                final user = Modular.get<AuthModel>();
+                user.clear();
+                Modular.to.pushNamedAndRemoveUntil('/', (_) => false);
+              }),
             ],
           ),
-          actions: [
-            IconButton(
-              highlightColor: Colors.transparent,
-              icon: const Icon(
-                Icons.account_circle,
-                size: 48,
-              ),
-              onPressed: () {},
-            )
-          ],
+          // actions: [
+          //   IconButton(
+          //     highlightColor: Colors.transparent,
+          //     icon: const Icon(
+          //       Icons.account_circle,
+          //       size: 48,
+          //     ),
+          //     onPressed: () {},
+          //   )
+          // ],
         );
 
   static Widget _button(String title, Function()? onPressed) {

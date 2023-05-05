@@ -34,6 +34,13 @@ class LoginService {
 
   loginUser(String email, String password) {}
 
-  registerUser(UserModel user, FileModel? image) {}
-  // Future<Map<String, dynamic>?> registerUser(UserModel user, FileModel? image) async{}
+  Future<Map<String, dynamic>?> registerUser(UserModel user, FileModel? image) async =>
+      (await _dio.post<Map<String, dynamic>>(
+        '/user/register',
+        data: {
+          ...user.toMap(),
+          if (image != null) 'newLogo': image.toMap(),
+        },
+      ))
+          .data;
 }

@@ -1,8 +1,7 @@
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:tfg_front/src/components/modal_alert.dart';
+import 'package:tfg_front/src/core/helpers/constants.dart';
 import 'package:tfg_front/src/core/helpers/custom_exception.dart';
 import 'package:tfg_front/src/model/auth_model.dart';
 import 'package:tfg_front/src/module/home/home_module.dart';
@@ -21,8 +20,8 @@ class LoginController {
   final bool isSchool;
 
   final form = GlobalKey<FormState>();
-  String email = '';
-  String password = '';
+  late String email = isSchool ? Constants.emailSchool : Constants.emailUser;
+  late String password = Constants.password;
 
   Future<void> login() async {
     if (form.currentState!.validate()) {

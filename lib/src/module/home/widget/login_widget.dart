@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:tfg_front/src/module/school/school_module.dart';
 import 'package:validatorless/validatorless.dart';
 
 import 'package:tfg_front/src/components/button.dart';
@@ -69,6 +70,7 @@ class LoginWidget extends StatelessWidget {
                 children: [
                   InputRegister(
                     title: 'Email',
+                    initialValue: controller.email,
                     hintText: controller.isSchool ? 'escola@host.com' : 'usuario@host.com',
                     onChanged: (v) => controller.email = v,
                     validator: Validatorless.multiple([
@@ -78,6 +80,7 @@ class LoginWidget extends StatelessWidget {
                   ),
                   InputRegister(
                     title: 'Senha',
+                    initialValue: controller.password,
                     hintText: '****',
                     obscureText: true,
                     onChanged: (v) => controller.password = v,
@@ -119,7 +122,9 @@ class LoginWidget extends StatelessWidget {
                   if (controller.isSchool) ...[
                     const SizedBox(height: 16),
                     TextButton(
-                      onPressed: () {},
+                      onPressed: () {
+                        Navigator.of(context).pushNamed(SchoolModule.registerRoute);
+                      },
                       child: Text(
                         'Não tem uma conta? Cadastre sua Escola',
                         style: context.style.interLight.copyWith(

@@ -5,21 +5,20 @@
   "version": "0.2.0",
   "configurations": [
     {
-      "name": "tfg_front",
-      "request": "launch",
-      "type": "dart"
-    },
-    {
-      "name": "tfg_front (profile mode)",
+      "name": "Local",
       "request": "launch",
       "type": "dart",
-      "flutterMode": "profile"
+      "args": [
+        "--dart-define=emailSchool=asdbj@bhsrtgrdyhy6y6yhfb.com",
+        "--dart-define=password=123456",
+        "--dart-define=urlBase=http://localhost:3333/api",
+        "--dart-define=prod=false",
+      ]
     },
     {
-      "name": "tfg_front (release mode)",
+      "name": "Prod",
       "request": "launch",
       "type": "dart",
-      "flutterMode": "release"
     }
   ]
 }

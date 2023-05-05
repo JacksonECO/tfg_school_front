@@ -17,3 +17,4 @@ samples, guidance on mobile development, and a full API reference.
 
 
 npx http-server ./build/web -c-1 -p=4000
+https://tfg-school.web.app

@@ -12,24 +12,6 @@ class PhoneInputFormatter extends TextInputFormatter {
     return '';
   }
 
-  static List<String> phoneSearch(String phone) {
-    final temp = <String>[];
-    final clear = phone.replaceAll(RegExp('[() -]'), '');
-
-    // Completo
-    temp.add(clear);
-    // Sem 9
-    if (clear.length == 9) temp.add(clear.substring(1));
-    // Sem  DD
-    if (clear.length >= 10) temp.add(clear.substring(2));
-    // Sem DD e 9
-    if (clear.length == 11) temp.add(clear.substring(3));
-    // Removendo apenas o 9
-    if (clear.length == 11) temp.add(clear.substring(0, 2) + clear.substring(3));
-
-    return temp;
-  }
-
   @override
   TextEditingValue formatEditUpdate(TextEditingValue oldValue, TextEditingValue newValue) {
     final int newTextLength = newValue.text.length;

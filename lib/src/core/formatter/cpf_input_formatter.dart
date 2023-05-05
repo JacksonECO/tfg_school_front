@@ -22,7 +22,7 @@ class CpfInputFormatter extends TextInputFormatter {
     var substrIndex = 0;
     final newText = StringBuffer();
 
-    if (newValueLength > 14) {
+    if (newValueLength > 11) {
       return oldValue;
     }
 

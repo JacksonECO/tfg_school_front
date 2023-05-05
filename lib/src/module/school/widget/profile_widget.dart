@@ -6,6 +6,7 @@ import 'package:tfg_front/src/components/input_register.dart';
 import 'package:tfg_front/src/core/formatter/cep_input_formatter.dart';
 import 'package:tfg_front/src/core/formatter/cnpj_input_formatter.dart';
 import 'package:tfg_front/src/core/formatter/phone_input_formatter.dart';
+import 'package:tfg_front/src/core/helpers/constants.dart';
 import 'package:tfg_front/src/core/helpers/context_extension.dart';
 import 'package:tfg_front/src/module/school/controller/profile_controller.dart';
 import 'package:validatorless/validatorless.dart';
@@ -122,8 +123,7 @@ class ProfileWidget extends StatelessWidget {
                           validator: Validatorless.multiple([
                             Validatorless.required('Campo obrigatório'),
                             Validatorless.min(18, 'CNPJ inválido'),
-                            // TODO: Ativar validação de CNPJ
-                            // Validatorless.cnpj('CNPJ inválido'),
+                            Constants.prod ? Validatorless.cnpj('CNPJ inválido') : (_) => null,
                           ]),
                           inputFormatters: [
                             FilteringTextInputFormatter.digitsOnly,
