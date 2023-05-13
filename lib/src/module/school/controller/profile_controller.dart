@@ -5,6 +5,7 @@ import 'package:flutter_modular/flutter_modular.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:tfg_front/src/components/modal_alert.dart';
 import 'package:tfg_front/src/core/helpers/custom_exception.dart';
+import 'package:tfg_front/src/model/auth_model.dart';
 import 'package:tfg_front/src/model/file_model.dart';
 import 'package:tfg_front/src/module/school/model/school_model.dart';
 import 'package:tfg_front/src/module/school/school_module.dart';
@@ -50,12 +51,13 @@ abstract class _ProfileControllerBase with Store {
   Future<void> register() async {
     try {
       if (form.currentState!.validate()) {
-        await _service.registerSchool(school, image);
-
+        final AuthModel auth = await _service.registerSchool(school, image);
         await ModalAlert.show(
           'Cadastro',
           "Escola registrada com sucesso!",
         );
+
+        Modular.get<AuthModel>().set(auth);
         Modular.to.navigate(SchoolModule.initialRoute);
       }
     } on CustomException catch (e) {
@@ -63,7 +65,8 @@ abstract class _ProfileControllerBase with Store {
         'Cadastro',
         e.message,
       );
-    } catch (_) {
+    } catch (e, s) {
+      log('Erro ao registrar escola', error: e, stackTrace: s);
       ModalAlert.show(
         'Cadastro',
         "Falha ao registrar escola!",

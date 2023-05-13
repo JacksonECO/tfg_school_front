@@ -27,13 +27,14 @@ class LeadingMenuWidget extends StatelessWidget {
         children: [
           Column(
             children: [
-              if (user.photoUrl != null)
-                Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Center(
-                    child: Image.network(user.photoUrl!, height: 100),
-                  ),
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Center(
+                  child: (user.photoUrl != null)
+                      ? Image.network(user.photoUrl!, height: 100)
+                      : const Icon(Icons.person, size: 100),
                 ),
+              ),
               Text(user.name!),
               const SizedBox(height: 6),
               const Divider(height: 0),
