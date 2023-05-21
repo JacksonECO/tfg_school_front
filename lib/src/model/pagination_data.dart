@@ -15,7 +15,7 @@ class PaginationData<T> {
     this.search = '',
   });
 
-  int get totalPage => (totalElements / page).ceil();
+  int get totalPage => (totalElements / rowsPerPage).ceil();
 
   PaginationData<T> copyWith({
     List<T>? data,

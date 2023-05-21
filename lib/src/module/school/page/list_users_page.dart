@@ -1,8 +1,9 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
-import 'package:flutter_easyloading/flutter_easyloading.dart';
+import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:tfg_front/src/components/custom_page.dart';
+import 'package:tfg_front/src/components/paginator_widget.dart';
 import 'package:tfg_front/src/core/helpers/context_extension.dart';
 import 'package:tfg_front/src/model/user_model.dart';
 import 'package:tfg_front/src/module/school/controller/list_users_controller.dart';
@@ -20,6 +21,7 @@ class ListUsersPage extends StatelessWidget {
     return CustomPage(
       body: [
         Container(
+          width: double.infinity,
           margin: const EdgeInsets.all(50.0),
           padding: const EdgeInsets.all(50.0),
           decoration: BoxDecoration(
@@ -28,6 +30,7 @@ class ListUsersPage extends StatelessWidget {
           ),
           constraints: const BoxConstraints(minWidth: 300),
           child: Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               SearchSubHeaderWidget(
                 title: 'Alunos',
@@ -47,11 +50,23 @@ class ListUsersPage extends StatelessWidget {
                     return const Center(child: CircularProgressIndicator());
                   }
 
-                  return TableUser(
-                    users: controller.users,
-                  );
+                  return Observer(builder: (_) {
+                    return TableUser(
+                      users: controller.users,
+                    );
+                  });
                 },
               ),
+              const SizedBox(height: 16),
+              Observer(builder: (_) {
+                return Align(
+                  alignment: Alignment.center,
+                  child: PaginatorWidget(
+                    pagination: controller.pagination,
+                    goTo: controller.goTo,
+                  ),
+                );
+              })
             ],
           ),
         ),

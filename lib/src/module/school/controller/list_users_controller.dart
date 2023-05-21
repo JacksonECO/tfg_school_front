@@ -16,21 +16,23 @@ abstract class _ListUsersControllerBase with Store {
   _ListUsersControllerBase();
 
   bool _hasData = false;
+  @observable
   PaginationData<UserModel> _pagination = PaginationData<UserModel>(
     data: [],
     rowsPerPage: 10,
-    page: 0,
+    page: 1,
     totalElements: 1,
   );
 
   int get totalPage => _pagination.totalPage;
   int get page => _pagination.page;
   List<UserModel> get users => _pagination.data;
+  PaginationData<UserModel> get pagination => _pagination;
 
   void search(String input) async {
     try {
       EasyLoading.show();
-      _pagination = await _service.getUsersPaginated(_pagination.copyWith(page: 0, search: input));
+      _pagination = await _service.getUsersPaginated(_pagination.copyWith(page: 1, search: input));
       EasyLoading.dismiss();
     } catch (e, s) {
       log('Erro search', error: e, stackTrace: s);
