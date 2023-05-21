@@ -2,6 +2,7 @@ import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:tfg_front/src/core/helpers/context_extension.dart';
+import 'package:tfg_front/src/core/theme/custom_colors.dart';
 
 class Button extends StatefulWidget {
   final String text;
@@ -28,6 +29,38 @@ class Button extends StatefulWidget {
     this.prefixIcon,
     super.key,
   });
+
+  factory Button.blue({
+    required String text,
+    required Function onPressed,
+    double width = double.infinity,
+  }) {
+    return Button(
+      text: text,
+      onPressed: onPressed,
+      color: CustomColors.i.blue,
+      withBorder: false,
+      height: 46,
+      width: width,
+      borderRadius: 8,
+    );
+  }
+
+  factory Button.green({
+    required String text,
+    required Function onPressed,
+    double width = double.infinity,
+  }) {
+    return Button(
+      text: text,
+      onPressed: onPressed,
+      color: CustomColors.i.green,
+      withBorder: false,
+      height: 46,
+      width: width,
+      borderRadius: 8,
+    );
+  }
 
   @override
   State<Button> createState() => _ButtonState();

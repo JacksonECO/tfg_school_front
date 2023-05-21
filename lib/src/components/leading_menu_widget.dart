@@ -47,7 +47,12 @@ class LeadingMenuWidget extends StatelessWidget {
                       Modular.to.pushNamed(SchoolModule.studentRoute);
                     },
                   ),
-                  const ListTile(title: Text('Listar Alunos')),
+                  ListTile(
+                    title: const Text('Listar Alunos'),
+                    onTap: () {
+                      Modular.to.pushNamed(SchoolModule.listStudentsRoute);
+                    },
+                  ),
                 ],
               ),
               const ExpansionTile(

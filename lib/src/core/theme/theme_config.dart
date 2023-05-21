@@ -6,7 +6,7 @@ import 'package:tfg_front/src/core/theme/custom_text_styles.dart';
 class ThemeConfig {
   ThemeConfig._();
 
-  static const InputBorder border = OutlineInputBorder(
+  static const border = OutlineInputBorder(
     borderRadius: BorderRadius.all(
       Radius.circular(15),
     ),

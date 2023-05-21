@@ -28,4 +28,10 @@ class CustomColors {
 
   /// back
   Color get backgroundSecondary => const Color(0xff000000);
+
+  /// #6776ED
+  Color get blue => const Color(0xff6776ED);
+
+  /// #34C38F
+  Color get green => const Color(0xff34C38F);
 }

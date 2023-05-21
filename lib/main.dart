@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:tfg_front/src/core/helpers/constants.dart';
 import 'package:tfg_front/src/core/theme/theme_config.dart';
@@ -25,6 +26,13 @@ class Web extends StatefulWidget {
 class _WebState extends State<Web> {
   @override
   void initState() {
+    // GoogleFonts.config.allowRuntimeFetching = false;
+    Modular.setNavigatorKey(Constants.navigatorKey);
+
+    EasyLoading.instance
+      ..indicatorType = EasyLoadingIndicatorType.threeBounce
+      ..loadingStyle = EasyLoadingStyle.dark;
+
     super.initState();
     final user = Modular.get<AuthModel>();
 
@@ -44,15 +52,13 @@ class _WebState extends State<Web> {
 
   @override
   Widget build(BuildContext context) {
-    // GoogleFonts.config.allowRuntimeFetching = false;
-    Modular.setNavigatorKey(Constants.navigatorKey);
-
     return MaterialApp.router(
       title: 'School',
       debugShowCheckedModeBanner: false,
       routeInformationParser: Modular.routeInformationParser,
       routerDelegate: Modular.routerDelegate,
       theme: ThemeConfig.defaultTheme,
+      builder: EasyLoading.init(),
     );
   }
 }

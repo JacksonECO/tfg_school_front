@@ -16,12 +16,13 @@ class CustomTextStyle {
   TextStyle get interLight => GoogleFonts.inter(fontWeight: FontWeight.w300);
   TextStyle get interRegular => GoogleFonts.inter(fontWeight: FontWeight.w400);
   TextStyle get interMedium => GoogleFonts.inter(fontWeight: FontWeight.w500);
+  TextStyle get interSemiBold => GoogleFonts.inter(fontWeight: FontWeight.w600);
   TextStyle get interBold => GoogleFonts.inter(fontWeight: FontWeight.w700);
   TextStyle get interBlack => GoogleFonts.inter(fontWeight: FontWeight.w900);
 
   //? Google Fonts Custom
-  TextStyle get button => robotoBlack.copyWith(
-        fontSize: 18,
+  TextStyle get button => interBold.copyWith(
+        fontSize: 12,
         color: Colors.white,
         letterSpacing: 2,
       );

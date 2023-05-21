@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:tfg_front/src/model/auth_model.dart';
 import 'package:tfg_front/src/module/home/home_module.dart';
@@ -47,6 +48,15 @@ class _HomePageState extends State<HomePage> {
               onPressed: () => Navigator.pushNamed(context, HomeModule.loginUserRoute),
             ),
             const SizedBox(height: 35),
+            ElevatedButton(
+              child: const Text('EasyLoading'),
+              onPressed: () {
+                EasyLoading.show();
+                Future.delayed(const Duration(seconds: 5), () {
+                  EasyLoading.dismiss();
+                });
+              },
+            ),
           ],
         ),
       ),
