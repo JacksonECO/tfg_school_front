@@ -55,13 +55,25 @@ abstract class _ListUsersControllerBase with Store {
     return _hasData = true;
   }
 
-  void goTo(int page) async {
+  Future<void> goTo(int? page) async {
     try {
       EasyLoading.show();
       _pagination = await _service.getUsersPaginated(_pagination.copyWith(page: page));
       EasyLoading.dismiss();
     } catch (e, s) {
       log('Erro toPage', error: e, stackTrace: s);
+      EasyLoading.dismiss();
+    }
+  }
+
+  Future<void> removeUser(int id) async {
+    try {
+      EasyLoading.show();
+      await _service.remove(id);
+      await goTo(null);
+      EasyLoading.dismiss();
+    } catch (e, s) {
+      log('Erro removeUser', error: e, stackTrace: s);
       EasyLoading.dismiss();
     }
   }

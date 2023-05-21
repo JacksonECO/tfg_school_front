@@ -45,6 +45,7 @@ class SchoolModule extends Module {
           listStudentsRoute.split('/school').last,
           child: (_, args) => ListUsersPage(
             controller: ListUsersController(),
+            profileUserControllerType: ProfileUserController.new,
           ),
         ),
       ];

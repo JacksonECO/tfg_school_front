@@ -2,14 +2,18 @@ import 'package:flutter/material.dart';
 import 'package:tfg_front/src/components/button.dart';
 import 'package:tfg_front/src/core/helpers/context_extension.dart';
 import 'package:tfg_front/src/core/theme/theme_config.dart';
+import 'package:tfg_front/src/module/school/widget/profile_user_widget.dart';
 
 class SearchSubHeaderWidget extends StatefulWidget {
   final String title;
   final void Function(String value) onChanged;
+  final Function({required bool isStudent, int? userId}) profileUserControllerType;
+
   const SearchSubHeaderWidget({
     required this.title,
     required this.onChanged,
     super.key,
+    required this.profileUserControllerType,
   });
 
   @override
@@ -83,7 +87,13 @@ class _SearchSubHeaderWidgetState extends State<SearchSubHeaderWidget> {
         const SizedBox(width: 50),
         Button.green(
           text: 'Adicionar ${widget.title}',
-          onPressed: () {},
+          onPressed: () {
+            ProfileUserWidget.showModal(
+              profileUserController: widget.profileUserControllerType(
+                isStudent: true,
+              ),
+            );
+          },
           width: 200,
         ),
       ],

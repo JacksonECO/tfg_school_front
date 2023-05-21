@@ -20,9 +20,16 @@ class CustomTextStyle {
   TextStyle get interBold => GoogleFonts.inter(fontWeight: FontWeight.w700);
   TextStyle get interBlack => GoogleFonts.inter(fontWeight: FontWeight.w900);
 
+  TextStyle get poppinsLight => GoogleFonts.poppins(fontWeight: FontWeight.w300);
+  TextStyle get poppinsRegular => GoogleFonts.poppins(fontWeight: FontWeight.w400);
+  TextStyle get poppinsMedium => GoogleFonts.poppins(fontWeight: FontWeight.w500);
+  TextStyle get poppinsSemiBold => GoogleFonts.poppins(fontWeight: FontWeight.w600);
+  TextStyle get poppinsBold => GoogleFonts.poppins(fontWeight: FontWeight.w700);
+  TextStyle get poppinsBlack => GoogleFonts.poppins(fontWeight: FontWeight.w900);
+
   //? Google Fonts Custom
   TextStyle get button => interBold.copyWith(
-        fontSize: 12,
+        fontSize: 14,
         color: Colors.white,
         letterSpacing: 2,
       );

@@ -8,7 +8,7 @@ import 'package:tfg_front/src/core/helpers/custom_exception.dart';
 import 'package:tfg_front/src/model/auth_role_enum.dart';
 import 'package:tfg_front/src/model/file_model.dart';
 import 'package:tfg_front/src/model/user_model.dart';
-import 'package:tfg_front/src/module/school/model/class_model.dart';
+import 'package:tfg_front/src/model/class_model.dart';
 import 'package:tfg_front/src/module/school/school_module.dart';
 
 import 'package:mobx/mobx.dart';

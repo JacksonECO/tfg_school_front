@@ -6,6 +6,7 @@ class UserModel {
   int? id;
   int? schoolId;
   int? classId;
+  String? className; // Extra
   String? name;
   String? registration;
   DateTime? birthDate;
@@ -44,6 +45,7 @@ class UserModel {
     this.id,
     this.schoolId,
     this.classId,
+    this.className,
     this.name,
     this.registration,
     this.birthDate,
@@ -64,6 +66,7 @@ class UserModel {
   UserModel copyWith({
     int? id,
     int? schoolId,
+    String? className,
     int? classId,
     String? name,
     String? registration,
@@ -84,6 +87,7 @@ class UserModel {
     return UserModel(
       id: id ?? this.id,
       schoolId: schoolId ?? this.schoolId,
+      className: className ?? this.className,
       classId: classId ?? this.classId,
       name: name ?? this.name,
       registration: registration ?? this.registration,

@@ -13,19 +13,28 @@ class CustomHttpDio implements CustomHttp {
     BaseOptions(
       baseUrl: Constants.baseUrl,
     ),
-  )..interceptors.add(
-      InterceptorsWrapper(
-        onRequest: (options, handler) {
-          options.headers['Content-Type'] = 'application/json';
-          options.headers['authorization'] = Modular.get<AuthModel>().tokenJwt;
-          handler.next(options);
-        },
-        onError: (DioError e, handler) {
-          log('ERROR[${e.response?.statusCode}] => PATH: ${e.requestOptions.path}');
-          log(e.response.toString());
-          handler.next(e);
-        },
-      ),
+  )..interceptors.addAll(
+      [
+        // LogInterceptor(
+        //   requestHeader: false,
+        //   responseHeader: false,
+        //   requestBody: true,
+        //   responseBody: true,
+        //   request: false,
+        // ),
+        InterceptorsWrapper(
+          onRequest: (options, handler) {
+            options.headers['Content-Type'] = 'application/json';
+            options.headers['authorization'] = Modular.get<AuthModel>().tokenJwt;
+            handler.next(options);
+          },
+          onError: (DioError e, handler) {
+            log('ERROR[${e.response?.statusCode}] => PATH: ${e.requestOptions.path}');
+            log(e.response.toString());
+            handler.next(e);
+          },
+        )
+      ],
     );
 
   @override
