@@ -52,6 +52,7 @@ class CustomHttpDio implements CustomHttp {
     } on CustomException catch (_) {
       rethrow;
     } on DioError catch (e) {
+      _verify401(e.response);
       throw CustomException(error: e.response, message: e.response?.data['message']);
     } catch (e, s) {
       throw CustomException(error: e.toString(), stackTrace: s);
@@ -75,6 +76,7 @@ class CustomHttpDio implements CustomHttp {
     } on CustomException catch (_) {
       rethrow;
     } on DioError catch (e) {
+      _verify401(e.response);
       throw CustomException(error: e.response, message: e.response?.data['message']);
     } catch (e, s) {
       throw CustomException(error: e.toString(), stackTrace: s);
@@ -98,6 +100,7 @@ class CustomHttpDio implements CustomHttp {
     } on CustomException catch (_) {
       rethrow;
     } on DioError catch (e) {
+      _verify401(e.response);
       throw CustomException(error: e.response, message: e.response?.data['message']);
     } catch (e, s) {
       throw CustomException(error: e.toString(), stackTrace: s);
@@ -121,9 +124,17 @@ class CustomHttpDio implements CustomHttp {
     } on CustomException catch (_) {
       rethrow;
     } on DioError catch (e) {
+      _verify401(e.response);
       throw CustomException(error: e.response, message: e.response?.data['message']);
     } catch (e, s) {
       throw CustomException(error: e.toString(), stackTrace: s);
+    }
+  }
+
+  void _verify401(Response? response) {
+    if (response?.statusCode == 401) {
+      // TODO:Implementar aviso de erro
+      Modular.to.navigate('/');
     }
   }
 }
