@@ -35,7 +35,7 @@ class LeadingMenuWidget extends StatelessWidget {
                       : const Icon(Icons.person, size: 100),
                 ),
               ),
-              Text(user.name!),
+              Text(user.name ?? ''),
               const SizedBox(height: 6),
               const Divider(height: 0),
               ExpansionTile(

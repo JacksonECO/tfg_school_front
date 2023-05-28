@@ -35,6 +35,7 @@ abstract class _ProfileUserControllerBase with Store {
     } else {
       user = UserModel();
       newUser = true;
+      hasDate = true;
     }
     getClass();
   }
@@ -47,11 +48,19 @@ abstract class _ProfileUserControllerBase with Store {
 
   @observable
   ObservableList<ClassModel> classes = ObservableList();
+  ClassModel? get userClass {
+    if (user.classId == null) return null;
+    try {
+      return classes.firstWhere((element) => element.id == user.classId);
+    } catch (_) {
+      return null;
+    }
+  }
 
   @observable
   FileModel? image;
 
-  Future<bool> get getSchool async {
+  Future<bool> get getUser async {
     if (hasDate) return true;
 
     final temp = await _serviceUser.getUser(user.id!);

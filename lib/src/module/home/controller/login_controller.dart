@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:tfg_front/src/components/modal_alert.dart';
@@ -41,6 +43,7 @@ class LoginController {
       } on CustomException catch (e) {
         ModalAlert.show('Login', e.message);
       } catch (e) {
+        log(e.toString());
         ModalAlert.show('Login', 'Erro ao fazer login, tente mais tarde.');
       }
     }

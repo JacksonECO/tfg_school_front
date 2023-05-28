@@ -31,7 +31,7 @@ class HeaderWidget extends AppBar {
               _button('Início', () {
                 final user = Modular.get<AuthModel>();
 
-                switch (user.authRole) {
+                switch (user.role) {
                   case AuthRoleEnum.admin:
                     Modular.to.navigate(SchoolModule.initialRoute);
                     break;

@@ -10,8 +10,8 @@ class AuthModel {
   String? name;
   String? email;
   String? photoUrl;
-  AuthRoleEnum? authRole;
-  String? tokenJwt;
+  AuthRoleEnum? role;
+  String? token;
 
   AuthModel({
     this.userId,
@@ -19,8 +19,8 @@ class AuthModel {
     this.name,
     this.email,
     this.photoUrl,
-    this.authRole,
-    this.tokenJwt,
+    this.role,
+    this.token,
   });
 
   factory AuthModel.cookie() {
@@ -36,8 +36,8 @@ class AuthModel {
       'name': name,
       'email': email,
       'photoUrl': photoUrl,
-      'authRole': authRole?.name,
-      'tokenJwt': tokenJwt,
+      'role': role?.name,
+      'token': token,
     };
   }
 
@@ -47,9 +47,9 @@ class AuthModel {
       schoolId: map['schoolId'] as int?,
       name: map['name'] as String?,
       email: map['email'] as String?,
-      photoUrl: map['photoUrl'] as String?,
-      authRole: AuthRoleEnum.fromName(map['authRole'] as String?),
-      tokenJwt: map['tokenJwt'] as String? ?? map['token'] as String?,
+      photoUrl: map['photoUrl']?['url'] as String?,
+      role: AuthRoleEnum.fromName(map['role'] as String?),
+      token: map['token'] as String?,
     );
   }
 
@@ -59,8 +59,8 @@ class AuthModel {
       AuthModel.fromMap(json.decode(source) as Map<String, dynamic>);
 
   @override
-  String toString() {
-    return 'AuthModel(userId: $userId, schoolId: $schoolId, name: $name, email: $email, photoUrl: $photoUrl, authRole: $authRole, tokenJwt: $tokenJwt)';
+  String toString() { 
+    return 'AuthModel(userId: $userId, schoolId: $schoolId, name: $name, email: $email, photoUrl: $photoUrl, role: $role, token: $token)';
   }
 
   void clear() {
@@ -69,8 +69,8 @@ class AuthModel {
     name = null;
     email = null;
     photoUrl = null;
-    authRole = null;
-    tokenJwt = null;
+    role = null;
+    token = null;
     SweetCookie.clear();
   }
 
@@ -80,8 +80,8 @@ class AuthModel {
     name = user.name;
     email = user.email;
     photoUrl = user.photoUrl;
-    authRole = user.authRole;
-    tokenJwt = user.tokenJwt;
+    role = user.role;
+    token = user.token;
 
     updateStorage();
   }

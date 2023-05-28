@@ -8,24 +8,24 @@ import 'package:tfg_front/src/core/helpers/custom_http.dart';
 import 'package:tfg_front/src/model/auth_model.dart';
 
 class CustomHttpDio implements CustomHttp {
-  String? get token => Modular.get<AuthModel>().tokenJwt;
+  String? get token => Modular.get<AuthModel>().token;
   final Dio _dio = Dio(
     BaseOptions(
       baseUrl: Constants.baseUrl,
     ),
   )..interceptors.addAll(
       [
-        // LogInterceptor(
-        //   requestHeader: false,
-        //   responseHeader: false,
-        //   requestBody: true,
-        //   responseBody: true,
-        //   request: false,
-        // ),
+        LogInterceptor(
+          requestHeader: false,
+          responseHeader: false,
+          requestBody: true,
+          responseBody: true,
+          request: false,
+        ),
         InterceptorsWrapper(
           onRequest: (options, handler) {
             options.headers['Content-Type'] = 'application/json';
-            options.headers['authorization'] = Modular.get<AuthModel>().tokenJwt;
+            options.headers['authorization'] = Modular.get<AuthModel>().token;
             handler.next(options);
           },
           onError: (DioError e, handler) {

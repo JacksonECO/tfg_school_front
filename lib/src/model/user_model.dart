@@ -17,7 +17,7 @@ class UserModel {
   String? rg;
   String? password;
   String? profilePicture;
-  String? cep;
+  // String? cep;
   String? address;
   String? city;
   DateTime? createdAt;
@@ -56,7 +56,7 @@ class UserModel {
     this.rg,
     this.password,
     this.profilePicture,
-    this.cep,
+    // this.cep,
     this.address,
     this.city,
     this.createdAt,
@@ -99,7 +99,7 @@ class UserModel {
       rg: rg ?? this.rg,
       password: password ?? this.password,
       profilePicture: profilePicture ?? this.profilePicture,
-      cep: cep ?? this.cep,
+      // cep: cep ?? this.cep,
       address: address ?? this.address,
       city: city ?? this.city,
       createdAt: createdAt ?? this.createdAt,
@@ -122,7 +122,7 @@ class UserModel {
       'rg': rg,
       'password': password,
       'profile_picture': profilePicture,
-      'cep': cep,
+      // 'cep': cep,
       'address': address,
       'city': city,
       'created_at': createdAt?.toIso8601String(),
@@ -145,7 +145,7 @@ class UserModel {
       rg: map['rg'] != null ? map['rg'] as String : null,
       password: map['password'] != null ? map['password'] as String : null,
       profilePicture: map['profile_picture'] != null ? map['profile_picture'] as String : null,
-      cep: map['cep'] != null ? map['cep'] as String : null,
+      // cep: map['cep'] != null ? map['cep'] as String : null,
       address: map['address'] != null ? map['address'] as String : null,
       city: map['city'] != null ? map['city'] as String : null,
       createdAt: DateTime.tryParse(map['createdAt'] as String? ?? ''),
@@ -160,7 +160,7 @@ class UserModel {
 
   @override
   String toString() {
-    return 'UserModel(id: $id, schoolId: $schoolId, classId: $classId, name: $name, registration: $registration, birthDate: $birthDate, role: $role, phone: $phone, email: $email, cpf: $cpf, rg: $rg, password: $password, profilePicture: $profilePicture, cep: $cep, address: $address, city: $city, createdAt: $createdAt, updatedAt: $updatedAt)';
+    return 'UserModel(id: $id, schoolId: $schoolId, classId: $classId, name: $name, registration: $registration, birthDate: $birthDate, role: $role, phone: $phone, email: $email, cpf: $cpf, rg: $rg, password: $password, profilePicture: $profilePicture, address: $address, city: $city, createdAt: $createdAt, updatedAt: $updatedAt)';
   }
 
   @override
@@ -180,7 +180,7 @@ class UserModel {
         other.rg == rg &&
         other.password == password &&
         other.profilePicture == profilePicture &&
-        other.cep == cep &&
+        // other.cep == cep &&
         other.address == address &&
         other.city == city &&
         other.createdAt == createdAt &&
@@ -202,7 +202,7 @@ class UserModel {
         rg.hashCode ^
         password.hashCode ^
         profilePicture.hashCode ^
-        cep.hashCode ^
+        // cep.hashCode ^
         address.hashCode ^
         city.hashCode ^
         createdAt.hashCode ^

@@ -36,7 +36,7 @@ class _WebState extends State<Web> {
     super.initState();
     final user = Modular.get<AuthModel>();
 
-    switch (user.authRole) {
+    switch (user.role) {
       case AuthRoleEnum.admin:
         Modular.to.navigate(SchoolModule.initialRoute);
         break;
