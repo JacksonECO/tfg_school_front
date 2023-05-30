@@ -96,7 +96,6 @@ class _ButtonState extends State<Button> {
                 ? const BorderSide(color: Colors.black, width: 1)
                 : BorderSide.none,
           ),
-          elevation: 5,
           surfaceTintColor: Colors.white,
         ),
         child: _isLoading

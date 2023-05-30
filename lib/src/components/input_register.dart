@@ -36,10 +36,10 @@ class InputRegister extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Padding(
-            padding: const EdgeInsets.only(left: 10, bottom: 4),
+            padding: const EdgeInsets.only(left: 2, bottom: 4),
             child: Text(
               title,
-              style: context.style.robotoRegular.copyWith(fontSize: 14),
+              style: context.style.poppinsRegular.copyWith(fontSize: 14),
             ),
           ),
           TextFormField(
@@ -51,12 +51,17 @@ class InputRegister extends StatelessWidget {
             controller: controller,
             keyboardType: keyboardType,
             decoration: InputDecoration(
+              enabledBorder: OutlineInputBorder(
+                borderSide: BorderSide.none,
+                borderRadius: BorderRadius.circular(5.0),
+              ),
               hintText: hintText,
               fillColor: context.colors.gray,
               filled: true,
             ),
             validator: validator,
             inputFormatters: inputFormatters,
+            style: context.style.poppinsRegular,
           ),
         ],
       ),

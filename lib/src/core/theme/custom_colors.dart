@@ -34,4 +34,7 @@ class CustomColors {
 
   /// #34C38F
   Color get green => const Color(0xff34C38F);
+
+  /// #738ADB
+  Color get backgroundTitle => const Color(0xff738ADB);
 }

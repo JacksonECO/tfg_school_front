@@ -6,6 +6,7 @@ import 'package:tfg_front/src/components/modal_alert.dart';
 import 'package:tfg_front/src/core/helpers/constants.dart';
 import 'package:tfg_front/src/core/helpers/custom_exception.dart';
 import 'package:tfg_front/src/model/auth_model.dart';
+import 'package:tfg_front/src/module/forgot_password/forgot_password_module.dart';
 import 'package:tfg_front/src/module/home/home_module.dart';
 import 'package:tfg_front/src/module/school/school_module.dart';
 import 'package:tfg_front/src/module/user/user_module.dart';
@@ -61,5 +62,11 @@ class LoginController {
     );
   }
 
-  void forgotPassword() {}
+  void forgotPassword(bool isSchool) {
+    if(isSchool) {
+      Modular.to.navigate(ForgotPasswordModule.schoolInitialRoute);
+    } else {
+      Modular.to.navigate(ForgotPasswordModule.userInitialRoute);
+    }
+  }
 }

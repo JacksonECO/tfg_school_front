@@ -89,7 +89,9 @@ class LoginWidget extends StatelessWidget {
                   const SizedBox(height: 16),
                   Center(
                     child: TextButton(
-                      onPressed: controller.forgotPassword,
+                      onPressed: () {
+                        controller.forgotPassword(controller.isSchool ? true : false);
+                      },
                       child: Row(
                         mainAxisSize: MainAxisSize.min,
                         children: [
