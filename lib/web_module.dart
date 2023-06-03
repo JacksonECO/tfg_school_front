@@ -24,10 +24,10 @@ class WebModule extends Module {
 
   @override
   List<ModularRoute> get routes => [
-        ModuleRoute('/', module: HomeModule()),
-        ModuleRoute('/school', module: SchoolModule()),
-        ModuleRoute('/user', module: UserModule()),
-        ModuleRoute('/forgot-password', module: ForgotPasswordModule()),
-        ModuleRoute('/reset-password', module: ResetPasswordModule()),
+        ModuleRoute('/', module: HomeModule(), transition: TransitionType.noTransition),
+        ModuleRoute('/school', module: SchoolModule(), transition: TransitionType.noTransition),
+        ModuleRoute('/user', module: UserModule(), transition: TransitionType.noTransition),
+        ModuleRoute('/forgot-password', module: ForgotPasswordModule(), transition: TransitionType.noTransition),
+        ModuleRoute('/reset-password', module: ResetPasswordModule(), transition: TransitionType.noTransition),
       ];
 }

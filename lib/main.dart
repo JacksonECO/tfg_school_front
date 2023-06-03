@@ -41,20 +41,6 @@ class _WebState extends State<Web> {
       ..loadingStyle = EasyLoadingStyle.dark;
 
     super.initState();
-    final user = Modular.get<AuthModel>();
-
-    switch (user.role) {
-      case AuthRoleEnum.admin:
-        Modular.to.navigate(SchoolModule.initialRoute);
-        break;
-      case AuthRoleEnum.teacher:
-      case AuthRoleEnum.student:
-      case AuthRoleEnum.tutor:
-        Modular.to.navigate(UserModule.initialRoute);
-        break;
-      default:
-        Modular.to.navigate('/');
-    }
   }
 
   @override
