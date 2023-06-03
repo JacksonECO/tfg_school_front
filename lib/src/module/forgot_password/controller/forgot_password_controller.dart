@@ -13,8 +13,7 @@ enum ForgotPasswordStateStatus {
   error,
 }
 
-class ForgotPasswordController = ForgotPasswordControllerBase
-    with _$ForgotPasswordController ;
+class ForgotPasswordController = ForgotPasswordControllerBase with _$ForgotPasswordController;
 
 abstract class ForgotPasswordControllerBase with Store {
   final ResetPasswordService _service = Modular.get<ResetPasswordService>();
@@ -32,19 +31,22 @@ abstract class ForgotPasswordControllerBase with Store {
   @action
   Future<void> preResetPassword(bool isSchool) async {
     if (form.currentState!.validate()) {
-      ServiceModel serviceForgotPassword;
-      _status = ForgotPasswordStateStatus.loading;
-      serviceForgotPassword = await _service.preResetPassword(
-        email,
-        isSchool,
-      );
+      try {
+        _status = ForgotPasswordStateStatus.loading;
+        ServiceModel serviceForgotPassword = await _service.preResetPassword(
+          email,
+          isSchool,
+        );
 
-      if (serviceForgotPassword.error) {
+        if (serviceForgotPassword.error) {
+          _status = ForgotPasswordStateStatus.error;
+        } else {
+          _status = ForgotPasswordStateStatus.loaded;
+        }
+        _message = serviceForgotPassword.message;
+      } catch (e) {
         _status = ForgotPasswordStateStatus.error;
-      } else {
-        _status = ForgotPasswordStateStatus.loaded;
       }
-      _message = serviceForgotPassword.message;
     }
   }
 

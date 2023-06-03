@@ -1,4 +1,3 @@
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:mobx/mobx.dart';
@@ -13,14 +12,14 @@ enum ResetPasswordStateStatus {
   error,
 }
 
-class ResetPasswordController = ResetPasswordControllerBase
-    with _$ResetPasswordController;
+class ResetPasswordController = ResetPasswordControllerBase with _$ResetPasswordController;
 
 abstract class ResetPasswordControllerBase with Store {
   final ResetPasswordService _service = Modular.get<ResetPasswordService>();
 
   @readonly
   var _status = ResetPasswordStateStatus.initial;
+  
 
   @readonly
   String? _message;
@@ -37,21 +36,20 @@ abstract class ResetPasswordControllerBase with Store {
   }
 
   @action
-  Future<void> resetPassowrd(String resetToken) async {
+  Future<void> resetPassword(String resetToken) async {
     if (form.currentState!.validate()) {
       _status = ResetPasswordStateStatus.loading;
-      ServiceModel serviceResetPassword =
-          await _service.resetPassword(newPassword, resetToken);
-      if (serviceResetPassword.error) {
+      try {
+        ServiceModel serviceResetPassword = await _service.resetPassword(newPassword, resetToken);
+        if (serviceResetPassword.error) {
+          _status = ResetPasswordStateStatus.error;
+        } else {
+          _status = ResetPasswordStateStatus.loaded;
+        }
+        _message = serviceResetPassword.message;
+      } catch (e) {
         _status = ResetPasswordStateStatus.error;
-      } else {
-        _status = ResetPasswordStateStatus.loaded;
       }
-      _message = serviceResetPassword.message;
     }
-  }
-
-  void goToHome() {
-    return Modular.to.navigate('/');
   }
 }

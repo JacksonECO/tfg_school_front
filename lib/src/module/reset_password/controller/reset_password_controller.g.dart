@@ -45,14 +45,14 @@ mixin _$ResetPasswordController on ResetPasswordControllerBase, Store {
     });
   }
 
-  late final _$resetPassowrdAsyncAction = AsyncAction(
-      'ResetPasswordControllerBase.resetPassowrd',
+  late final _$resetPasswordAsyncAction = AsyncAction(
+      'ResetPasswordControllerBase.resetPassword',
       context: context);
 
   @override
-  Future<void> resetPassowrd(String resetToken) {
-    return _$resetPassowrdAsyncAction
-        .run(() => super.resetPassowrd(resetToken));
+  Future<void> resetPassword(String resetToken) {
+    return _$resetPasswordAsyncAction
+        .run(() => super.resetPassword(resetToken));
   }
 
   @override

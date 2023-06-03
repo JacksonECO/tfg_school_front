@@ -106,10 +106,9 @@ class _ResetPasswordPageState extends State<ResetPasswordPage> {
                           InputRegister(
                             title: 'Senha de Acesso',
                             hintText: 'Senha',
-                            onFieldSubmitted: (_) => controller.resetPassowrd(widget.resetToken),
+                            onFieldSubmitted: (_) => controller.resetPassword(widget.resetToken),
                             obscureText: true,
-                            onChanged: (value) =>
-                                controller.newPassword = value,
+                            onChanged: (value) => controller.newPassword = value,
                             validator: Validatorless.multiple([
                               Validatorless.required('Campo obrigatório'),
                               Validatorless.min(6, 'Mínimo 6 caracteres'),
@@ -121,7 +120,7 @@ class _ResetPasswordPageState extends State<ResetPasswordPage> {
                           InputRegister(
                             title: 'Confirme sua Senha',
                             hintText: 'Senha',
-                            onFieldSubmitted: (_) => controller.resetPassowrd(widget.resetToken),
+                            onFieldSubmitted: (_) => controller.resetPassword(widget.resetToken),
                             obscureText: true,
                             validator: Validatorless.multiple([
                               Validatorless.required('Campo obrigatório'),
@@ -135,7 +134,7 @@ class _ResetPasswordPageState extends State<ResetPasswordPage> {
                           Button(
                             text: 'Redefinir Senha',
                             onPressed: () {
-                              controller.resetPassowrd(widget.resetToken);
+                              controller.resetPassword(widget.resetToken);
                             },
                             color: context.colors.blue,
                             height: 45,
