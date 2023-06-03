@@ -13,6 +13,7 @@
         "--dart-define=password=123456",
         "--dart-define=urlBase=http://localhost:3333/api",
         "--dart-define=prod=false",
+        "--web-port=8000"
       ]
     },
     {

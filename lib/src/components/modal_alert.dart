@@ -1,10 +1,13 @@
+// ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:flutter/material.dart';
+
 import 'package:tfg_front/src/components/button.dart';
 import 'package:tfg_front/src/core/helpers/constants.dart';
 import 'package:tfg_front/src/core/helpers/context_extension.dart';
 
 class ModalAlert {
-  static Future<void> show(String title, String message) {
+  static Future<void> show(
+      String title, String message) {
     return showDialog<void>(
       context: Constants.context,
       builder: (BuildContext context) {
@@ -14,7 +17,9 @@ class ModalAlert {
           actions: [
             TextButton(
               child: const Text('OK'),
-              onPressed: () => Navigator.of(context).pop(),
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
             ),
           ],
         );
@@ -30,7 +35,8 @@ class ModalAlert {
               constraints: const BoxConstraints(maxWidth: 200),
               padding: const EdgeInsets.all(80),
               child: AlertDialog(
-                titlePadding: const EdgeInsets.only(bottom: 38, left: 100, right: 100, top: 38),
+                titlePadding: const EdgeInsets.only(
+                    bottom: 38, left: 100, right: 100, top: 38),
                 buttonPadding: const EdgeInsets.only(left: 8, right: 8),
                 title: Text(
                   title,

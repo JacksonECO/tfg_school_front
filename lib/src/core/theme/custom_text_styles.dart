@@ -28,7 +28,7 @@ class CustomTextStyle {
   TextStyle get poppinsBlack => GoogleFonts.poppins(fontWeight: FontWeight.w900);
 
   //? Google Fonts Custom
-  TextStyle get button => interBold.copyWith(
+  TextStyle get button => poppinsBold.copyWith(
         fontSize: 14,
         color: Colors.white,
         letterSpacing: 2,

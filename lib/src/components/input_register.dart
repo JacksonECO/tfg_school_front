@@ -13,6 +13,7 @@ class InputRegister extends StatelessWidget {
   final String? initialValue;
   final void Function(String)? onChanged;
   final void Function()? onTap;
+  final void Function(String)? onFieldSubmitted;
 
   const InputRegister({
     required this.title,
@@ -26,6 +27,7 @@ class InputRegister extends StatelessWidget {
     this.onTap,
     this.obscureText = false,
     super.key,
+    this.onFieldSubmitted,
   });
 
   @override
@@ -36,10 +38,10 @@ class InputRegister extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Padding(
-            padding: const EdgeInsets.only(left: 10, bottom: 4),
+            padding: const EdgeInsets.only(left: 2, bottom: 4),
             child: Text(
               title,
-              style: context.style.robotoRegular.copyWith(fontSize: 14),
+              style: context.style.poppinsRegular.copyWith(fontSize: 14),
             ),
           ),
           TextFormField(
@@ -50,13 +52,19 @@ class InputRegister extends StatelessWidget {
             obscureText: obscureText,
             controller: controller,
             keyboardType: keyboardType,
+            onFieldSubmitted: onFieldSubmitted,
             decoration: InputDecoration(
+              enabledBorder: OutlineInputBorder(
+                borderSide: BorderSide.none,
+                borderRadius: BorderRadius.circular(5.0),
+              ),
               hintText: hintText,
               fillColor: context.colors.gray,
               filled: true,
             ),
             validator: validator,
             inputFormatters: inputFormatters,
+            style: context.style.poppinsRegular,
           ),
         ],
       ),
