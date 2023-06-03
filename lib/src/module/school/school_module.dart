@@ -14,6 +14,9 @@ class SchoolModule extends Module {
   /// Param: id
   static const String studentRoute = '${initialRoute}student';
   static const String listStudentsRoute = '${initialRoute}listStudents';
+  static const String listTeacherRoute = '${initialRoute}listTeacher';
+  static const String listClassRoute = '${initialRoute}listClass';
+  static const String listDisciplinaRoute = '${initialRoute}listDisciplina';
 
   @override
   List<Bind> get binds => [];

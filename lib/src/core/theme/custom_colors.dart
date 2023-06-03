@@ -37,4 +37,7 @@ class CustomColors {
 
   /// #738ADB
   Color get backgroundTitle => const Color(0xff738ADB);
+
+  /// #1C1C27
+  Color get navBar => const Color(0xff1C1C27);
 }

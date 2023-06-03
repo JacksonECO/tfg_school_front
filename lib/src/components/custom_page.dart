@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 
 import 'package:tfg_front/src/components/footer_widget.dart';
-import 'package:tfg_front/src/components/header_widget.dart';
 import 'package:tfg_front/src/components/leading_menu_widget.dart';
 
 class CustomPage extends StatelessWidget {
@@ -30,7 +29,7 @@ class CustomPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: appBar ?? (showAppBar ? HeaderWidget() : null),
+      // appBar: appBar ?? (showAppBar ? HeaderWidget() : null),
       body: CustomScrollView(
         slivers: [
           if (body != null) ...[
@@ -40,7 +39,7 @@ class CustomPage extends StatelessWidget {
                       child: Row(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          leading ?? LeadingMenuWidget(),
+                          leading ?? const LeadingMenuWidget(),
                           Expanded(
                             child: Column(
                               children: body!,

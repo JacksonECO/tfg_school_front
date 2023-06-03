@@ -2,7 +2,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:mobx/mobx.dart';
 import 'package:tfg_front/src/model/service_model.dart';
-import 'package:tfg_front/src/module/forgot_password/forgot_password_module.dart';
 import 'package:tfg_front/src/service/reset_password_service.dart';
 part 'forgot_password_controller.g.dart';
 
@@ -48,9 +47,5 @@ abstract class ForgotPasswordControllerBase with Store {
         _status = ForgotPasswordStateStatus.error;
       }
     }
-  }
-
-  void goToSendedEmailPage() {
-    return Modular.to.navigate(ForgotPasswordModule.emailSendedRoute);
   }
 }

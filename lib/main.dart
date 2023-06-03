@@ -1,6 +1,8 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:flutter_modular/flutter_modular.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:tfg_front/src/core/helpers/constants.dart';
 import 'package:tfg_front/src/core/theme/theme_config.dart';
 import 'package:tfg_front/src/model/auth_model.dart';
@@ -9,7 +11,12 @@ import 'package:tfg_front/src/module/school/school_module.dart';
 import 'package:tfg_front/src/module/user/user_module.dart';
 import 'package:tfg_front/web_module.dart';
 
-void main() {
+Future<void> main() async {
+  if (!kIsWeb) {
+    WidgetsFlutterBinding.ensureInitialized();
+    AuthModel.sharedPreferences = await SharedPreferences.getInstance();
+  }
+
   runApp(ModularApp(
     module: WebModule(),
     child: const Web(),
