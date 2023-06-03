@@ -46,6 +46,8 @@ abstract class _ProfileUserControllerBase with Store {
   final form = GlobalKey<FormState>();
   bool hasDate = false;
 
+  String get typeUser => isStudent ? 'Aluno' : 'Professor';
+
   @observable
   ObservableList<ClassModel> classes = ObservableList();
   ClassModel? get userClass {

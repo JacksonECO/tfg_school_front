@@ -33,9 +33,9 @@ class ListUsersPage extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               SearchSubHeaderWidget(
-                title: 'Alunos',
                 onChanged: controller.search,
                 profileUserControllerType: profileUserControllerType,
+                typeUser: controller.typeUser,
               ),
               const SizedBox(height: 16),
               FutureBuilder<bool>(

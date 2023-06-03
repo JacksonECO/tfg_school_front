@@ -1,4 +1,5 @@
 import 'package:flutter_modular/flutter_modular.dart';
+import 'package:tfg_front/src/model/auth_role_enum.dart';
 import 'package:tfg_front/src/module/school/controller/list_users_controller.dart';
 import 'package:tfg_front/src/module/school/controller/profile_controller.dart';
 import 'package:tfg_front/src/module/school/controller/profile_user_controller.dart';
@@ -47,7 +48,14 @@ class SchoolModule extends Module {
         ChildRoute(
           listStudentsRoute.split('/school').last,
           child: (_, args) => ListUsersPage(
-            controller: ListUsersController(),
+            controller: ListUsersController(typeUser: AuthRoleEnum.student),
+            profileUserControllerType: ProfileUserController.new,
+          ),
+        ),
+        ChildRoute(
+          listTeacherRoute.split('/school').last,
+          child: (_, args) => ListUsersPage(
+            controller: ListUsersController(typeUser: AuthRoleEnum.teacher),
             profileUserControllerType: ProfileUserController.new,
           ),
         ),

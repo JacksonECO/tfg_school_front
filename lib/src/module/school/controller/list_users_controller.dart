@@ -2,6 +2,7 @@ import 'dart:developer';
 
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:flutter_modular/flutter_modular.dart';
+import 'package:tfg_front/src/model/auth_role_enum.dart';
 import 'package:tfg_front/src/model/pagination_data.dart';
 import 'package:tfg_front/src/model/user_model.dart';
 import 'package:tfg_front/src/service/user_service.dart';
@@ -12,8 +13,10 @@ class ListUsersController = _ListUsersControllerBase with _$ListUsersController;
 
 abstract class _ListUsersControllerBase with Store {
   final UserService _service = Modular.get<UserService>();
-
-  _ListUsersControllerBase();
+  final AuthRoleEnum typeUser;
+  _ListUsersControllerBase({
+    required this.typeUser,
+  });
 
   bool _hasData = false;
   @observable

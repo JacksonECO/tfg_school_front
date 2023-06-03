@@ -2,18 +2,20 @@ import 'package:flutter/material.dart';
 import 'package:tfg_front/src/components/button.dart';
 import 'package:tfg_front/src/core/helpers/context_extension.dart';
 import 'package:tfg_front/src/core/theme/theme_config.dart';
+import 'package:tfg_front/src/model/auth_role_enum.dart';
 import 'package:tfg_front/src/module/school/widget/profile_user_widget.dart';
 
 class SearchSubHeaderWidget extends StatefulWidget {
-  final String title;
   final void Function(String value) onChanged;
+  final AuthRoleEnum typeUser;
+
   final Function({required bool isStudent, int? userId}) profileUserControllerType;
 
   const SearchSubHeaderWidget({
-    required this.title,
     required this.onChanged,
-    super.key,
+    required this.typeUser,
     required this.profileUserControllerType,
+    super.key,
   });
 
   @override
@@ -46,7 +48,7 @@ class _SearchSubHeaderWidgetState extends State<SearchSubHeaderWidget> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        'Procurar ${widget.title}',
+                        'Procurar ${widget.typeUser == AuthRoleEnum.student ? 'Alunos' : 'Professores'}',
                         style: context.style.interSemiBold.copyWith(letterSpacing: 0.5),
                       ),
                       const SizedBox(height: 8),
@@ -86,11 +88,11 @@ class _SearchSubHeaderWidgetState extends State<SearchSubHeaderWidget> {
         ),
         const SizedBox(width: 50),
         Button.green(
-          text: 'Adicionar ${widget.title}',
+          text: 'Adicionar ${widget.typeUser == AuthRoleEnum.student ? 'Aluno' : 'Professor'}',
           onPressed: () {
             ProfileUserWidget.showModal(
               profileUserController: widget.profileUserControllerType(
-                isStudent: true,
+                isStudent: widget.typeUser == AuthRoleEnum.student,
               ),
             );
           },

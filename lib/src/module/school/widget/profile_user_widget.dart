@@ -76,16 +76,16 @@ class ProfileUserWidget extends StatelessWidget {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
-                            controller.newUser ? 'Cadastre seu aluno' : 'Perfil',
+                            controller.newUser
+                                ? 'Cadastrar novo ${controller.typeUser}'
+                                : 'Editar Perfil do ${controller.typeUser}',
                             style: context.style.robotoMedium.copyWith(
                               fontSize: 26,
                             ),
                           ),
                           const SizedBox(height: 8),
                           Text(
-                            controller.newUser
-                                ? 'Preencha com os dados do aluno'
-                                : 'Edite os dados abaixo',
+                            'Preencha com os dados abaixo',
                             style: context.style.interRegular.copyWith(fontSize: 16),
                           ),
                         ],
@@ -107,10 +107,9 @@ class ProfileUserWidget extends StatelessWidget {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Flexible(
-                              flex: 2,
                               child: InputRegister(
                                 title: 'Nome',
-                                hintText: 'nome do aluno',
+                                hintText: 'Nome completo',
                                 initialValue: controller.user.name,
                                 onChanged: (v) => controller.user.name = v,
                                 validator: Validatorless.required('Campo obrigatório'),
@@ -119,8 +118,25 @@ class ProfileUserWidget extends StatelessWidget {
                             const SizedBox(width: 16),
                             Flexible(
                               child: InputRegister(
+                                title: 'Email',
+                                hintText: 'Email',
+                                initialValue: controller.user.email,
+                                onChanged: (v) => controller.user.email = v,
+                                validator: Validatorless.multiple([
+                                  Validatorless.required('Campo obrigatório'),
+                                  Validatorless.email('Email inválido'),
+                                ]),
+                              ),
+                            ),
+                          ],
+                        ),
+                        Row(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Flexible(
+                              child: InputRegister(
                                 title: 'Data de Nascimento',
-                                hintText: '01/01/2000',
+                                hintText: 'Data de Nascimento',
                                 initialValue: controller.user.birthString,
                                 onChanged: (v) => controller.user.birthString = v,
                                 validator: Validatorless.multiple([
@@ -133,82 +149,88 @@ class ProfileUserWidget extends StatelessWidget {
                                 ],
                               ),
                             ),
+                            const SizedBox(width: 16),
+                            controller.isStudent
+                                ? Flexible(
+                                    child: Padding(
+                                      padding: const EdgeInsets.symmetric(vertical: 6),
+                                      child: Column(
+                                        crossAxisAlignment: CrossAxisAlignment.start,
+                                        children: [
+                                          Padding(
+                                            padding: const EdgeInsets.only(left: 10, bottom: 4),
+                                            child: Text(
+                                              'Turma',
+                                              style: context.style.robotoRegular
+                                                  .copyWith(fontSize: 14),
+                                            ),
+                                          ),
+                                          Observer(builder: (_) {
+                                            return DropdownButtonFormField<ClassModel>(
+                                              value: controller.userClass,
+                                              decoration: InputDecoration(
+                                                hintText: 'Selecione a turma',
+                                                fillColor: context.colors.gray,
+                                                filled: true,
+                                                border: OutlineInputBorder(
+                                                  borderRadius: BorderRadius.circular(4),
+                                                  borderSide: BorderSide.none,
+                                                ),
+                                              ),
+                                              items: controller.classes.map((ClassModel value) {
+                                                return DropdownMenuItem<ClassModel>(
+                                                  value: value,
+                                                  child: Text(value.name!),
+                                                );
+                                              }).toList(),
+                                              onChanged: (v) => controller.user.classId = v?.id,
+                                              validator:
+                                                  Validatorless.required('Campo obrigatório'),
+                                            );
+                                          }),
+                                        ],
+                                      ),
+                                    ),
+                                  )
+                                : Flexible(
+                                    child: InputRegister(
+                                      title: 'Telefone',
+                                      hintText: '(00) 0000-0000',
+                                      initialValue: controller.user.phone,
+                                      onChanged: (v) => controller.user.phone = v,
+                                      validator: Validatorless.multiple([
+                                        Validatorless.required('Campo obrigatório'),
+                                        Validatorless.between(14, 15, 'Telefone inválido'),
+                                      ]),
+                                      inputFormatters: [
+                                        FilteringTextInputFormatter.digitsOnly,
+                                        PhoneInputFormatter(),
+                                      ],
+                                    ),
+                                  ),
                           ],
                         ),
                         Row(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            Flexible(
-                              flex: 1,
-                              child: InputRegister(
-                                title: 'Email',
-                                hintText: 'escola@host.com',
-                                initialValue: controller.user.email,
-                                onChanged: (v) => controller.user.email = v,
-                                validator: Validatorless.multiple([
-                                  Validatorless.required('Campo obrigatório'),
-                                  Validatorless.email('Email inválido'),
-                                ]),
-                              ),
-                            ),
-                            const SizedBox(width: 16),
-                            Flexible(
-                              child: Padding(
-                                padding: const EdgeInsets.symmetric(vertical: 6),
-                                child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    Padding(
-                                      padding: const EdgeInsets.only(left: 10, bottom: 4),
-                                      child: Text(
-                                        'Turma',
-                                        style: context.style.robotoRegular.copyWith(fontSize: 14),
-                                      ),
-                                    ),
-                                    Observer(builder: (_) {
-                                      return DropdownButtonFormField<ClassModel>(
-                                        value: controller.userClass,
-                                        decoration: InputDecoration(
-                                          hintText: 'Selecione a turma',
-                                          fillColor: context.colors.gray,
-                                          filled: true,
-                                        ),
-                                        items: controller.classes.map((ClassModel value) {
-                                          return DropdownMenuItem<ClassModel>(
-                                            value: value,
-                                            child: Text(value.name!),
-                                          );
-                                        }).toList(),
-                                        onChanged: (v) => controller.user.classId = v?.id,
-                                        validator: Validatorless.required('Campo obrigatório'),
-                                      );
-                                    }),
+                            if (controller.isStudent)
+                              Flexible(
+                                child: InputRegister(
+                                  title: 'Telefone',
+                                  hintText: '(00) 0000-0000',
+                                  initialValue: controller.user.phone,
+                                  onChanged: (v) => controller.user.phone = v,
+                                  validator: Validatorless.multiple([
+                                    Validatorless.required('Campo obrigatório'),
+                                    Validatorless.between(14, 15, 'Telefone inválido'),
+                                  ]),
+                                  inputFormatters: [
+                                    FilteringTextInputFormatter.digitsOnly,
+                                    PhoneInputFormatter(),
                                   ],
                                 ),
                               ),
-                            ),
-                          ],
-                        ),
-                        Row(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Flexible(
-                              child: InputRegister(
-                                title: 'Telefone',
-                                hintText: '(00) 0000-0000',
-                                initialValue: controller.user.phone,
-                                onChanged: (v) => controller.user.phone = v,
-                                validator: Validatorless.multiple([
-                                  Validatorless.required('Campo obrigatório'),
-                                  Validatorless.between(14, 15, 'Telefone inválido'),
-                                ]),
-                                inputFormatters: [
-                                  FilteringTextInputFormatter.digitsOnly,
-                                  PhoneInputFormatter(),
-                                ],
-                              ),
-                            ),
-                            const SizedBox(width: 16),
+                            if (controller.isStudent) const SizedBox(width: 16),
                             Flexible(
                               child: InputRegister(
                                 title: 'CPF',

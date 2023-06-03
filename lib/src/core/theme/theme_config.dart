@@ -8,7 +8,7 @@ class ThemeConfig {
 
   static const border = OutlineInputBorder(
     borderRadius: BorderRadius.all(
-      Radius.circular(15),
+      Radius.circular(4),
     ),
     borderSide: BorderSide(color: Colors.transparent, width: 0),
   );

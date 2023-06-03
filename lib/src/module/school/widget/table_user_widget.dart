@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:tfg_front/src/components/modal_alert.dart';
 import 'package:tfg_front/src/core/helpers/context_extension.dart';
 import 'package:tfg_front/src/core/helpers/list_extension.dart';
+import 'package:tfg_front/src/model/auth_role_enum.dart';
 import 'package:tfg_front/src/model/user_model.dart';
 import 'package:tfg_front/src/module/school/controller/list_users_controller.dart';
 import 'package:tfg_front/src/module/school/widget/profile_user_widget.dart';
@@ -27,24 +28,26 @@ class TableUserWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Table(
       defaultVerticalAlignment: TableCellVerticalAlignment.middle,
-      columnWidths: const {
-        0: FlexColumnWidth(3),
-        1: FlexColumnWidth(4),
-        2: FlexColumnWidth(2),
-        3: FlexColumnWidth(1.5),
-        4: IntrinsicColumnWidth(flex: 0.5),
-      },
+      columnWidths: [
+        const FlexColumnWidth(3),
+        const FlexColumnWidth(4),
+        if (controller.typeUser == AuthRoleEnum.student) const FlexColumnWidth(2),
+        if (controller.typeUser == AuthRoleEnum.student) const FlexColumnWidth(1.5),
+        const IntrinsicColumnWidth(flex: 0.5)
+      ].asMap(),
       children: [
         TableRow(
           decoration: BoxDecoration(
             color: context.colors.blue,
           ),
-          children: const [
-            TableTextWidget('Nome', isHeader: true),
-            TableTextWidget('Email', isHeader: true),
-            TableTextWidget('Matrícula', isHeader: true),
-            TableTextWidget('Turma', isHeader: true),
-            TableTextWidget('Ações', isHeader: true),
+          children: [
+            const TableTextWidget('Nome', isHeader: true),
+            const TableTextWidget('Email', isHeader: true),
+            if (controller.typeUser == AuthRoleEnum.student)
+              const TableTextWidget('Matrícula', isHeader: true),
+            if (controller.typeUser == AuthRoleEnum.student)
+              const TableTextWidget('Turma', isHeader: true),
+            const TableTextWidget('Ações', isHeader: true),
           ],
         ),
         ...listHelp.map(
@@ -55,10 +58,12 @@ class TableUserWidget extends StatelessWidget {
             children: [
               TableTextWidget(users.index(index)?.name ?? ''),
               TableTextWidget(users.index(index)?.email ?? ''),
-              TableTextWidget(users.index(index)?.registration ?? ''),
-              TableTextWidget(
-                users.index(index)?.className ?? users.index(index)?.classId?.toString() ?? '',
-              ),
+              if (controller.typeUser == AuthRoleEnum.student)
+                TableTextWidget(users.index(index)?.registration ?? ''),
+              if (controller.typeUser == AuthRoleEnum.student)
+                TableTextWidget(
+                  users.index(index)?.className ?? users.index(index)?.classId?.toString() ?? '',
+                ),
               users.index(index)?.id == null
                   ? const TableTextWidget('')
                   : Row(
@@ -70,7 +75,7 @@ class TableUserWidget extends StatelessWidget {
                           onPressed: () {
                             ProfileUserWidget.showModal(
                               profileUserController: profileUserControllerType(
-                                isStudent: true,
+                                isStudent: controller.typeUser == AuthRoleEnum.student,
                                 userId: users.index(index)!.id!,
                               ),
                             );
@@ -80,7 +85,7 @@ class TableUserWidget extends StatelessWidget {
                           icon: const Icon(Icons.delete),
                           onPressed: () async {
                             if (await ModalAlert.showConfirmRemove(
-                              'Deseja excluir o aluno ${users.index(index)?.name ?? ''}?',
+                              'Deseja excluir o(a) ${controller.typeUser == AuthRoleEnum.student ? 'aluno(a)' : 'professor(a)'} ${users.index(index)?.name ?? ''}?',
                             )) {
                               await controller.removeUser(users.index(index)?.id ?? 0);
                             }
