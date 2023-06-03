@@ -106,6 +106,7 @@ class _ResetPasswordPageState extends State<ResetPasswordPage> {
                           InputRegister(
                             title: 'Senha de Acesso',
                             hintText: 'Senha',
+                            onFieldSubmitted: (_) => controller.resetPassowrd(widget.resetToken),
                             obscureText: true,
                             onChanged: (value) =>
                                 controller.newPassword = value,
@@ -120,6 +121,7 @@ class _ResetPasswordPageState extends State<ResetPasswordPage> {
                           InputRegister(
                             title: 'Confirme sua Senha',
                             hintText: 'Senha',
+                            onFieldSubmitted: (_) => controller.resetPassowrd(widget.resetToken),
                             obscureText: true,
                             validator: Validatorless.multiple([
                               Validatorless.required('Campo obrigatório'),

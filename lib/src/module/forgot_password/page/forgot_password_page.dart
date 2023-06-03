@@ -106,6 +106,7 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
                           InputRegister(
                             title: 'Email',
                             hintText: 'Email',
+                            onFieldSubmitted: (_) => controller.preResetPassword(widget.isSchool),
                             onChanged: (value) => controller.email = value,
                             validator: Validatorless.multiple([
                               Validatorless.required('Campo obrigatório'),

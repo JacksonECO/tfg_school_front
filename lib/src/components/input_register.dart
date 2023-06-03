@@ -13,6 +13,7 @@ class InputRegister extends StatelessWidget {
   final String? initialValue;
   final void Function(String)? onChanged;
   final void Function()? onTap;
+  final void Function(String)? onFieldSubmitted;
 
   const InputRegister({
     required this.title,
@@ -26,6 +27,7 @@ class InputRegister extends StatelessWidget {
     this.onTap,
     this.obscureText = false,
     super.key,
+    this.onFieldSubmitted,
   });
 
   @override
@@ -50,6 +52,7 @@ class InputRegister extends StatelessWidget {
             obscureText: obscureText,
             controller: controller,
             keyboardType: keyboardType,
+            onFieldSubmitted: onFieldSubmitted,
             decoration: InputDecoration(
               enabledBorder: OutlineInputBorder(
                 borderSide: BorderSide.none,

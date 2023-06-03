@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:tfg_front/src/module/school/school_module.dart';
 import 'package:validatorless/validatorless.dart';
@@ -71,6 +73,7 @@ class LoginWidget extends StatelessWidget {
                   InputRegister(
                     title: 'Email',
                     initialValue: controller.email,
+                    onFieldSubmitted: (_) => controller.login(),                    
                     hintText: controller.isSchool ? 'escola@host.com' : 'usuario@host.com',
                     onChanged: (v) => controller.email = v,
                     validator: Validatorless.multiple([
@@ -83,6 +86,7 @@ class LoginWidget extends StatelessWidget {
                     initialValue: controller.password,
                     hintText: '****',
                     obscureText: true,
+                    onFieldSubmitted: (_) => controller.login(),
                     onChanged: (v) => controller.password = v,
                     validator: Validatorless.multiple([
                       Validatorless.required('Campo obrigatório'),
