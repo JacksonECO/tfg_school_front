@@ -12,7 +12,7 @@ class TableTextWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 12.0),
+      padding: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 20.0),
       constraints: const BoxConstraints(minHeight: 50),
       alignment: Alignment.centerLeft,
       child: Text(
