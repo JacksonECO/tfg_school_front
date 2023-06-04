@@ -33,7 +33,7 @@ class _LeadingMenuWidgetState extends State<LeadingMenuWidget> {
           Row(
             children: [
               Container(
-                width: isClose ? 75 : 200,
+                width: isClose ? 100 : 250,
                 color: context.colors.navBar,
                 child: Column(
                   children: [
@@ -45,7 +45,7 @@ class _LeadingMenuWidgetState extends State<LeadingMenuWidget> {
                 ),
               ),
               Container(
-                width: 10,
+                width: 15,
                 color: Colors.transparent,
               )
             ],
@@ -55,7 +55,8 @@ class _LeadingMenuWidgetState extends State<LeadingMenuWidget> {
             right: 0,
             child: Click(
               child: CircleAvatar(
-                radius: 10,
+                radius: 15,
+                backgroundColor: context.colors.primary,
                 child: Image.asset(
                   isClose
                       ? 'assets/icon/double-right-arrows.png'
@@ -83,16 +84,18 @@ class _LeadingMenuWidgetState extends State<LeadingMenuWidget> {
           ? ElevatedButton(
               style: ElevatedButton.styleFrom(
                 elevation: 0,
-                shadowColor: context.colors.primary.withOpacity(0.1),
+                shadowColor: context.colors.primary.withOpacity(0.5),
                 padding: item.canSelect
                     ? const EdgeInsets.symmetric(vertical: 16, horizontal: 14)
                     : EdgeInsets.zero,
                 backgroundColor: Modular.args.uri.path == item.route
-                    ? context.colors.primary.withOpacity(0.2)
+                    ? context.colors.primary.withOpacity(0.7)
                     : Colors.transparent,
               ),
               child: Row(
-                mainAxisAlignment: isClose ? MainAxisAlignment.center : MainAxisAlignment.start,
+                mainAxisAlignment: isClose
+                    ? MainAxisAlignment.center
+                    : MainAxisAlignment.start,
                 children: [
                   item.icon,
                   if (!isClose) const SizedBox(width: 14),
@@ -109,14 +112,17 @@ class _LeadingMenuWidgetState extends State<LeadingMenuWidget> {
                   return;
                 }
                 if (item.route != null) {
-                  Navigator.of(context).pushNamedAndRemoveUntil(item.route!, (route) => false);
+                  Navigator.of(context)
+                      .pushNamedAndRemoveUntil(item.route!, (route) => false);
                 }
               },
             )
           : Padding(
               padding: const EdgeInsets.symmetric(vertical: 0, horizontal: 10),
               child: Row(
-                mainAxisAlignment: isClose ? MainAxisAlignment.center : MainAxisAlignment.start,
+                mainAxisAlignment: isClose
+                    ? MainAxisAlignment.center
+                    : MainAxisAlignment.start,
                 children: [
                   item.icon,
                   if (!isClose) const SizedBox(width: 14),

@@ -41,7 +41,7 @@ class LoginWidget extends StatelessWidget {
                   children: [
                     Text(
                       controller.isSchool ? 'Portal da escola' : 'Portal Escolar',
-                      style: context.style.robotoMedium.copyWith(
+                      style: context.style.poppinsMedium.copyWith(
                         fontSize: 26,
                       ),
                     ),

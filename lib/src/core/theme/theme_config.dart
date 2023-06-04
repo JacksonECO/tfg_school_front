@@ -37,7 +37,7 @@ class ThemeConfig {
       errorBorder: border,
       focusedErrorBorder: border,
       disabledBorder: border,
-      errorStyle: CustomTextStyle.i.robotoItalic.copyWith(color: Colors.red, fontSize: 14),
+      errorStyle: CustomTextStyle.i.poppinsItalic.copyWith(color: Colors.red, fontSize: 14),
       contentPadding: const EdgeInsets.symmetric(horizontal: 20, vertical: 5),
     ),
     dividerColor: Colors.black,

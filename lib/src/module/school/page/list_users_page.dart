@@ -41,7 +41,12 @@ class ListUsersPage extends StatelessWidget {
                   ),
                 ),
                 padding: const EdgeInsets.fromLTRB(50.0, 10.0, 50.0, 10.0),
-                child: Text(controller.typeUser == AuthRoleEnum.student ? 'Alunos' : 'Professores'),
+                child: Text(
+                  controller.typeUser == AuthRoleEnum.student
+                      ? 'Alunos'
+                      : 'Professores',
+                  style: context.style.crudTitle,
+                ),
               ),
             ),
             Container(
@@ -51,11 +56,11 @@ class ListUsersPage extends StatelessWidget {
               decoration: BoxDecoration(
                 color: context.colors.secondary,
                 borderRadius: const BorderRadius.only(
-                    topLeft: Radius.circular(0),
-                    topRight: Radius.circular(20),
-                    bottomLeft: Radius.circular(20),
-                    bottomRight: Radius.circular(20),
-                  ),
+                  topLeft: Radius.circular(0),
+                  topRight: Radius.circular(20),
+                  bottomLeft: Radius.circular(20),
+                  bottomRight: Radius.circular(20),
+                ),
               ),
               constraints: const BoxConstraints(minWidth: 300),
               child: Column(

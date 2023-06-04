@@ -26,17 +26,18 @@ class ProfileWidget extends StatelessWidget {
       margin: const EdgeInsets.all(50.0),
       decoration: BoxDecoration(
         color: context.colors.secondary,
-        borderRadius: BorderRadius.circular(25),
+        borderRadius: BorderRadius.circular(12),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Container(
             decoration: BoxDecoration(
-              color: context.colors.primary,
-              borderRadius: const BorderRadius.vertical(top: Radius.circular(22)),
+              color: context.colors.backgroundTitle,
+              borderRadius:
+                  const BorderRadius.vertical(top: Radius.circular(12)),
             ),
-            padding: const EdgeInsets.fromLTRB(28, 32, 32, 0),
+            padding: const EdgeInsets.fromLTRB(30, 30, 30, 0),
             child: Row(
               crossAxisAlignment: CrossAxisAlignment.start,
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -46,13 +47,15 @@ class ProfileWidget extends StatelessWidget {
                   children: [
                     Text(
                       controller.newSchool ? 'Cadastro' : 'Perfil',
-                      style: context.style.robotoMedium.copyWith(
+                      style: context.style.poppinsMedium.copyWith(
                         fontSize: 26,
                       ),
                     ),
                     const SizedBox(height: 8),
                     Text(
-                      controller.newSchool ? 'Preencha seus dados abaixo' : 'Edite os dados abaixo',
+                      controller.newSchool
+                          ? 'Preencha seus dados abaixo'
+                          : 'Edite os dados abaixo',
                       style: context.style.interRegular.copyWith(fontSize: 16),
                     ),
                   ],
@@ -67,9 +70,50 @@ class ProfileWidget extends StatelessWidget {
           Form(
             key: controller.form,
             child: Padding(
-              padding: const EdgeInsets.all(16),
+              padding: const EdgeInsets.fromLTRB(30, 16, 30, 30),
               child: Column(
                 children: [
+                  Observer(builder: (_) {
+                    return Row(
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Text(
+                          'Logotipo:',
+                          style: context.style.poppinsRegular
+                              .copyWith(fontSize: 14),
+                        ),
+                        const SizedBox(width: 16),
+                        if (controller.image?.image != null)
+                          Click(
+                            onTap: controller.getImage,
+                            child: Image.memory(
+                              controller.image!.image!,
+                              height: 150,
+                              fit: BoxFit.cover,
+                            ),
+                          )
+                        else if (controller.school.logo != null &&
+                            controller.school.logo != '')
+                          Click(
+                            onTap: controller.getImage,
+                            child: Image.network(
+                              controller.school.logo!,
+                              height: 150,
+                              fit: BoxFit.cover,
+                            ),
+                          )
+                        else
+                          IconButton(
+                            onPressed: controller.getImage,
+                            icon: const Icon(
+                              Icons.add_photo_alternate_outlined,
+                              size: 18,
+                            ),
+                          )
+                      ],
+                    );
+                  }),
                   InputRegister(
                     title: 'Escola',
                     hintText: 'Nome completo da escola',
@@ -123,7 +167,9 @@ class ProfileWidget extends StatelessWidget {
                           validator: Validatorless.multiple([
                             Validatorless.required('Campo obrigatório'),
                             Validatorless.min(18, 'CNPJ inválido'),
-                            Constants.prod ? Validatorless.cnpj('CNPJ inválido') : (_) => null,
+                            Constants.prod
+                                ? Validatorless.cnpj('CNPJ inválido')
+                                : (_) => null,
                           ]),
                           inputFormatters: [
                             FilteringTextInputFormatter.digitsOnly,
@@ -182,49 +228,9 @@ class ProfileWidget extends StatelessWidget {
                       ],
                     ),
                   const SizedBox(height: 16),
-                  Observer(builder: (_) {
-                    return Row(
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Text(
-                          'Logotipo:',
-                          style: context.style.robotoRegular.copyWith(fontSize: 14),
-                        ),
-                        const SizedBox(width: 16),
-                        if (controller.image?.image != null)
-                          Click(
-                            onTap: controller.getImage,
-                            child: Image.memory(
-                              controller.image!.image!,
-                              height: 150,
-                              fit: BoxFit.cover,
-                            ),
-                          )
-                        else if (controller.school.logo != null && controller.school.logo != '')
-                          Click(
-                            onTap: controller.getImage,
-                            child: Image.network(
-                              controller.school.logo!,
-                              height: 150,
-                              fit: BoxFit.cover,
-                            ),
-                          )
-                        else
-                          IconButton(
-                            onPressed: controller.getImage,
-                            icon: const Icon(
-                              Icons.add_photo_alternate_outlined,
-                              size: 18,
-                            ),
-                          )
-                      ],
-                    );
-                  }),
-                  const SizedBox(height: 16),
                   Button(
-                    text: controller.newSchool ? 'CRIAR CONTAS' : 'SALVAR',
-                    borderRadius: 15,
+                    text: controller.newSchool ? 'Criar Conta' : 'Salvar',
+                    borderRadius: 10,
                     onPressed: controller.register,
                     color: context.colors.primary,
                     height: 45,
