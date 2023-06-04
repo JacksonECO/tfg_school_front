@@ -9,7 +9,8 @@ class SearchSubHeaderWidget extends StatefulWidget {
   final void Function(String value) onChanged;
   final AuthRoleEnum typeUser;
 
-  final Function({required bool isStudent, int? userId}) profileUserControllerType;
+  final Function({required bool isStudent, int? userId})
+      profileUserControllerType;
 
   const SearchSubHeaderWidget({
     required this.onChanged,
@@ -49,7 +50,8 @@ class _SearchSubHeaderWidgetState extends State<SearchSubHeaderWidget> {
                     children: [
                       Text(
                         'Procurar ${widget.typeUser == AuthRoleEnum.student ? 'Alunos' : 'Professores'}',
-                        style: context.style.interSemiBold.copyWith(letterSpacing: 0.5),
+                        style: context.style.interSemiBold
+                            .copyWith(letterSpacing: 0.5),
                       ),
                       const SizedBox(height: 8),
                       TextFormField(
@@ -88,7 +90,8 @@ class _SearchSubHeaderWidgetState extends State<SearchSubHeaderWidget> {
         ),
         const SizedBox(width: 50),
         Button.green(
-          text: 'Adicionar ${widget.typeUser == AuthRoleEnum.student ? 'Aluno' : 'Professor'}',
+          text:
+              'Adicionar ${widget.typeUser == AuthRoleEnum.student ? 'Aluno' : 'Professor'}',
           onPressed: () {
             ProfileUserWidget.showModal(
               profileUserController: widget.profileUserControllerType(

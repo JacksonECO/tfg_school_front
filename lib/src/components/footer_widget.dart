@@ -16,7 +16,7 @@ class FooterWidget extends StatelessWidget {
         child: Column(mainAxisSize: MainAxisSize.min, children: [
           Text(
             'Trabalho FINAL de Graduação'.toUpperCase(),
-            style: context.style.robotoBlack.copyWith(
+            style: context.style.poppinsBlack.copyWith(
               fontSize: 26,
               color: Colors.white,
             ),

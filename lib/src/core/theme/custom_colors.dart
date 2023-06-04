@@ -40,4 +40,7 @@ class CustomColors {
 
   /// #1C1C27
   Color get navBar => const Color(0xff1C1C27);
+
+  // #FF3B3B
+  Color get error => const Color(0xffFF3B3B);
 }

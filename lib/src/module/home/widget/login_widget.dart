@@ -17,11 +17,11 @@ class LoginWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: 500,
+      width: 550,
       margin: const EdgeInsets.all(50.0),
       decoration: BoxDecoration(
         color: context.colors.secondary,
-        borderRadius: BorderRadius.circular(25),
+        borderRadius: BorderRadius.circular(12),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -29,10 +29,10 @@ class LoginWidget extends StatelessWidget {
         children: [
           Container(
             decoration: BoxDecoration(
-              color: context.colors.primary,
-              borderRadius: const BorderRadius.vertical(top: Radius.circular(22)),
+              color: context.colors.backgroundTitle,
+              borderRadius: const BorderRadius.vertical(top: Radius.circular(12)),
             ),
-            padding: const EdgeInsets.fromLTRB(28, 32, 32, 0),
+            padding: const EdgeInsets.fromLTRB(40, 40, 40, 0),
             child: Row(
               crossAxisAlignment: CrossAxisAlignment.start,
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -42,7 +42,7 @@ class LoginWidget extends StatelessWidget {
                   children: [
                     Text(
                       controller.isSchool ? 'Portal da escola' : 'Portal Escolar',
-                      style: context.style.robotoMedium.copyWith(
+                      style: context.style.poppinsMedium.copyWith(
                         fontSize: 26,
                       ),
                     ),
@@ -65,7 +65,7 @@ class LoginWidget extends StatelessWidget {
           Form(
             key: controller.form,
             child: Padding(
-              padding: const EdgeInsets.all(16),
+              padding: const EdgeInsets.fromLTRB(40, 16, 40, 16),
               child: Column(
                 children: [
                   InputRegister(
@@ -100,13 +100,13 @@ class LoginWidget extends StatelessWidget {
                       child: Row(
                         mainAxisSize: MainAxisSize.min,
                         children: [
-                          const Icon(Icons.lock, color: Colors.white60, size: 18),
+                          const Icon(Icons.lock, color: Colors.white70, size: 18),
                           const SizedBox(width: 6),
                           Text(
                             'Esqueceu a senha?',
                             style: context.style.interLight.copyWith(
                               fontSize: 16,
-                              color: Colors.white60,
+                              color: Colors.white70,
                             ),
                           ),
                         ],
@@ -115,8 +115,8 @@ class LoginWidget extends StatelessWidget {
                   ),
                   const SizedBox(height: 16),
                   Button(
-                    text: 'LOGIN',
-                    borderRadius: 15,
+                    text: 'Login',
+                    borderRadius: 10,
                     onPressed: controller.login,
                     color: context.colors.primary,
                     height: 45,
@@ -133,7 +133,7 @@ class LoginWidget extends StatelessWidget {
                         'Não tem uma conta? Cadastre sua Escola',
                         style: context.style.interLight.copyWith(
                           fontSize: 14,
-                          color: Colors.white38,
+                          color: Colors.white70,
                         ),
                       ),
                     ),
@@ -145,7 +145,7 @@ class LoginWidget extends StatelessWidget {
                       controller.isSchool ? 'Entrar como Usuário' : 'Entrar como Escola',
                       style: context.style.interLight.copyWith(
                         fontSize: 14,
-                        color: Colors.white38,
+                        color: Colors.white70,
                       ),
                     ),
                   ),

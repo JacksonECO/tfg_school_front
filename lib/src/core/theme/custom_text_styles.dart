@@ -6,13 +6,6 @@ class CustomTextStyle {
   static final CustomTextStyle _instance = CustomTextStyle._();
   static CustomTextStyle get i => _instance;
 
-  TextStyle get robotoLight => GoogleFonts.roboto(fontWeight: FontWeight.w300);
-  TextStyle get robotoRegular => GoogleFonts.roboto(fontWeight: FontWeight.w400);
-  TextStyle get robotoItalic => GoogleFonts.roboto(fontStyle: FontStyle.italic);
-  TextStyle get robotoMedium => GoogleFonts.roboto(fontWeight: FontWeight.w500);
-  TextStyle get robotoBold => GoogleFonts.roboto(fontWeight: FontWeight.w700);
-  TextStyle get robotoBlack => GoogleFonts.roboto(fontWeight: FontWeight.w900);
-
   TextStyle get interLight => GoogleFonts.inter(fontWeight: FontWeight.w300);
   TextStyle get interRegular => GoogleFonts.inter(fontWeight: FontWeight.w400);
   TextStyle get interMedium => GoogleFonts.inter(fontWeight: FontWeight.w500);
@@ -20,18 +13,37 @@ class CustomTextStyle {
   TextStyle get interBold => GoogleFonts.inter(fontWeight: FontWeight.w700);
   TextStyle get interBlack => GoogleFonts.inter(fontWeight: FontWeight.w900);
 
-  TextStyle get poppinsLight => GoogleFonts.poppins(fontWeight: FontWeight.w300);
-  TextStyle get poppinsRegular => GoogleFonts.poppins(fontWeight: FontWeight.w400);
-  TextStyle get poppinsMedium => GoogleFonts.poppins(fontWeight: FontWeight.w500);
-  TextStyle get poppinsSemiBold => GoogleFonts.poppins(fontWeight: FontWeight.w600);
+  TextStyle get poppinsLight =>
+      GoogleFonts.poppins(fontWeight: FontWeight.w300);
+  TextStyle get poppinsRegular =>
+      GoogleFonts.poppins(fontWeight: FontWeight.w400);
+  TextStyle get poppinsMedium =>
+      GoogleFonts.poppins(fontWeight: FontWeight.w500);
+  TextStyle get poppinsSemiBold =>
+      GoogleFonts.poppins(fontWeight: FontWeight.w600);
   TextStyle get poppinsBold => GoogleFonts.poppins(fontWeight: FontWeight.w700);
-  TextStyle get poppinsBlack => GoogleFonts.poppins(fontWeight: FontWeight.w900);
+  TextStyle get poppinsBlack =>
+      GoogleFonts.poppins(fontWeight: FontWeight.w900);
+  TextStyle get poppinsItalic =>
+      GoogleFonts.poppins(fontStyle: FontStyle.italic);
 
   //? Google Fonts Custom
   TextStyle get button => poppinsBold.copyWith(
+        fontSize: 16,
+        color: Colors.white,
+        letterSpacing: 1,
+      );
+
+  TextStyle get buttonAction => poppinsBold.copyWith(
         fontSize: 14,
         color: Colors.white,
-        letterSpacing: 2,
+        letterSpacing: 1,
+      );
+
+  TextStyle get crudTitle => poppinsBold.copyWith(
+        fontSize: 16,
+        color: Colors.white,
+        letterSpacing: 1,
       );
 }
 
