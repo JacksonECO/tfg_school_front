@@ -35,6 +35,7 @@ class ModalAlert {
               constraints: const BoxConstraints(maxWidth: 200),
               padding: const EdgeInsets.all(80),
               child: AlertDialog(
+                backgroundColor: context.colors.secondary,
                 titlePadding: const EdgeInsets.only(
                     bottom: 38, left: 100, right: 100, top: 38),
                 buttonPadding: const EdgeInsets.only(left: 8, right: 8),
@@ -48,12 +49,14 @@ class ModalAlert {
                     color: const Color(0xffFF3B3B),
                     text: 'Cancelar',
                     height: 50,
+                    withBorder: false,
                     onPressed: () => Navigator.of(context).pop(false),
                   ),
                   Button(
                     color: const Color(0xff6776ED),
                     text: 'Confirmar',
                     height: 50,
+                    withBorder: false,
                     onPressed: () => Navigator.of(context).pop(true),
                   ),
                 ],

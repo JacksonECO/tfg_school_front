@@ -110,7 +110,7 @@ class LoginWidget extends StatelessWidget {
                   ),
                   const SizedBox(height: 16),
                   Button(
-                    text: 'LOGIN',
+                    text: 'Login',
                     borderRadius: 15,
                     onPressed: controller.register,
                     color: context.colors.primary,

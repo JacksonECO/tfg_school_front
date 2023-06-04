@@ -59,7 +59,7 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
         child: SingleChildScrollView(
           child: LayoutBuilder(builder: (_, constraints) {
             return Container(
-              width: 500,
+              width: 550,
               margin: const EdgeInsets.all(50.0),
               decoration: BoxDecoration(
                 color: context.colors.secondary,
@@ -78,7 +78,7 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
                         topRight: Radius.circular(10),
                       ),
                     ),
-                    padding: const EdgeInsets.all(32),
+                    padding: const EdgeInsets.fromLTRB(50, 30, 50, 30),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [

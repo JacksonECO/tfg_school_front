@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_modular/flutter_modular.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:sweet_cookie/sweet_cookie.dart';
 import 'package:tfg_front/src/components/leading_menu_widget.dart';
@@ -37,7 +38,8 @@ class AuthModel {
   });
 
   factory AuthModel.cookie() {
-    final String? cookie = kIsWeb ? SweetCookie.get('auth') : sharedPreferences?.getString('auth');
+    final String? cookie =
+        kIsWeb ? SweetCookie.get('auth') : sharedPreferences?.getString('auth');
     if (cookie == null) return AuthModel();
     return AuthModel.fromJson(cookie);
   }
@@ -67,7 +69,7 @@ class AuthModel {
     return AuthModel(
       userId: map['userId'] as int?,
       userName: map['userName'] as String?,
-      userPhoto: photo,
+      userPhoto: map['userPhoto'] as String?,
       schoolId: map['schoolId'] as int?,
       schoolName: map['schoolName'] as String?,
       schoolLogo: map['schoolLogo'] as String?,
@@ -136,8 +138,11 @@ class AuthModel {
 
     menu.top.addAll([
       LeadingMenuItem(
-        title: schoolName ?? '',
-        icon: Image.network(schoolLogo!, height: 32, width: 32),
+        title: schoolName ?? 'BlackBoard',
+        icon: schoolLogo != null
+            ? Image.network(schoolLogo!, height: 32, width: 32)
+            : Image.asset('assets/icon/black-board-logo.png',
+                height: 32, width: 32),
         canSelect: false,
       ),
       LeadingMenuItem(
@@ -148,15 +153,21 @@ class AuthModel {
     ]);
     menu.bottom.addAll([
       LeadingMenuItem(
-        title: 'Sair',
-        icon: Image.asset('assets/icon/power-off.png', height: 28, width: 28),
-      ),
+          title: 'Sair',
+          icon: Image.asset('assets/icon/power-off.png', height: 28, width: 28),
+          onTap: () {
+            final user = Modular.get<AuthModel>();
+            user.clear();
+            Modular.to.pushNamedAndRemoveUntil('/', (_) => false);
+          }),
       if (role != AuthRoleEnum.admin)
         LeadingMenuItem(
           title: userName ?? '',
           subTitle: email ?? '',
           icon: CircleAvatar(
-            backgroundImage: NetworkImage(userPhoto!),
+            backgroundImage: userPhoto != null
+                ? NetworkImage(userPhoto!)
+                : const AssetImage('icon/default-profile.png') as ImageProvider,
             radius: 14,
           ),
         ),
@@ -176,7 +187,8 @@ class AuthModel {
           LeadingMenuItem(
             title: 'Alunos',
             route: SchoolModule.listStudentsRoute,
-            icon: Image.asset('assets/icon/student-with-book.png', height: 28, width: 28),
+            icon: Image.asset('assets/icon/student-with-book.png',
+                height: 28, width: 28),
           ),
           LeadingMenuItem(
             title: 'Turmas',
@@ -195,12 +207,14 @@ class AuthModel {
           LeadingMenuItem(
             title: 'Meus Curso',
             route: '/',
-            icon: Image.asset('assets/icon/courses-icon.png', height: 28, width: 28),
+            icon: Image.asset('assets/icon/courses-icon.png',
+                height: 28, width: 28),
           ),
           LeadingMenuItem(
             title: 'Cronograma',
             route: '/',
-            icon: Image.asset('assets/icon/schedule.png', height: 28, width: 28),
+            icon:
+                Image.asset('assets/icon/schedule.png', height: 28, width: 28),
           ),
           LeadingMenuItem(
             title: 'Suporte ',

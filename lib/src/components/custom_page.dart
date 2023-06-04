@@ -21,15 +21,14 @@ class CustomPage extends StatelessWidget {
     this.footer,
     this.leading,
     this.showLeading = true,
-    this.showAppBar = true,
-    this.showFooter = true,
+    this.showAppBar = false,
+    this.showFooter = false,
     super.key,
   });
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      // appBar: appBar ?? (showAppBar ? HeaderWidget() : null),
       body: CustomScrollView(
         slivers: [
           if (body != null) ...[
