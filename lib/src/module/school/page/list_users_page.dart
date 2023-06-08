@@ -47,10 +47,6 @@ class ListUsersPage extends StatelessWidget {
                     );
                   }
 
-                  if (!snapshot.hasData) {
-                    return const Center(child: CircularProgressIndicator());
-                  }
-
                   return Observer(builder: (_) {
                     return TableUserWidget(
                       controller: controller,
