@@ -4,11 +4,13 @@ class CustomException implements Exception {
   late final String message;
   final Object? error;
   final StackTrace? stackTrace;
+  final int? statusCode;
 
   CustomException({
     String? message,
     this.error,
     this.stackTrace,
+    this.statusCode,
   }) {
     this.message = message ?? 'Aconteceu um erro inesperado, tente novamente mais tarde!';
     log('$runtimeType => $message', error: error, stackTrace: stackTrace);

@@ -40,9 +40,12 @@ class ThemeConfig {
       errorStyle: CustomTextStyle.i.poppinsItalic.copyWith(color: Colors.red, fontSize: 14),
       contentPadding: const EdgeInsets.symmetric(horizontal: 20, vertical: 5),
     ),
-    dividerColor: Colors.black,
+    dividerColor: Colors.white70,
     dividerTheme: const DividerThemeData(
       color: Colors.black,
+    ),
+    listTileTheme: ListTileThemeData(
+      tileColor: CustomColors.i.primary,
     ),
   );
 }

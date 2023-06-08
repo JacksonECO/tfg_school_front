@@ -5,12 +5,13 @@ import 'package:tfg_front/src/model/pagination_data.dart';
 
 class PaginatorWidget extends StatelessWidget {
   final PaginationData pagination;
-  final Function(int) goTo;
+  final void Function(int) goTo;
   const PaginatorWidget({super.key, required this.pagination, required this.goTo});
 
   @override
   Widget build(BuildContext context) {
-    return Center(
+    return Align(
+      alignment: Alignment.bottomRight,
       child: Row(
         mainAxisSize: MainAxisSize.min,
         children: [

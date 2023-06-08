@@ -53,7 +53,11 @@ class CustomHttpDio implements CustomHttp {
       rethrow;
     } on DioError catch (e) {
       _verify401(e.response);
-      throw CustomException(error: e.response, message: e.response?.data['message']);
+      throw CustomException(
+        error: e.response,
+        message: e.response?.data['message'],
+        statusCode: e.response?.statusCode,
+      );
     } catch (e, s) {
       throw CustomException(error: e.toString(), stackTrace: s);
     }
@@ -77,7 +81,11 @@ class CustomHttpDio implements CustomHttp {
       rethrow;
     } on DioError catch (e) {
       _verify401(e.response);
-      throw CustomException(error: e.response, message: e.response?.data['message']);
+      throw CustomException(
+        error: e.response,
+        message: e.response?.data['message'],
+        statusCode: e.response?.statusCode,
+      );
     } catch (e, s) {
       throw CustomException(error: e.toString(), stackTrace: s);
     }
@@ -101,7 +109,11 @@ class CustomHttpDio implements CustomHttp {
       rethrow;
     } on DioError catch (e) {
       _verify401(e.response);
-      throw CustomException(error: e.response, message: e.response?.data['message']);
+      throw CustomException(
+        error: e.response,
+        message: e.response?.data['message'],
+        statusCode: e.response?.statusCode,
+      );
     } catch (e, s) {
       throw CustomException(error: e.toString(), stackTrace: s);
     }
@@ -125,7 +137,11 @@ class CustomHttpDio implements CustomHttp {
       rethrow;
     } on DioError catch (e) {
       _verify401(e.response);
-      throw CustomException(error: e.response, message: e.response?.data['message']);
+      throw CustomException(
+        error: e.response,
+        message: e.response?.data['message'],
+        statusCode: e.response?.statusCode,
+      );
     } catch (e, s) {
       throw CustomException(error: e.toString(), stackTrace: s);
     }

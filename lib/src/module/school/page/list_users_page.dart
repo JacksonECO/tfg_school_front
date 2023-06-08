@@ -103,7 +103,7 @@ class ListUsersPage extends StatelessWidget {
                         goTo: controller.goTo,
                       ),
                     );
-                  })
+                  }),
                 ],
               ),
             ),
