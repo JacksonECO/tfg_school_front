@@ -43,4 +43,7 @@ class CustomColors {
 
   // #FF3B3B
   Color get error => const Color(0xffFF3B3B);
+
+  // #403F56
+  Color get darkBackground => const Color(0xff403F56);
 }

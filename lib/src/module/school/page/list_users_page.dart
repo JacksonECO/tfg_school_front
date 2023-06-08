@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
+import 'package:tfg_front/src/components/crud_viewer.dart';
 import 'package:tfg_front/src/components/custom_page.dart';
 import 'package:tfg_front/src/components/paginator_widget.dart';
-import 'package:tfg_front/src/core/helpers/context_extension.dart';
 import 'package:tfg_front/src/model/auth_role_enum.dart';
 import 'package:tfg_front/src/module/school/controller/list_users_controller.dart';
 import 'package:tfg_front/src/module/school/widget/search_sub_header_widget.dart';
@@ -22,46 +22,13 @@ class ListUsersPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return CustomPage(
       body: [
-        Column(
-          children: [
-            Align(
-              alignment: Alignment.topLeft,
-              child: Container(
-                margin: const EdgeInsets.only(
-                  top: 50.0,
-                  left: 50.0,
-                ),
-                decoration: BoxDecoration(
-                  color: context.colors.blue,
-                  borderRadius: const BorderRadius.only(
-                    topLeft: Radius.circular(15),
-                    topRight: Radius.circular(15),
-                    bottomLeft: Radius.circular(0),
-                    bottomRight: Radius.circular(0),
-                  ),
-                ),
-                padding: const EdgeInsets.fromLTRB(50.0, 10.0, 50.0, 10.0),
-                child: Text(
-                  controller.typeUser == AuthRoleEnum.student
-                      ? 'Alunos'
-                      : 'Professores',
-                  style: context.style.crudTitle,
-                ),
-              ),
-            ),
+        CrudViewer(
+          title: controller.typeUser == AuthRoleEnum.student
+              ? 'Alunos'
+              : 'Professores',
+          body: [
             Container(
               width: double.infinity,
-              margin: const EdgeInsets.fromLTRB(50.0, 0, 50.0, 50.0),
-              padding: const EdgeInsets.all(50.0),
-              decoration: BoxDecoration(
-                color: context.colors.secondary,
-                borderRadius: const BorderRadius.only(
-                  topLeft: Radius.circular(0),
-                  topRight: Radius.circular(20),
-                  bottomLeft: Radius.circular(20),
-                  bottomRight: Radius.circular(20),
-                ),
-              ),
               constraints: const BoxConstraints(minWidth: 300),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.center,
@@ -103,7 +70,7 @@ class ListUsersPage extends StatelessWidget {
                         goTo: controller.goTo,
                       ),
                     );
-                  })
+                  }),
                 ],
               ),
             ),

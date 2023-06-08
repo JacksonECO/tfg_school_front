@@ -20,6 +20,7 @@ class AuthModel {
   int? schoolId;
   String? schoolName;
   String? schoolLogo;
+  int? classId;
 
   String? email;
   AuthRoleEnum? role;
@@ -35,6 +36,7 @@ class AuthModel {
     this.email,
     this.role,
     this.token,
+    this.classId,
   });
 
   factory AuthModel.cookie() {
@@ -52,6 +54,7 @@ class AuthModel {
       'schoolId': schoolId,
       'schoolName': schoolName,
       'schoolLogo': schoolLogo,
+      'classId': classId,
       'email': email,
       'role': role?.name,
       'token': token,
@@ -73,6 +76,7 @@ class AuthModel {
       schoolId: map['schoolId'] as int?,
       schoolName: map['schoolName'] as String?,
       schoolLogo: map['schoolLogo'] as String?,
+      classId: map['classId'] as int?,
       email: map['email'] as String?,
       role: AuthRoleEnum.fromName(map['role'] as String?),
       token: map['token'] as String?,
@@ -97,6 +101,7 @@ class AuthModel {
     schoolId = null;
     schoolName = null;
     schoolLogo = null;
+    classId = null;
 
     email = null;
     role = null;
@@ -117,6 +122,7 @@ class AuthModel {
     schoolId = user.schoolId;
     schoolName = user.schoolName;
     schoolLogo = user.schoolLogo;
+    classId = user.classId;
 
     email = user.email;
     role = user.role;
@@ -201,18 +207,18 @@ class AuthModel {
         menu.top.addAll([
           LeadingMenuItem(
             title: 'Notícias',
-            route: '/',
+            route: '/user/news',
             icon: Image.asset('assets/icon/alert.png', height: 28, width: 28),
           ),
           LeadingMenuItem(
-            title: 'Meus Curso',
-            route: '/',
+            title: 'Meus Cursos',
+            route: '/user/courses',
             icon: Image.asset('assets/icon/courses-icon.png',
                 height: 28, width: 28),
           ),
           LeadingMenuItem(
             title: 'Cronograma',
-            route: '/',
+            route: '/user/schedule',
             icon:
                 Image.asset('assets/icon/schedule.png', height: 28, width: 28),
           ),

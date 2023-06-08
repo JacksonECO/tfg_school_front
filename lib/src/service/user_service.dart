@@ -1,6 +1,6 @@
-
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:tfg_front/src/core/helpers/custom_http.dart';
+import 'package:tfg_front/src/model/auth_role_enum.dart';
 import 'package:tfg_front/src/model/class_model.dart';
 import 'package:tfg_front/src/model/pagination_data.dart';
 import 'package:tfg_front/src/model/user_model.dart';
@@ -20,16 +20,17 @@ class UserService {
   Future<PaginationData<UserModel>> getUsersPaginated(
     PaginationData<UserModel> pagination,
   ) async {
-    List<dynamic>? temp;
+    Map? temp;
     List<ClassModel>? listClass;
 
     await Future.wait([
-      _dio.get<List<dynamic>>(
-        '/user',
+      _dio.get<Map>(
+        '/user/paginated',
         queryParameters: {
           'rowsPerPage': pagination.rowsPerPage,
           'page': pagination.page,
           'search': pagination.search,
+          'role': AuthRoleEnum.student,
         },
       ).then((value) => temp = value.data),
 
@@ -39,7 +40,7 @@ class UserService {
           ),
     ]);
 
-    if (temp == null) {
+    if (temp?['data'] == null) {
       return PaginationData<UserModel>(
         data: [],
         rowsPerPage: pagination.rowsPerPage,
@@ -48,7 +49,7 @@ class UserService {
       );
     }
 
-    final list = temp!.map((e) => UserModel.fromMap(e)).toList();
+    List<UserModel> list = temp!['data'].map<UserModel>((e) => UserModel.fromMap(e)).toList();
 
     // Busca ClassName
     for (var element in list) {
@@ -64,7 +65,7 @@ class UserService {
       data: list,
       rowsPerPage: pagination.rowsPerPage,
       page: pagination.page,
-      totalElements: list.length,
+      totalElements: temp!['total'],
     );
   }
 

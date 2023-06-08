@@ -9,6 +9,8 @@ import 'package:tfg_front/src/module/school/school_module.dart';
 import 'package:tfg_front/src/module/user/user_module.dart';
 import 'package:tfg_front/src/service/class_service.dart';
 import 'package:tfg_front/src/service/login_service.dart';
+import 'package:tfg_front/src/service/news_service.dart';
+import 'package:tfg_front/src/service/subject_service.dart';
 import 'package:tfg_front/src/service/user_service.dart';
 
 class WebModule extends Module {
@@ -19,7 +21,9 @@ class WebModule extends Module {
         Bind.factory((i) => LoginService()),
         Bind.factory((i) => UserService()),
         Bind.factory((i) => ClassService()),
-        Bind.singleton((i) => AuthModel.cookie())
+        Bind.factory((i) => NewsService()),
+        Bind.factory((i) => SubjectService()),
+        Bind.singleton((i) => AuthModel.cookie()),
       ];
 
   @override
