@@ -1,5 +1,5 @@
 import 'package:tfg_front/src/model/subject_model.dart';
-import 'package:tfg_front/src/module/user/model/news_model.dart';
+import 'package:tfg_front/src/model/news_model.dart';
 
 class SubjectNewsModel extends SubjectModel {
   final List<NewsModel>? news;

@@ -4,9 +4,16 @@ import 'package:tfg_front/src/core/helpers/context_extension.dart';
 class CrudViewer extends StatelessWidget {
   final String title;
   final bool hasPadding;
+  final bool hasScroll;
   final List<Widget> body;
 
-  const CrudViewer({super.key, required this.title, required this.body, this.hasPadding = true});
+  const CrudViewer({
+    super.key,
+    required this.title,
+    required this.body,
+    this.hasPadding = true,
+    this.hasScroll = true,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -47,23 +54,44 @@ class CrudViewer extends StatelessWidget {
               bottomLeft: Radius.circular(20),
               bottomRight: Radius.circular(20),
             ),
+            boxShadow: [
+              BoxShadow(
+                color: Colors.black.withOpacity(0.3),
+                spreadRadius: 3,
+                blurRadius: 3,
+                offset: const Offset(5, 10), // changes position of shadow
+              ),
+            ],
           ),
           constraints:
               BoxConstraints(minWidth: 300, maxHeight: context.height - 150),
-          child: SingleChildScrollView(
-            child: Column(
-              children: body.isNotEmpty
-                  ? body
-                  : [
-                      Center(
-                        child: Text(
-                          'Nenhum dado registrado',
-                          style: context.style.poppinsMedium,
-                        ),
-                      ),
-                    ],
-            ),
-          ),
+          child: hasScroll
+              ? SingleChildScrollView(
+                  child: Column(
+                    children: body.isNotEmpty
+                        ? body
+                        : [
+                            Center(
+                              child: Text(
+                                'Nenhum dado registrado',
+                                style: context.style.poppinsMedium,
+                              ),
+                            ),
+                          ],
+                  ),
+                )
+              : Column(
+                  children: body.isNotEmpty
+                      ? body
+                      : [
+                          Center(
+                            child: Text(
+                              'Nenhum dado registrado',
+                              style: context.style.poppinsMedium,
+                            ),
+                          ),
+                        ],
+                ),
         )
       ],
     );

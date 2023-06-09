@@ -3,7 +3,7 @@ import 'package:tfg_front/src/components/crud_viewer.dart';
 import 'package:tfg_front/src/components/custom_page.dart';
 import 'package:tfg_front/src/core/helpers/context_extension.dart';
 import 'package:tfg_front/src/module/user/controller/news_controller.dart';
-import 'package:tfg_front/src/module/user/wiget/news_subject_item.dart';
+import 'package:tfg_front/src/module/user/wiget/news_subject_item_widget.dart';
 
 class NewsPage extends StatefulWidget {
   final NewsController controller;
@@ -28,7 +28,7 @@ class _NewsPageState extends State<NewsPage> {
                 title: 'Notícias',
                 body: widget.controller.allNews
                     .where((e) => e.news != null && e.news!.isNotEmpty)
-                    .map((e) => NewsSubjectItem(newsItem: e))
+                    .map((e) => NewsSubjectItemWidget(newsItem: e)) 
                     .toList(),
               );
             } else if (snapshot.hasError) {
