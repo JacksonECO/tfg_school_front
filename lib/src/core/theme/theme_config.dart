@@ -42,10 +42,7 @@ class ThemeConfig {
     ),
     dividerColor: Colors.white70,
     dividerTheme: const DividerThemeData(
-      color: Colors.black,
-    ),
-    listTileTheme: ListTileThemeData(
-      tileColor: CustomColors.i.primary,
+      color: Colors.white70,
     ),
   );
 }

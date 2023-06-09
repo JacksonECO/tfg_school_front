@@ -6,9 +6,6 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:tfg_front/src/core/helpers/constants.dart';
 import 'package:tfg_front/src/core/theme/theme_config.dart';
 import 'package:tfg_front/src/model/auth_model.dart';
-import 'package:tfg_front/src/model/auth_role_enum.dart';
-import 'package:tfg_front/src/module/school/school_module.dart';
-import 'package:tfg_front/src/module/user/user_module.dart';
 import 'package:tfg_front/web_module.dart';
 
 Future<void> main() async {

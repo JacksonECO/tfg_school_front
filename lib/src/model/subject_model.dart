@@ -6,8 +6,11 @@ class SubjectModel {
   int? classId;
   int? teacherId;
   String? name;
+  String? className;
+  String? teacherName;
   DateTime? createdAt;
   DateTime? updatedAt;
+  String? picture;
   
   SubjectModel({
     this.id,
@@ -15,8 +18,11 @@ class SubjectModel {
     this.classId,
     this.teacherId,
     this.name,
+    this.className,
+    this.teacherName,
     this.createdAt,
     this.updatedAt,
+    this.picture,
   });
 
   Map<String, dynamic> toMap() {
@@ -28,6 +34,9 @@ class SubjectModel {
       'name': name,
       'createdAt': createdAt?.millisecondsSinceEpoch,
       'updatedAt': updatedAt?.millisecondsSinceEpoch,
+      'className': className,
+      'teacherName': teacherName,
+      'picture': picture,
     };
   }
 
@@ -38,6 +47,9 @@ class SubjectModel {
       classId: map['classId'] != null ? map['classId'] as int : null,
       teacherId: map['teacherId'] != null ? map['teacherId'] as int : null,
       name: map['name'] != null ? map['name'] as String : null,
+      className: map['className'] != null ? map['className'] as String : null,
+      teacherName: map['teacherName'] != null ? map['teacherName'] as String : null,
+      picture: map['picture'] != null ? map['picture'] as String : null,
       createdAt: DateTime.tryParse(map['createdAt'] as String? ?? ''),
       updatedAt: DateTime.tryParse(map['updatedAt'] as String? ?? ''),
     );
