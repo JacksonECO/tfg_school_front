@@ -19,6 +19,7 @@ class UserService {
 
   Future<PaginationData<UserModel>> getUsersPaginated(
     PaginationData<UserModel> pagination,
+    AuthRoleEnum type,
   ) async {
     Map? temp;
     List<ClassModel>? listClass;
@@ -30,7 +31,7 @@ class UserService {
           'rowsPerPage': pagination.rowsPerPage,
           'page': pagination.page,
           'search': pagination.search,
-          'role': AuthRoleEnum.student,
+          'role': type,
         },
       ).then((value) => temp = value.data),
 
@@ -69,7 +70,18 @@ class UserService {
     );
   }
 
-  remove(int id) async {
+  Future<List<UserModel>> getUsers(AuthRoleEnum type) async {
+    final temp = await _dio.get<List>('/user', queryParameters: {
+      'role': type.name,
+    }).then((value) {
+      return value.data;
+    });
+
+    if (temp == null) return [];
+    return temp.map<UserModel>((e) => UserModel.fromMap(e)).toList();
+  }
+
+  Future<void> remove(int id) async {
     await _dio.delete<Map<String, dynamic>>('/user/$id');
   }
 }

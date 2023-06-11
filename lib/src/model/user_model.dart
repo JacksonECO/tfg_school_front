@@ -41,6 +41,8 @@ class UserModel {
     }
   }
 
+  bool get isEmpty => name == null;
+
   UserModel({
     this.id,
     this.schoolId,

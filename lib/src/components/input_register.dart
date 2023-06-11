@@ -11,6 +11,7 @@ class InputRegister extends StatelessWidget {
   final List<TextInputFormatter>? inputFormatters;
   final bool obscureText;
   final String? initialValue;
+  final Color? prefixColor;
   final void Function(String)? onChanged;
   final void Function()? onTap;
   final void Function(String)? onFieldSubmitted;
@@ -26,8 +27,9 @@ class InputRegister extends StatelessWidget {
     this.onChanged,
     this.onTap,
     this.obscureText = false,
-    super.key,
     this.onFieldSubmitted,
+    this.prefixColor,
+    super.key,
   });
 
   @override
@@ -45,6 +47,7 @@ class InputRegister extends StatelessWidget {
             ),
           ),
           TextFormField(
+            readOnly: onTap != null,
             autovalidateMode: AutovalidateMode.onUserInteraction,
             initialValue: initialValue,
             onChanged: onChanged,
@@ -61,6 +64,8 @@ class InputRegister extends StatelessWidget {
               hintText: hintText,
               fillColor: context.colors.gray,
               filled: true,
+              prefixIcon: prefixColor != null ? const Icon(Icons.circle) : null,
+              prefixIconColor: prefixColor,
             ),
             validator: validator,
             inputFormatters: inputFormatters,

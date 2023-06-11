@@ -65,8 +65,7 @@ class ProfileUserWidget extends StatelessWidget {
                 Container(
                   decoration: BoxDecoration(
                     color: context.colors.backgroundTitle,
-                    borderRadius:
-                        const BorderRadius.vertical(top: Radius.circular(12)),
+                    borderRadius: const BorderRadius.vertical(top: Radius.circular(12)),
                   ),
                   padding: const EdgeInsets.fromLTRB(30, 30, 30, 0),
                   child: Row(
@@ -87,8 +86,7 @@ class ProfileUserWidget extends StatelessWidget {
                           const SizedBox(height: 8),
                           Text(
                             'Preencha com os dados abaixo',
-                            style: context.style.interRegular
-                                .copyWith(fontSize: 16),
+                            style: context.style.interRegular.copyWith(fontSize: 16),
                           ),
                         ],
                       ),
@@ -102,8 +100,7 @@ class ProfileUserWidget extends StatelessWidget {
                 Container(
                   decoration: BoxDecoration(
                     color: context.colors.secondary,
-                    borderRadius:
-                        const BorderRadius.vertical(bottom: Radius.circular(12)),
+                    borderRadius: const BorderRadius.vertical(bottom: Radius.circular(12)),
                   ),
                   child: Form(
                     key: controller.form,
@@ -118,8 +115,7 @@ class ProfileUserWidget extends StatelessWidget {
                               children: [
                                 Text(
                                   'Perfil:',
-                                  style: context.style.poppinsMedium
-                                      .copyWith(fontSize: 14),
+                                  style: context.style.poppinsMedium.copyWith(fontSize: 14),
                                 ),
                                 const SizedBox(width: 16),
                                 if (controller.image?.image != null)
@@ -161,8 +157,7 @@ class ProfileUserWidget extends StatelessWidget {
                                   hintText: 'Nome completo',
                                   initialValue: controller.user.name,
                                   onChanged: (v) => controller.user.name = v,
-                                  validator:
-                                      Validatorless.required('Campo obrigatório'),
+                                  validator: Validatorless.required('Campo obrigatório'),
                                 ),
                               ),
                               const SizedBox(width: 16),
@@ -188,8 +183,7 @@ class ProfileUserWidget extends StatelessWidget {
                                   title: 'Data de Nascimento',
                                   hintText: 'Data de Nascimento',
                                   initialValue: controller.user.birthString,
-                                  onChanged: (v) =>
-                                      controller.user.birthString = v,
+                                  onChanged: (v) => controller.user.birthString = v,
                                   validator: Validatorless.multiple([
                                     Validatorless.required('Campo obrigatório'),
                                     DateInputFormatter.validator,
@@ -204,48 +198,40 @@ class ProfileUserWidget extends StatelessWidget {
                               controller.isStudent
                                   ? Flexible(
                                       child: Padding(
-                                        padding: const EdgeInsets.symmetric(
-                                            vertical: 6),
+                                        padding: const EdgeInsets.symmetric(vertical: 6),
                                         child: Column(
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.start,
+                                          crossAxisAlignment: CrossAxisAlignment.start,
                                           children: [
                                             Padding(
-                                              padding: const EdgeInsets.only(
-                                                  left: 10, bottom: 4),
+                                              padding: const EdgeInsets.only(left: 10, bottom: 4),
                                               child: Text(
                                                 'Turma',
-                                                style: context
-                                                    .style.poppinsRegular
+                                                style: context.style.poppinsRegular
                                                     .copyWith(fontSize: 14),
                                               ),
                                             ),
                                             Observer(builder: (_) {
-                                              return DropdownButtonFormField<
-                                                  ClassModel>(
+                                              // FIX: Atualizar para o InputOptionsRegister
+                                              return DropdownButtonFormField<ClassModel>(
                                                 value: controller.userClass,
                                                 decoration: InputDecoration(
                                                   hintText: 'Selecione a turma',
                                                   fillColor: context.colors.gray,
                                                   filled: true,
                                                   border: OutlineInputBorder(
-                                                    borderRadius:
-                                                        BorderRadius.circular(4),
+                                                    borderRadius: BorderRadius.circular(4),
                                                     borderSide: BorderSide.none,
                                                   ),
                                                 ),
-                                                items: controller.classes
-                                                    .map((ClassModel value) {
-                                                  return DropdownMenuItem<
-                                                      ClassModel>(
+                                                items: controller.classes.map((ClassModel value) {
+                                                  return DropdownMenuItem<ClassModel>(
                                                     value: value,
                                                     child: Text(value.name!),
                                                   );
                                                 }).toList(),
-                                                onChanged: (v) => controller
-                                                    .user.classId = v?.id,
-                                                validator: Validatorless.required(
-                                                    'Campo obrigatório'),
+                                                onChanged: (v) => controller.user.classId = v?.id,
+                                                validator:
+                                                    Validatorless.required('Campo obrigatório'),
                                               );
                                             }),
                                           ],
@@ -257,13 +243,10 @@ class ProfileUserWidget extends StatelessWidget {
                                         title: 'Telefone',
                                         hintText: '(00) 0000-0000',
                                         initialValue: controller.user.phone,
-                                        onChanged: (v) =>
-                                            controller.user.phone = v,
+                                        onChanged: (v) => controller.user.phone = v,
                                         validator: Validatorless.multiple([
-                                          Validatorless.required(
-                                              'Campo obrigatório'),
-                                          Validatorless.between(
-                                              14, 15, 'Telefone inválido'),
+                                          Validatorless.required('Campo obrigatório'),
+                                          Validatorless.between(14, 15, 'Telefone inválido'),
                                         ]),
                                         inputFormatters: [
                                           FilteringTextInputFormatter.digitsOnly,
@@ -285,8 +268,7 @@ class ProfileUserWidget extends StatelessWidget {
                                     onChanged: (v) => controller.user.phone = v,
                                     validator: Validatorless.multiple([
                                       Validatorless.required('Campo obrigatório'),
-                                      Validatorless.between(
-                                          14, 15, 'Telefone inválido'),
+                                      Validatorless.between(14, 15, 'Telefone inválido'),
                                     ]),
                                     inputFormatters: [
                                       FilteringTextInputFormatter.digitsOnly,
@@ -326,9 +308,7 @@ class ProfileUserWidget extends StatelessWidget {
                                     Validatorless.min(5, 'RG inválido'),
                                     Validatorless.max(13, 'RG inválido'),
                                   ]),
-                                  inputFormatters: [
-                                    FilteringTextInputFormatter.digitsOnly
-                                  ],
+                                  inputFormatters: [FilteringTextInputFormatter.digitsOnly],
                                 ),
                               ),
                             ],
@@ -361,8 +341,7 @@ class ProfileUserWidget extends StatelessWidget {
                             hintText: 'Rua A, 123',
                             initialValue: controller.user.address,
                             onChanged: (v) => controller.user.address = v,
-                            validator:
-                                Validatorless.required('Campo obrigatório'),
+                            validator: Validatorless.required('Campo obrigatório'),
                           ),
                           //     ),
                           //   ],
@@ -376,8 +355,7 @@ class ProfileUserWidget extends StatelessWidget {
                                     title: 'Senha',
                                     hintText: '********',
                                     obscureText: true,
-                                    onChanged: (v) =>
-                                        controller.user.password = v,
+                                    onChanged: (v) => controller.user.password = v,
                                     validator: Validatorless.multiple([
                                       Validatorless.required('Campo obrigatório'),
                                       Validatorless.min(6, 'Mínimo 6 caracteres'),
@@ -400,7 +378,7 @@ class ProfileUserWidget extends StatelessWidget {
                               ],
                             ),
                           const SizedBox(height: 16),
-                
+
                           Button(
                             text: controller.newUser ? 'Criar Conta' : 'Salvar',
                             borderRadius: 10,

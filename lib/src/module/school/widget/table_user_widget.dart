@@ -13,8 +13,7 @@ import 'package:tfg_front/src/module/school/widget/table_text_widget.dart';
 class TableUserWidget extends StatelessWidget {
   final ListUsersController controller;
   final List<UserModel> users;
-  final Function({required bool isStudent, int? userId})
-      profileUserControllerType;
+  final Function({required bool isStudent, int? userId}) profileUserControllerType;
 
   const TableUserWidget({
     required this.users,
@@ -23,8 +22,7 @@ class TableUserWidget extends StatelessWidget {
     super.key,
   });
 
-  List<int> get listHelp =>
-      List.generate(max(users.length, 10), (index) => index, growable: false);
+  List<int> get listHelp => List.generate(max(users.length, 10), (index) => index, growable: false);
 
   @override
   Widget build(BuildContext context) {
@@ -33,10 +31,8 @@ class TableUserWidget extends StatelessWidget {
       columnWidths: [
         const FlexColumnWidth(3),
         const FlexColumnWidth(4),
-        if (controller.typeUser == AuthRoleEnum.student)
-          const FlexColumnWidth(2),
-        if (controller.typeUser == AuthRoleEnum.student)
-          const FlexColumnWidth(1.5),
+        if (controller.typeUser == AuthRoleEnum.student) const FlexColumnWidth(2),
+        if (controller.typeUser == AuthRoleEnum.student) const FlexColumnWidth(1.5),
         const IntrinsicColumnWidth(flex: 0.5)
       ].asMap(),
       children: [
@@ -58,9 +54,7 @@ class TableUserWidget extends StatelessWidget {
         ...listHelp.map(
           (index) => TableRow(
             decoration: BoxDecoration(
-              color: index.isEven
-                  ? context.colors.backgroundPrimary
-                  : const Color(0xFF424162),
+              color: index.isEven ? context.colors.backgroundPrimary : const Color(0xFF424162),
               borderRadius: index == listHelp.length - 1
                   ? const BorderRadius.vertical(bottom: Radius.circular(10))
                   : null,
@@ -72,9 +66,7 @@ class TableUserWidget extends StatelessWidget {
                 TableTextWidget(users.index(index)?.registration ?? ''),
               if (controller.typeUser == AuthRoleEnum.student)
                 TableTextWidget(
-                  users.index(index)?.className ??
-                      users.index(index)?.classId?.toString() ??
-                      '',
+                  users.index(index)?.className ?? users.index(index)?.classId?.toString() ?? '',
                 ),
               users.index(index)?.id == null
                   ? const TableTextWidget('')
@@ -87,8 +79,7 @@ class TableUserWidget extends StatelessWidget {
                           onPressed: () {
                             ProfileUserWidget.showModal(
                               profileUserController: profileUserControllerType(
-                                isStudent:
-                                    controller.typeUser == AuthRoleEnum.student,
+                                isStudent: controller.typeUser == AuthRoleEnum.student,
                                 userId: users.index(index)!.id!,
                               ),
                             );
@@ -98,10 +89,9 @@ class TableUserWidget extends StatelessWidget {
                           icon: const Icon(Icons.delete),
                           onPressed: () async {
                             if (await ModalAlert.showConfirmRemove(
-                              'Deseja excluir ${controller.typeUser == AuthRoleEnum.student ? 'aluno(a):' : 'professor(a):'} ${users.index(index)?.name ?? ''}?',
+                              'Deseja excluir o(a) ${controller.typeUser == AuthRoleEnum.student ? 'aluno(a):' : 'professor(a):'} ${users.index(index)?.name ?? ''}?',
                             )) {
-                              await controller
-                                  .removeUser(users.index(index)?.id ?? 0);
+                              await controller.removeUser(users.index(index)?.id ?? 0);
                             }
                           },
                         ),

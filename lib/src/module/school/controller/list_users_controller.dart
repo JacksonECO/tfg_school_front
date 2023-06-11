@@ -35,7 +35,12 @@ abstract class _ListUsersControllerBase with Store {
   void search(String input) async {
     try {
       EasyLoading.show();
-      _pagination = await _service.getUsersPaginated(_pagination.copyWith(page: 1, search: input));
+      _pagination = await _service.getUsersPaginated(
+          _pagination.copyWith(
+            page: 1,
+            search: input,
+          ),
+          typeUser);
       EasyLoading.dismiss();
     } catch (e, s) {
       log('Erro search', error: e, stackTrace: s);
@@ -48,7 +53,7 @@ abstract class _ListUsersControllerBase with Store {
 
     try {
       EasyLoading.show();
-      _pagination = await _service.getUsersPaginated(_pagination);
+      _pagination = await _service.getUsersPaginated(_pagination, typeUser);
       EasyLoading.dismiss();
     } catch (e, s) {
       log('Erro future', error: e, stackTrace: s);
@@ -61,7 +66,7 @@ abstract class _ListUsersControllerBase with Store {
   Future<void> goTo(int? page) async {
     try {
       EasyLoading.show();
-      _pagination = await _service.getUsersPaginated(_pagination.copyWith(page: page));
+      _pagination = await _service.getUsersPaginated(_pagination.copyWith(page: page), typeUser);
       EasyLoading.dismiss();
     } catch (e, s) {
       log('Erro toPage', error: e, stackTrace: s);

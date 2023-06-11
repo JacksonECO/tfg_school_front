@@ -1,23 +1,42 @@
 import 'dart:convert';
 
+import 'package:flutter/material.dart';
+import 'package:tfg_front/src/model/date_custom.dart';
+import 'package:tfg_front/src/model/week_day_enum.dart';
+
 class SubjectModel {
   int? id;
   int? schoolId;
   int? classId;
   int? teacherId;
+  String? teacherName;
   String? name;
+  String? color;
+  List<DateCustom>? dateCustom;
   DateTime? createdAt;
   DateTime? updatedAt;
-  
+
+  //FIX: add novos campos
+
   SubjectModel({
     this.id,
     this.schoolId,
     this.classId,
     this.teacherId,
+    this.teacherName,
     this.name,
+    this.color = '#FFFFFF',
+    this.dateCustom,
     this.createdAt,
     this.updatedAt,
   });
+
+  factory SubjectModel.empty() => SubjectModel(
+        color: '#FFFFFF',
+        dateCustom: [DateCustom(weekDay: WeekDayEnum.empty)],
+      );
+
+  Color get toColor => Color(int.parse(color!.substring(1, 7), radix: 16) + 0xFF000000);
 
   Map<String, dynamic> toMap() {
     return <String, dynamic>{
@@ -45,5 +64,6 @@ class SubjectModel {
 
   String toJson() => json.encode(toMap());
 
-  factory SubjectModel.fromJson(String source) => SubjectModel.fromMap(json.decode(source) as Map<String, dynamic>);
+  factory SubjectModel.fromJson(String source) =>
+      SubjectModel.fromMap(json.decode(source) as Map<String, dynamic>);
 }

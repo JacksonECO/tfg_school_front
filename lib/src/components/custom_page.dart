@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 
-import 'package:tfg_front/src/components/footer_widget.dart';
 import 'package:tfg_front/src/components/leading_menu_widget.dart';
 
 class CustomPage extends StatelessWidget {
@@ -53,10 +52,10 @@ class CustomPage extends StatelessWidget {
             )
           ],
           // if (slivers != null) ...slivers!,
-          SliverFillRemaining(
-            hasScrollBody: false,
-            child: footer ?? (showFooter ? const FooterWidget() : null),
-          ),
+          // SliverFillRemaining(
+          //   hasScrollBody: false,
+          //   child: footer ?? (showFooter ? const FooterWidget() : null),
+          // ),
         ],
       ),
     );

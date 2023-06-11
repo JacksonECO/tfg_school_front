@@ -5,12 +5,14 @@ import 'package:tfg_front/src/components/custom_page.dart';
 import 'package:tfg_front/src/components/paginator_widget.dart';
 import 'package:tfg_front/src/model/auth_role_enum.dart';
 import 'package:tfg_front/src/module/school/controller/list_users_controller.dart';
+import 'package:tfg_front/src/module/school/controller/profile_user_controller.dart';
+import 'package:tfg_front/src/module/school/widget/profile_user_widget.dart';
 import 'package:tfg_front/src/module/school/widget/search_sub_header_widget.dart';
 import 'package:tfg_front/src/module/school/widget/table_user_widget.dart';
 
 class ListUsersPage extends StatelessWidget {
   final ListUsersController controller;
-  final Function({required bool isStudent, int? userId})
+  final ProfileUserController Function({required bool isStudent, int? userId})
       profileUserControllerType;
   const ListUsersPage({
     required this.controller,
@@ -23,9 +25,7 @@ class ListUsersPage extends StatelessWidget {
     return CustomPage(
       body: [
         CrudViewer(
-          title: controller.typeUser == AuthRoleEnum.student
-              ? 'Alunos'
-              : 'Professores',
+          title: controller.typeUser == AuthRoleEnum.student ? 'Alunos' : 'Professores',
           body: [
             Container(
               width: double.infinity,
@@ -34,9 +34,15 @@ class ListUsersPage extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   SearchSubHeaderWidget(
+                    title: controller.typeUser == AuthRoleEnum.student ? 'Aluno' : 'Professor',
                     onChanged: controller.search,
-                    profileUserControllerType: profileUserControllerType,
-                    typeUser: controller.typeUser,
+                    onAdd: () {
+                      ProfileUserWidget.showModal(
+                        profileUserController: profileUserControllerType(
+                          isStudent: controller.typeUser == AuthRoleEnum.student,
+                        ),
+                      );
+                    },
                   ),
                   const SizedBox(height: 16),
                   FutureBuilder<bool>(
