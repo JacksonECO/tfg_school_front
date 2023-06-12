@@ -81,7 +81,7 @@ abstract class CoursesControllerBase with Store {
       _status = CoursesStateStatus.loading;
       _filteredSubjects = _allSubjects
           .where((subject) => filterSubjectName != ''
-              ? subject.name!.toLowerCase().contains(filterSubjectName)
+              ? subject.name!.toLowerCase().contains(filterSubjectName.toLowerCase())
               : true)
           .where((subject) => filterTeacherName != null
               ? subject.teacherName! == filterTeacherName

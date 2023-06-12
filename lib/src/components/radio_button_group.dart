@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:tfg_front/src/core/helpers/context_extension.dart';
-import 'package:tfg_front/src/model/filter_course_model.dart';
+import 'package:tfg_front/src/model/filter_course_enum.dart';
 import 'package:tfg_front/src/module/user/controller/courses_controller.dart';
 
 class RadioButtonGroup extends StatefulWidget {

@@ -6,7 +6,7 @@ import 'package:tfg_front/src/components/radio_button_group.dart';
 import 'package:tfg_front/src/core/helpers/context_extension.dart';
 import 'package:tfg_front/src/core/helpers/debouncer.dart';
 import 'package:tfg_front/src/core/theme/theme_config.dart';
-import 'package:tfg_front/src/model/filter_course_model.dart';
+import 'package:tfg_front/src/model/filter_course_enum.dart';
 import 'package:tfg_front/src/module/user/controller/courses_controller.dart';
 import 'package:tfg_front/src/module/user/wiget/course_item_widget.dart';
 
