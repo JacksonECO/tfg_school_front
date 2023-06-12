@@ -50,6 +50,7 @@ class _SearchSubHeaderWidgetState extends State<SearchSubHeaderWidget> {
                       ),
                       const SizedBox(height: 8),
                       TextFormField(
+                        controller: controller,
                         decoration: InputDecoration(
                           prefixIcon: const Padding(
                             padding: EdgeInsets.symmetric(horizontal: 15),

@@ -7,8 +7,8 @@ class Constants {
   static BuildContext get context => navigatorKey.currentContext!;
 
   static bool get prod => const bool.fromEnvironment('prod', defaultValue: false);
-  static String get baseUrl => const String.fromEnvironment('urlBase',
-      defaultValue: 'https://tfg-school-unifei.loca.lt/api');
+  static String get baseUrl =>
+      const String.fromEnvironment('urlBase', defaultValue: 'https://back-escola.fly.dev/api');
 
   static String get emailSchool => const String.fromEnvironment('emailSchool');
   static String get emailUser => const String.fromEnvironment('emailSchool');

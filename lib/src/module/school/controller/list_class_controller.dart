@@ -67,12 +67,14 @@ abstract class _ListClassControllerBase with Store {
 
   Future<void> remove(int index) async {
     try {
+      EasyLoading.show();
       await _service.delete(data[index].id!);
       data.removeAt(index);
+      EasyLoading.dismiss();
     } catch (e, s) {
       log('Erro toPage', error: e, stackTrace: s);
       EasyLoading.dismiss();
-      ModalAlert.show('Erro', 'Falha ao remover turma');
+      ModalAlert.show('Erro', 'Verifique se tem algum aluno cadastrado na turma e tente novamente');
     }
   }
 }

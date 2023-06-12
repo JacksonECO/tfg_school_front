@@ -3,7 +3,6 @@ import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:tfg_front/src/components/crud_viewer.dart';
 import 'package:tfg_front/src/components/custom_page.dart';
 import 'package:tfg_front/src/components/paginator_widget.dart';
-import 'package:tfg_front/src/core/helpers/context_extension.dart';
 import 'package:tfg_front/src/model/class_with_subject_model.dart';
 import 'package:tfg_front/src/module/school/controller/class_controller.dart';
 import 'package:tfg_front/src/module/school/controller/list_class_controller.dart';
@@ -25,8 +24,9 @@ class ListClassPage extends StatelessWidget {
           SearchSubHeaderWidget(
             title: 'Turma',
             onChanged: controller.search,
-            onAdd: () {
-              ClassWidget.showModal(classController: classController());
+            onAdd: () async {
+              await ClassWidget.showModal(classController: classController());
+              controller.goTo(1);
             },
           ),
           const SizedBox(height: 16),
