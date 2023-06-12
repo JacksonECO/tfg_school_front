@@ -10,13 +10,13 @@ class SubjectModel {
   int? classId;
   int? teacherId;
   String? teacherName;
+  String? className;
   String? name;
   String? color;
   List<DateCustom>? dateCustom;
+  String? picture;
   DateTime? createdAt;
   DateTime? updatedAt;
-
-  //FIX: add novos campos
 
   SubjectModel({
     this.id,
@@ -24,9 +24,11 @@ class SubjectModel {
     this.classId,
     this.teacherId,
     this.teacherName,
+    this.className,
     this.name,
     this.color = '#FFFFFF',
     this.dateCustom,
+    this.picture,
     this.createdAt,
     this.updatedAt,
   });
@@ -44,7 +46,12 @@ class SubjectModel {
       'schoolId': schoolId,
       'classId': classId,
       'teacherId': teacherId,
+      'teacherName': teacherName,
+      'className': className,
       'name': name,
+      'color': color,
+      'dateCustom': dateCustom?.map((DateCustom e) => e.toMap()).toList(),
+      'picture': picture,
       'createdAt': createdAt?.millisecondsSinceEpoch,
       'updatedAt': updatedAt?.millisecondsSinceEpoch,
     };
@@ -56,7 +63,16 @@ class SubjectModel {
       schoolId: map['schoolId'] != null ? map['schoolId'] as int : null,
       classId: map['classId'] != null ? map['classId'] as int : null,
       teacherId: map['teacherId'] != null ? map['teacherId'] as int : null,
+      teacherName: map['teacherName'] != null ? map['teacherName'] as String : null,
+      className: map['className'] != null ? map['className'] as String : null,
       name: map['name'] != null ? map['name'] as String : null,
+      color: map['color'] != null ? map['color'] as String : null,
+      dateCustom: map['dateCustom'] != null
+          ? (map['dateCustom'] as List<dynamic>)
+              .map((dynamic e) => DateCustom.fromMap(e as Map<String, dynamic>))
+              .toList()
+          : null,
+      picture: map['picture'] != null ? map['picture'] as String : null,
       createdAt: DateTime.tryParse(map['createdAt'] as String? ?? ''),
       updatedAt: DateTime.tryParse(map['updatedAt'] as String? ?? ''),
     );

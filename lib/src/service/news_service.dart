@@ -2,7 +2,7 @@ import 'dart:developer';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:tfg_front/src/core/helpers/custom_exception.dart';
 import 'package:tfg_front/src/core/helpers/custom_http.dart';
-import 'package:tfg_front/src/module/user/model/news_model.dart';
+import 'package:tfg_front/src/model/news_model.dart';
 
 class NewsService {
   final _dio = Modular.get<CustomHttp>();

@@ -33,7 +33,7 @@ abstract class NewsControllerBase with Store {
     try {
       if (_allNews.isNotEmpty) return true;
       var listSubjects = await _subjectService.allSubjects(_auth.classId!);
-      if (listSubjects != null) {
+      if (listSubjects != []) {
         for (var subject in listSubjects) {
           await loadNews(subject);
         }

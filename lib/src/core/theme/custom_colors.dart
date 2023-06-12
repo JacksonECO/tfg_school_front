@@ -46,4 +46,7 @@ class CustomColors {
 
   // #403F56
   Color get darkBackground => const Color(0xff403F56);
+
+  //#828BB4
+  Color get inputAlertModal => const Color(0xff828BB4);
 }
