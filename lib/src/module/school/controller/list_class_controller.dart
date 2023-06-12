@@ -3,6 +3,7 @@ import 'dart:developer';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:mobx/mobx.dart';
+import 'package:tfg_front/src/components/modal_alert.dart';
 import 'package:tfg_front/src/model/class_model.dart';
 import 'package:tfg_front/src/model/pagination_data.dart';
 import 'package:tfg_front/src/service/class_service.dart';
@@ -65,7 +66,13 @@ abstract class _ListClassControllerBase with Store {
   }
 
   Future<void> remove(int index) async {
-    await _service.delete(data[index].id!);
-    data.removeAt(index);
+    try {
+      await _service.delete(data[index].id!);
+      data.removeAt(index);
+    } catch (e, s) {
+      log('Erro toPage', error: e, stackTrace: s);
+      EasyLoading.dismiss();
+      ModalAlert.show('Erro', 'Falha ao remover turma');
+    }
   }
 }
