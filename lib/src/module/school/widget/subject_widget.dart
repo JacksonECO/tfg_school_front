@@ -46,6 +46,9 @@ class _SubjectWidgetState extends State<SubjectWidget> with TickerProviderStateM
     super.initState();
     expand = widget.isExpanded;
     colorController = TextEditingController(text: widget.subject.color);
+    if (widget.subject.dateCustom == null || widget.subject.dateCustom!.isEmpty) {
+      widget.controller.addPeriod(widget.index);
+    }
 
     countPeriod = ValueNotifier(widget.subject.dateCustom?.length ?? 0)
       ..addListener(() {

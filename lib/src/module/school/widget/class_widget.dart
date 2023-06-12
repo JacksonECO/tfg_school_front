@@ -131,7 +131,7 @@ class ClassWidget extends StatelessWidget {
                         Button(
                           text: controller.newClass ? 'Criar Turma' : 'Salvar Turma',
                           borderRadius: 15,
-                          onPressed: controller.register,
+                          onPressed: controller.save,
                           color: context.colors.primary,
                           height: 45,
                           withBorder: false,

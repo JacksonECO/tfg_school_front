@@ -3,14 +3,16 @@ import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:tfg_front/src/components/custom_page.dart';
 import 'package:tfg_front/src/components/paginator_widget.dart';
 import 'package:tfg_front/src/core/helpers/context_extension.dart';
+import 'package:tfg_front/src/model/class_with_subject_model.dart';
 import 'package:tfg_front/src/module/school/controller/class_controller.dart';
 import 'package:tfg_front/src/module/school/controller/list_class_controller.dart';
 import 'package:tfg_front/src/module/school/widget/class_widget.dart';
 import 'package:tfg_front/src/module/school/widget/search_sub_header_widget.dart';
+import 'package:tfg_front/src/module/school/widget/table_class_widget.dart';
 
 class ListClassPage extends StatelessWidget {
   final ListClassController controller;
-  final ClassController Function() classController;
+  final ClassController Function({int? userId, ClassWithSubjectModel? userClass}) classController;
 
   const ListClassPage({super.key, required this.controller, required this.classController});
 
@@ -47,14 +49,10 @@ class ListClassPage extends StatelessWidget {
                     );
                   }
 
-                  return Container();
-
-                  // return Observer(builder: (_) {
-                  //   return TableClassWidget(
-                  //     controller: controller,
-                  //     users: controller.class,
-                  //   );
-                  // });
+                  return TableClassWidget(
+                    controller: controller,
+                    classControllerType: classController,
+                  );
                 },
               ),
               const SizedBox(height: 16),

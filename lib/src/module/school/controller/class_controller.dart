@@ -100,7 +100,11 @@ abstract class _ClassControllerBase with Store {
             ?.any((element) => element.weekDay == WeekDayEnum.empty) ??
         false) return;
 
-    classModel.subjects[subject].dateCustom?.add(DateCustom(weekDay: WeekDayEnum.empty));
+    if (classModel.subjects[subject].dateCustom == null) {
+      classModel.subjects[subject].dateCustom = [];
+    }
+
+    classModel.subjects[subject].dateCustom!.add(DateCustom(weekDay: WeekDayEnum.empty));
   }
 
   Future<void> requestListTeachers() async {
@@ -160,5 +164,28 @@ abstract class _ClassControllerBase with Store {
     }
   }
 
-  Future<void> update() async {}
+  Future<void> update() async {
+    try {
+      if (form.currentState!.validate()) {
+        await _service.update(classModel);
+        await ModalAlert.show(
+          'Sucesso',
+          "Turma atualizada com sucesso!",
+        );
+        Modular.to.pop();
+      }
+    } on CustomException catch (e) {
+      log(e.toString());
+      ModalAlert.show(
+        'Erro',
+        e.message,
+      );
+    } catch (e) {
+      log(e.toString());
+      ModalAlert.show(
+        'Erro',
+        "Falha ao atualizar turma!",
+      );
+    }
+  }
 }

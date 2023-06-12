@@ -51,12 +51,9 @@ class ClassService {
   }
 
   Future<void> register(ClassWithSubjectModel classWithSubject) async {
-    final Map<String, dynamic>? data = await _dio.post<Map<String, dynamic>>(
-      '/class/register',
-      data: {
-        ...classWithSubject.toMap(),
-      },
-    ).then((value) => value.data);
+    final Map<String, dynamic>? data = await _dio
+        .post<Map<String, dynamic>>('/class/register', data: classWithSubject.toMap())
+        .then((value) => value.data);
 
     if (data == null) {
       throw CustomException(
@@ -65,5 +62,23 @@ class ClassService {
         stackTrace: StackTrace.current,
       );
     }
+  }
+
+  Future<void> update(ClassWithSubjectModel classWithSubject) async {
+    final Map<String, dynamic>? data = await _dio
+        .patch<Map<String, dynamic>>('/class', data: classWithSubject.toMap())
+        .then((value) => value.data);
+
+    if (data == null) {
+      throw CustomException(
+        message: 'Erro ao registrar class',
+        error: data,
+        stackTrace: StackTrace.current,
+      );
+    }
+  }
+
+  Future<void> delete(int id) async {
+    await _dio.delete<Map<String, dynamic>>('/class/$id');
   }
 }

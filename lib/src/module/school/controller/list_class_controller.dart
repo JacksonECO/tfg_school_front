@@ -24,6 +24,9 @@ abstract class _ListClassControllerBase with Store {
     totalElements: 1,
   );
 
+  @computed
+  List<ClassModel> get data => _pagination.data;
+
   void search(String input) async {
     try {
       EasyLoading.show();
@@ -59,5 +62,10 @@ abstract class _ListClassControllerBase with Store {
       log('Erro toPage', error: e, stackTrace: s);
       EasyLoading.dismiss();
     }
+  }
+
+  Future<void> remove(int index) async {
+    await _service.delete(data[index].id!);
+    data.removeAt(index);
   }
 }
