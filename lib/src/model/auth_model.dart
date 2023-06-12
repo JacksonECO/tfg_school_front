@@ -181,6 +181,20 @@ class AuthModel {
 
     switch (role) {
       case AuthRoleEnum.teacher:
+        menu.top.addAll([
+          LeadingMenuItem(
+            title: 'Meus Cursos',
+            route: '/user/courses',
+            icon: Image.asset('assets/icon/courses-icon.png',
+                height: 28, width: 28),
+          ),
+          LeadingMenuItem(
+            title: 'Suporte ',
+            route: '/',
+            icon: Image.asset('assets/icon/suporte.png', height: 28, width: 28),
+          ),
+        ]);
+        break;
       case AuthRoleEnum.tutor:
         break;
       case AuthRoleEnum.admin:

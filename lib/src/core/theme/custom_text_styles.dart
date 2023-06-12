@@ -47,6 +47,11 @@ class CustomTextStyle {
       );
 
   TextStyle get title => poppinsBold.copyWith(
+        fontSize: 17,
+        color: Colors.white,
+      );
+
+  TextStyle get text => poppinsRegular.copyWith(
         fontSize: 16,
         color: Colors.white,
       );
