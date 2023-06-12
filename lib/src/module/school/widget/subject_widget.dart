@@ -46,11 +46,11 @@ class _SubjectWidgetState extends State<SubjectWidget> with TickerProviderStateM
     super.initState();
     expand = widget.isExpanded;
     colorController = TextEditingController(text: widget.subject.color);
-    if (widget.subject.dateCustom == null || widget.subject.dateCustom!.isEmpty) {
+    if (widget.subject.times == null || widget.subject.times!.isEmpty) {
       widget.controller.addPeriod(widget.index);
     }
 
-    countPeriod = ValueNotifier(widget.subject.dateCustom?.length ?? 0)
+    countPeriod = ValueNotifier(widget.subject.times?.length ?? 0)
       ..addListener(() {
         setState(() {});
       });
@@ -175,13 +175,13 @@ class _SubjectWidgetState extends State<SubjectWidget> with TickerProviderStateM
               ListView.builder(
                 primary: false,
                 shrinkWrap: true,
-                itemCount: widget.subject.dateCustom?.length ?? 0,
+                itemCount: widget.subject.times?.length ?? 0,
                 itemBuilder: (context, index) {
                   return PeriodLineSubjectWidget(
                     key: Key(index.toString()),
                     index: index,
                     subjectIndex: widget.index,
-                    dateCustom: widget.subject.dateCustom![index],
+                    dateCustom: widget.subject.times![index],
                     notifier: countPeriod,
                     controller: widget.controller,
                   );

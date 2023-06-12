@@ -13,7 +13,7 @@ class SubjectModel {
   String? className;
   String? name;
   String? color;
-  List<DateCustom>? dateCustom;
+  List<DateCustom>? times;
   String? picture;
   DateTime? createdAt;
   DateTime? updatedAt;
@@ -27,7 +27,7 @@ class SubjectModel {
     this.className,
     this.name,
     this.color = '#FFFFFF',
-    this.dateCustom,
+    this.times,
     this.picture,
     this.createdAt,
     this.updatedAt,
@@ -35,10 +35,10 @@ class SubjectModel {
 
   factory SubjectModel.empty() => SubjectModel(
         color: '#FFFFFF',
-        dateCustom: [DateCustom(weekDay: WeekDayEnum.empty)],
+        times: [DateCustom(weekDay: WeekDayEnum.empty)],
       );
 
-  Color get toColor => Color(int.parse(color!.substring(1, 7), radix: 16) + 0xFF000000);
+  Color get toColor => Color(int.parse(color?.substring(1, 7) ?? '000000', radix: 16) + 0xFF000000);
 
   Map<String, dynamic> toMap() {
     return <String, dynamic>{
@@ -50,7 +50,7 @@ class SubjectModel {
       'className': className,
       'name': name,
       'color': color,
-      'dateCustom': dateCustom?.map((DateCustom e) => e.toMap()).toList(),
+      'times': times?.map((DateCustom e) => e.toMap()).toList(),
       'picture': picture,
       'createdAt': createdAt?.millisecondsSinceEpoch,
       'updatedAt': updatedAt?.millisecondsSinceEpoch,
@@ -67,8 +67,8 @@ class SubjectModel {
       className: map['className'] != null ? map['className'] as String : null,
       name: map['name'] != null ? map['name'] as String : null,
       color: map['color'] != null ? map['color'] as String : null,
-      dateCustom: map['dateCustom'] != null
-          ? (map['dateCustom'] as List<dynamic>)
+      times: map['times'] != null
+          ? (map['times'] as List<dynamic>)
               .map((dynamic e) => DateCustom.fromMap(e as Map<String, dynamic>))
               .toList()
           : null,

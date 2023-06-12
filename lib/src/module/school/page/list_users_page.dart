@@ -27,59 +27,46 @@ class ListUsersPage extends StatelessWidget {
         CrudViewer(
           title: controller.typeUser == AuthRoleEnum.student ? 'Alunos' : 'Professores',
           body: [
-            Container(
-              width: double.infinity,
-              constraints: const BoxConstraints(minWidth: 300),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  SearchSubHeaderWidget(
-                    title: controller.typeUser == AuthRoleEnum.student ? 'Aluno' : 'Professor',
-                    onChanged: controller.search,
-                    onAdd: () {
-                      ProfileUserWidget.showModal(
-                        profileUserController: profileUserControllerType(
-                          isStudent: controller.typeUser == AuthRoleEnum.student,
-                        ),
-                      );
-                    },
+            SearchSubHeaderWidget(
+              title: controller.typeUser == AuthRoleEnum.student ? 'Aluno' : 'Professor',
+              onChanged: controller.search,
+              onAdd: () {
+                ProfileUserWidget.showModal(
+                  profileUserController: profileUserControllerType(
+                    isStudent: controller.typeUser == AuthRoleEnum.student,
                   ),
-                  const SizedBox(height: 16),
-                  FutureBuilder<bool>(
-                    future: controller.future,
-                    builder: (context, snapshot) {
-                      if (snapshot.hasError) {
-                        return const Center(
-                          child: Text('Não foi possível pegar os alunos'),
-                        );
-                      }
-
-                      if (!snapshot.hasData) {
-                        return const Center(child: CircularProgressIndicator());
-                      }
-
-                      return Observer(builder: (_) {
-                        return TableUserWidget(
-                          controller: controller,
-                          users: controller.users,
-                          profileUserControllerType: profileUserControllerType,
-                        );
-                      });
-                    },
-                  ),
-                  const SizedBox(height: 16),
-                  Observer(builder: (_) {
-                    return Align(
-                      alignment: Alignment.center,
-                      child: PaginatorWidget(
-                        pagination: controller.pagination,
-                        goTo: controller.goTo,
-                      ),
-                    );
-                  }),
-                ],
-              ),
+                );
+              },
             ),
+            const SizedBox(height: 16),
+            FutureBuilder<bool>(
+              future: controller.future,
+              builder: (context, snapshot) {
+                if (snapshot.hasError) {
+                  return const Center(
+                    child: Text('Não foi possível pegar os alunos'),
+                  );
+                }
+
+                return Observer(builder: (_) {
+                  return TableUserWidget(
+                    controller: controller,
+                    users: controller.users,
+                    profileUserControllerType: profileUserControllerType,
+                  );
+                });
+              },
+            ),
+            const SizedBox(height: 16),
+            Observer(builder: (_) {
+              return Align(
+                alignment: Alignment.center,
+                child: PaginatorWidget(
+                  pagination: controller.pagination,
+                  goTo: controller.goTo,
+                ),
+              );
+            }),
           ],
         ),
       ],

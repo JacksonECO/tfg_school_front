@@ -43,7 +43,7 @@ class PeriodLineSubjectWidget extends StatelessWidget {
             onChanged: (v) {
               dateCustom.weekDay = v;
               controller.addPeriod(subjectIndex);
-              notifier.value = controller.classModel.subjects[subjectIndex].dateCustom?.length ?? 0;
+              notifier.value = controller.classModel.subjects[subjectIndex].times?.length ?? 0;
             },
             validator: Validatorless.required('Campo obrigatório'),
           ),
@@ -88,7 +88,7 @@ class PeriodLineSubjectWidget extends StatelessWidget {
             icon: const Icon(Icons.delete),
             onPressed: () {
               controller.removePeriod(subjectIndex, index);
-              notifier.value = controller.classModel.subjects[subjectIndex].dateCustom?.length ?? 0;
+              notifier.value = controller.classModel.subjects[subjectIndex].times?.length ?? 0;
             },
           ),
         ),

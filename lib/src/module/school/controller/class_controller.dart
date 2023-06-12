@@ -74,6 +74,11 @@ abstract class _ClassControllerBase with Store {
       classModel = await _service.getClassWithSubject(classModel.id!);
     }
 
+    // Adiciona os dias vazios
+    for (var element in List.generate(classModel.subjects.length, (index) => index)) {
+      addPeriod(element);
+    }
+
     return _hasDate = true;
   }
 
@@ -82,29 +87,26 @@ abstract class _ClassControllerBase with Store {
   }
 
   void removePeriod(int subject, int period) {
-    if ((classModel.subjects[subject].dateCustom?.length ?? 0) <= 1) return;
+    if ((classModel.subjects[subject].times?.length ?? 0) <= 1) return;
 
     // Se tiver apenas um dia como vazio, não pode remover
-    if (classModel.subjects[subject].dateCustom![period].isEmpty &&
-        classModel.subjects[subject].dateCustom!
-                .where((element) => element.isEmpty)
-                .toList()
-                .length <=
+    if (classModel.subjects[subject].times![period].isEmpty &&
+        classModel.subjects[subject].times!.where((element) => element.isEmpty).toList().length <=
             1) return;
 
-    classModel.subjects[subject].dateCustom?.removeAt(period);
+    classModel.subjects[subject].times?.removeAt(period);
   }
 
   void addPeriod(int subject) {
-    if (classModel.subjects[subject].dateCustom
+    if (classModel.subjects[subject].times
             ?.any((element) => element.weekDay == WeekDayEnum.empty) ??
         false) return;
 
-    if (classModel.subjects[subject].dateCustom == null) {
-      classModel.subjects[subject].dateCustom = [];
+    if (classModel.subjects[subject].times == null) {
+      classModel.subjects[subject].times = [];
     }
 
-    classModel.subjects[subject].dateCustom!.add(DateCustom(weekDay: WeekDayEnum.empty));
+    classModel.subjects[subject].times!.add(DateCustom(weekDay: WeekDayEnum.empty));
   }
 
   Future<void> requestListTeachers() async {
