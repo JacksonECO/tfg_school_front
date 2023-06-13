@@ -19,13 +19,13 @@ class UserModel {
   String? profilePicture;
   // String? cep;
   String? address;
-  String? city;
+  // String? city;
   DateTime? createdAt;
   DateTime? updatedAt;
 
   String? get birthString {
     if (birthDate == null) return null;
-    return '${birthDate?.day.toString().padLeft(2, '0')}/${birthDate?.month.toString().padLeft(2, '0')}/${birthDate?.year}';
+    return '${birthDate?.day.toString().padLeft(2, '0')}/${birthDate?.month.toString().padLeft(2, '0')}/${birthDate?.year.toString().padLeft(4, '0')}';
   }
 
   set birthString(String? value) {
@@ -60,7 +60,7 @@ class UserModel {
     this.profilePicture,
     // this.cep,
     this.address,
-    this.city,
+    // this.city,
     this.createdAt,
     this.updatedAt,
   });
@@ -82,7 +82,7 @@ class UserModel {
     String? profilePicture,
     String? cep,
     String? address,
-    String? city,
+    // String? city,
     DateTime? createdAt,
     DateTime? updatedAt,
   }) {
@@ -103,7 +103,7 @@ class UserModel {
       profilePicture: profilePicture ?? this.profilePicture,
       // cep: cep ?? this.cep,
       address: address ?? this.address,
-      city: city ?? this.city,
+      // city: city ?? this.city,
       createdAt: createdAt ?? this.createdAt,
       updatedAt: updatedAt ?? this.updatedAt,
     );
@@ -126,7 +126,7 @@ class UserModel {
       'profile_picture': profilePicture,
       // 'cep': cep,
       'address': address,
-      'city': city,
+      // 'city': city,
       'created_at': createdAt?.toIso8601String(),
       'updated_at': updatedAt?.toIso8601String(),
     };
@@ -139,7 +139,7 @@ class UserModel {
       classId: map['classId'] != null ? map['classId'] as int : null,
       name: map['name'] != null ? map['name'] as String : null,
       registration: map['registration'] != null ? map['registration'] as String : null,
-      birthDate: DateTime.tryParse(map['birthDate'] as String? ?? ''),
+      birthDate: DateTime.tryParse(map['birth_date'] as String? ?? ''),
       role: AuthRoleEnum.fromName(map['role'] as String?),
       phone: map['phone'] != null ? map['phone'] as String : null,
       email: map['email'] != null ? map['email'] as String : null,
@@ -149,7 +149,7 @@ class UserModel {
       profilePicture: map['profile_picture'] != null ? map['profile_picture'] as String : null,
       // cep: map['cep'] != null ? map['cep'] as String : null,
       address: map['address'] != null ? map['address'] as String : null,
-      city: map['city'] != null ? map['city'] as String : null,
+      // city: map['city'] != null ? map['city'] as String : null,
       createdAt: DateTime.tryParse(map['createdAt'] as String? ?? ''),
       updatedAt: DateTime.tryParse(map['updatedAt'] as String? ?? ''),
     );
@@ -162,7 +162,7 @@ class UserModel {
 
   @override
   String toString() {
-    return 'UserModel(id: $id, schoolId: $schoolId, classId: $classId, name: $name, registration: $registration, birthDate: $birthDate, role: $role, phone: $phone, email: $email, cpf: $cpf, rg: $rg, password: $password, profilePicture: $profilePicture, address: $address, city: $city, createdAt: $createdAt, updatedAt: $updatedAt)';
+    return 'UserModel(id: $id, schoolId: $schoolId, classId: $classId, name: $name, registration: $registration, birthDate: $birthDate, role: $role, phone: $phone, email: $email, cpf: $cpf, rg: $rg, password: $password, profilePicture: $profilePicture, address: $address, createdAt: $createdAt, updatedAt: $updatedAt)';
   }
 
   @override
@@ -184,7 +184,7 @@ class UserModel {
         other.profilePicture == profilePicture &&
         // other.cep == cep &&
         other.address == address &&
-        other.city == city &&
+        // other.city == city &&
         other.createdAt == createdAt &&
         other.updatedAt == updatedAt;
   }
@@ -206,7 +206,7 @@ class UserModel {
         profilePicture.hashCode ^
         // cep.hashCode ^
         address.hashCode ^
-        city.hashCode ^
+        // city.hashCode ^
         createdAt.hashCode ^
         updatedAt.hashCode;
   }

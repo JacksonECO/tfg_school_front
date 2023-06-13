@@ -118,7 +118,36 @@ abstract class _ProfileUserControllerBase with Store {
     }
   }
 
-  Future<void> update() async {}
+  Future<void> update() async {
+    try {
+      if (form.currentState!.validate()) {
+        if (isStudent) {
+          user.role = AuthRoleEnum.student;
+        } else {
+          user.role = AuthRoleEnum.teacher;
+        }
+
+        final info = await _service.updateUser(user, image);
+
+        await ModalAlert.show(
+          'Cadastro',
+          info?['message'] ?? "Usuário atualizado com sucesso!",
+        );
+        Modular.to.navigate(SchoolModule.initialRoute);
+      }
+    } on CustomException catch (e) {
+      ModalAlert.show(
+        'Cadastro',
+        e.message,
+      );
+    } catch (e) {
+      debugPrint(e.toString());
+      ModalAlert.show(
+        'Cadastro',
+        "Falha ao atualizar usuário!",
+      );
+    }
+  }
 
   Future<void> getImage() async {
     try {

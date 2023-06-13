@@ -9,8 +9,7 @@ import 'package:tfg_front/src/module/school/model/school_model.dart';
 class LoginService {
   final _dio = Modular.get<CustomHttp>();
 
-  Future<Map<String, dynamic>?> loginSchool(
-          String email, String password) async =>
+  Future<Map<String, dynamic>?> loginSchool(String email, String password) async =>
       (await _dio.post<Map<String, dynamic>>(
         '/school/login',
         data: {'email': email, 'password': password},
@@ -53,14 +52,23 @@ class LoginService {
     return SchoolModel.fromMap(response.data!);
   }
 
-  Future<Map<String, dynamic>?> registerUser(
-          UserModel user, FileModel? image) async =>
+  Future<Map<String, dynamic>?> registerUser(UserModel user, FileModel? image) async =>
       (await _dio.post<Map<String, dynamic>>(
         '/user/register',
         data: {
           ...user.toMap(),
-          if (image != null) 'newLogo': image.toMap(),
+          if (image != null) 'newPicture': image.toMap(),
         },
       ))
           .data;
+
+  Future<Map<String, dynamic>?> updateUser(UserModel user, FileModel? image) async {
+    return _dio.patch<Map<String, dynamic>>(
+      '/user',
+      data: {
+        ...user.toMap(),
+        if (image != null) 'newPicture': image.toMap(),
+      },
+    ).then((value) => value.data);
+  }
 }

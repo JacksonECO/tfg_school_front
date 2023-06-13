@@ -308,7 +308,6 @@ class ProfileUserWidget extends StatelessWidget {
                                     Validatorless.min(5, 'RG inválido'),
                                     Validatorless.max(13, 'RG inválido'),
                                   ]),
-                                  inputFormatters: [FilteringTextInputFormatter.digitsOnly],
                                 ),
                               ),
                             ],
@@ -382,7 +381,7 @@ class ProfileUserWidget extends StatelessWidget {
                           Button(
                             text: controller.newUser ? 'Criar Conta' : 'Salvar',
                             borderRadius: 10,
-                            onPressed: controller.register,
+                            onPressed: controller.save,
                             color: context.colors.primary,
                             height: 45,
                             withBorder: false,

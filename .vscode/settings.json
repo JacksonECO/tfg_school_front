@@ -1,7 +1,14 @@
 {
-  "cSpell.words": [
-    "dson",
-    "DSON",
-    "easyloading"
-  ]
+  "editor.formatOnSave": true,
+  "editor.formatOnType": true,
+  "dart.lineLength": 100,
+  "[dart]": {
+    "editor.rulers": [
+      100
+    ],
+  },
+  "files.exclude": {
+    "**/*.g.dart": true,
+    "**/*.mocks.dart": true,
+  }
 }
