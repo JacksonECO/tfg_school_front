@@ -12,7 +12,7 @@
         "--dart-define=emailSchool=escola@app.com",
         "--dart-define=emailUser=user@app.com",
         "--dart-define=password=123456",
-        "--dart-define=urlBase=http://localhost:3333/api",
+        "--dart-define=urlBase=https://back-escola.fly.dev/api",
         "--dart-define=prod=false",
         "--web-port=8000"
       ]
