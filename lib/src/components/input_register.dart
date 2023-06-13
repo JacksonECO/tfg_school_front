@@ -12,6 +12,7 @@ class InputRegister extends StatelessWidget {
   final bool obscureText;
   final String? initialValue;
   final Color? prefixColor;
+  final bool enabled;
   final void Function(String)? onChanged;
   final void Function()? onTap;
   final void Function(String)? onFieldSubmitted;
@@ -29,6 +30,7 @@ class InputRegister extends StatelessWidget {
     this.obscureText = false,
     this.onFieldSubmitted,
     this.prefixColor,
+    this.enabled = true,
     super.key,
   });
 
@@ -47,6 +49,7 @@ class InputRegister extends StatelessWidget {
             ),
           ),
           TextFormField(
+            enabled: enabled,
             readOnly: onTap != null,
             autovalidateMode: AutovalidateMode.onUserInteraction,
             initialValue: initialValue,

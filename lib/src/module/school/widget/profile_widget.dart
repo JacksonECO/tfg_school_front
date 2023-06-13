@@ -34,8 +34,7 @@ class ProfileWidget extends StatelessWidget {
           Container(
             decoration: BoxDecoration(
               color: context.colors.backgroundTitle,
-              borderRadius:
-                  const BorderRadius.vertical(top: Radius.circular(12)),
+              borderRadius: const BorderRadius.vertical(top: Radius.circular(12)),
             ),
             padding: const EdgeInsets.fromLTRB(30, 30, 30, 0),
             child: Row(
@@ -53,9 +52,7 @@ class ProfileWidget extends StatelessWidget {
                     ),
                     const SizedBox(height: 8),
                     Text(
-                      controller.newSchool
-                          ? 'Preencha seus dados abaixo'
-                          : 'Edite os dados abaixo',
+                      controller.newSchool ? 'Preencha seus dados abaixo' : 'Edite os dados abaixo',
                       style: context.style.interRegular.copyWith(fontSize: 16),
                     ),
                   ],
@@ -80,8 +77,7 @@ class ProfileWidget extends StatelessWidget {
                       children: [
                         Text(
                           'Logotipo:',
-                          style: context.style.poppinsRegular
-                              .copyWith(fontSize: 14),
+                          style: context.style.poppinsRegular.copyWith(fontSize: 14),
                         ),
                         const SizedBox(width: 16),
                         if (controller.image?.image != null)
@@ -93,8 +89,7 @@ class ProfileWidget extends StatelessWidget {
                               fit: BoxFit.cover,
                             ),
                           )
-                        else if (controller.school.logo != null &&
-                            controller.school.logo != '')
+                        else if (controller.school.logo != null && controller.school.logo != '')
                           Click(
                             onTap: controller.getImage,
                             child: Image.network(
@@ -126,6 +121,7 @@ class ProfileWidget extends StatelessWidget {
                     children: [
                       Expanded(
                         child: InputRegister(
+                          enabled: controller.newSchool,
                           title: 'Email',
                           hintText: 'escola@host.com',
                           initialValue: controller.school.email,
@@ -167,9 +163,7 @@ class ProfileWidget extends StatelessWidget {
                           validator: Validatorless.multiple([
                             Validatorless.required('Campo obrigatório'),
                             Validatorless.min(18, 'CNPJ inválido'),
-                            Constants.prod
-                                ? Validatorless.cnpj('CNPJ inválido')
-                                : (_) => null,
+                            Constants.prod ? Validatorless.cnpj('CNPJ inválido') : (_) => null,
                           ]),
                           inputFormatters: [
                             FilteringTextInputFormatter.digitsOnly,
@@ -231,7 +225,7 @@ class ProfileWidget extends StatelessWidget {
                   Button(
                     text: controller.newSchool ? 'Criar Conta' : 'Salvar',
                     borderRadius: 10,
-                    onPressed: controller.register,
+                    onPressed: controller.save,
                     color: context.colors.primary,
                     height: 45,
                     withBorder: false,

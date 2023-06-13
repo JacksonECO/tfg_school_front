@@ -81,13 +81,13 @@ abstract class _ProfileUserControllerBase with Store {
 
   Future<void> save() {
     if (newUser) {
-      return register();
+      return _register();
     } else {
-      return update();
+      return _update();
     }
   }
 
-  Future<void> register() async {
+  Future<void> _register() async {
     try {
       if (form.currentState!.validate()) {
         if (isStudent) {
@@ -118,7 +118,7 @@ abstract class _ProfileUserControllerBase with Store {
     }
   }
 
-  Future<void> update() async {
+  Future<void> _update() async {
     try {
       if (form.currentState!.validate()) {
         if (isStudent) {

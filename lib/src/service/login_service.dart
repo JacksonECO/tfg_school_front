@@ -71,4 +71,26 @@ class LoginService {
       },
     ).then((value) => value.data);
   }
+
+  Future<AuthModel> updateSchool(
+    SchoolModel school,
+    FileModel? image,
+  ) async {
+    final Map<String, dynamic>? data = await _dio.patch<Map<String, dynamic>>(
+      '/school',
+      data: {
+        ...school.toMap(),
+        if (image != null) 'newLogo': image.toMap(),
+      },
+    ).then((value) => value.data);
+
+    if (data == null) {
+      throw CustomException(
+        message: 'Erro ao atualizar escola',
+        error: data,
+        stackTrace: StackTrace.current,
+      );
+    }
+    return AuthModel.fromMap(data);
+  }
 }

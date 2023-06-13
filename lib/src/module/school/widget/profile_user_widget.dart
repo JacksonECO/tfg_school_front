@@ -163,6 +163,7 @@ class ProfileUserWidget extends StatelessWidget {
                               const SizedBox(width: 16),
                               Flexible(
                                 child: InputRegister(
+                                  enabled: controller.newUser,
                                   title: 'Email',
                                   hintText: 'Email',
                                   initialValue: controller.user.email,

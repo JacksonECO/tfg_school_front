@@ -48,7 +48,15 @@ abstract class _ProfileControllerBase with Store {
     return null;
   }
 
-  Future<void> register() async {
+  Future<void> save() async {
+    if (newSchool) {
+      return _register();
+    } else {
+      return _update();
+    }
+  }
+
+  Future<void> _register() async {
     try {
       if (form.currentState!.validate()) {
         final AuthModel auth = await _service.registerSchool(school, image);
@@ -70,6 +78,32 @@ abstract class _ProfileControllerBase with Store {
       ModalAlert.show(
         'Cadastro',
         "Falha ao registrar escola!",
+      );
+    }
+  }
+
+  Future<void> _update() async {
+    try {
+      if (form.currentState!.validate()) {
+        await _service.updateSchool(school, image);
+        await ModalAlert.show(
+          'Cadastro',
+          "Escola atualizada com sucesso!",
+        );
+      }
+
+      final auth = Modular.get<AuthModel>();
+      auth.set(auth.copyWith(schoolName: school.name));
+    } on CustomException catch (e) {
+      ModalAlert.show(
+        'Cadastro',
+        e.message,
+      );
+    } catch (e, s) {
+      log('Erro ao atualizar escola', error: e, stackTrace: s);
+      ModalAlert.show(
+        'Cadastro',
+        "Falha ao atualizar escola!",
       );
     }
   }

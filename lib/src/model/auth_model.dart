@@ -92,6 +92,32 @@ class AuthModel {
     return 'AuthModel(userId: $userId, schoolId: $schoolId)';
   }
 
+  AuthModel copyWith({
+    int? userId,
+    String? userName,
+    String? userPhoto,
+    int? schoolId,
+    String? schoolName,
+    String? schoolLogo,
+    int? classId,
+    String? email,
+    AuthRoleEnum? role,
+    String? token,
+  }) {
+    return AuthModel(
+      userId: userId ?? this.userId,
+      userName: userName ?? this.userName,
+      userPhoto: userPhoto ?? this.userPhoto,
+      schoolId: schoolId ?? this.schoolId,
+      schoolName: schoolName ?? this.schoolName,
+      schoolLogo: schoolLogo ?? this.schoolLogo,
+      classId: classId ?? this.classId,
+      email: email ?? this.email,
+      role: role ?? this.role,
+      token: token ?? this.token,
+    );
+  }
+
   void clear() {
     userId = null;
     userName = null;
