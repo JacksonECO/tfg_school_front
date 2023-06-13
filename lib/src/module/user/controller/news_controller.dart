@@ -4,6 +4,7 @@ import 'package:flutter_modular/flutter_modular.dart';
 import 'package:mobx/mobx.dart';
 
 import 'package:tfg_front/src/model/auth_model.dart';
+import 'package:tfg_front/src/model/auth_role_enum.dart';
 import 'package:tfg_front/src/model/news_model.dart';
 import 'package:tfg_front/src/model/subject_model.dart';
 import 'package:tfg_front/src/model/subject_news_model.dart';
@@ -37,7 +38,9 @@ abstract class NewsControllerBase with Store {
   Future<bool> loadSubjects() async {
     try {
       if (_allNews.isNotEmpty) return true;
-      var listSubjects = await _subjectService.allSubjects(_auth.classId!);
+      var listSubjects = _auth.role == AuthRoleEnum.teacher
+          ? await _subjectService.allSubjects(teacherId: _auth.userId)
+          : await _subjectService.allSubjects(classId: _auth.classId);
       if (listSubjects != []) {
         for (var subject in listSubjects) {
           await loadNews(subject);
@@ -54,8 +57,7 @@ abstract class NewsControllerBase with Store {
   Future<void> loadNews(SubjectModel subject) async {
     try {
       var newsBySubject = await _newsService.find(subject.id!);
-      _allNews
-          .add(SubjectNewsModel.news(news: newsBySubject, subject: subject));
+      _allNews.add(SubjectNewsModel.news(news: newsBySubject, subject: subject));
     } catch (e, s) {
       log('Erro ao buscar notícias', error: e, stackTrace: s);
     }
@@ -77,7 +79,7 @@ abstract class NewsControllerBase with Store {
     }
   }
 
-    Future<void> updateNews(NewsModel news) async {
+  Future<void> updateNews(NewsModel news) async {
     try {
       await _newsService.update(news);
     } catch (e, s) {

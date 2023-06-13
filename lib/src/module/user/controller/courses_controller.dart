@@ -51,7 +51,9 @@ abstract class CoursesControllerBase with Store {
     try {
       _status = CoursesStateStatus.loading;
       if (_allSubjects.isEmpty) {
-        _allSubjects = await _subjectService.allSubjects(_auth.classId!);
+        _allSubjects = _auth.role == AuthRoleEnum.teacher
+            ? await _subjectService.allSubjects(teacherId: _auth.userId)
+            : await _subjectService.allSubjects(classId: _auth.classId);
       }
       _filteredSubjects = _allSubjects;
       if (_filteredSubjects.isNotEmpty) {
@@ -83,19 +85,18 @@ abstract class CoursesControllerBase with Store {
           .where((subject) => filterSubjectName != ''
               ? subject.name!.toLowerCase().contains(filterSubjectName.toLowerCase())
               : true)
-          .where((subject) => filterTeacherName != null
-              ? subject.teacherName! == filterTeacherName
-              : true)
-          .where((subject) => filterClassName != null
-              ? subject.className! == filterClassName
-              : true)
+          .where((subject) =>
+              filterTeacherName != null ? subject.teacherName! == filterTeacherName : true)
+          .where(
+              (subject) => filterClassName != null ? subject.className! == filterClassName : true)
           .toList();
-      filterOrderDate == 'Mais Antigos' ?
-          _filteredSubjects.sort(((a, b) {
-            return a.updatedAt!.compareTo(b.updatedAt!);
-          })) : _filteredSubjects.sort(((a, b) {
-            return b.updatedAt!.compareTo(a.updatedAt!);
-          })) ;
+      filterOrderDate == 'Mais Antigos'
+          ? _filteredSubjects.sort(((a, b) {
+              return a.updatedAt!.compareTo(b.updatedAt!);
+            }))
+          : _filteredSubjects.sort(((a, b) {
+              return b.updatedAt!.compareTo(a.updatedAt!);
+            }));
       _totalSeachItens = _filteredSubjects.length;
       _status = CoursesStateStatus.loaded;
     } catch (e, s) {
