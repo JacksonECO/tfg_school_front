@@ -42,10 +42,11 @@ class LoginController {
           isSchool ? SchoolModule.initialRoute : UserModule.initialRoute,
         );
       } on CustomException catch (e) {
-        ModalAlert.show('Login', e.message);
+        ModalAlert.show('Login', 'E-mail ou senha incorretos.');
+        log(e.toString());
       } catch (e) {
         log(e.toString());
-        ModalAlert.show('Login', 'Erro ao fazer login, tente mais tarde.');
+        ModalAlert.show('Login', 'E-mail ou senha incorretos.');
       }
     }
   }
@@ -63,7 +64,7 @@ class LoginController {
   }
 
   void forgotPassword(bool isSchool) {
-    if(isSchool) {
+    if (isSchool) {
       Modular.to.navigate(ForgotPasswordModule.schoolInitialRoute);
     } else {
       Modular.to.navigate(ForgotPasswordModule.userInitialRoute);

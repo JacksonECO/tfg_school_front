@@ -11,7 +11,7 @@ class Constants {
       const String.fromEnvironment('urlBase', defaultValue: 'https://back-escola.fly.dev/api');
 
   static String get emailSchool => const String.fromEnvironment('emailSchool');
-  static String get emailUser => const String.fromEnvironment('emailSchool');
+  static String get emailUser => const String.fromEnvironment('emailUser');
   static String get password => const String.fromEnvironment('password');
   // static String get nome => const String.fromEnvironment('nome', defaultValue: 'default');
 }

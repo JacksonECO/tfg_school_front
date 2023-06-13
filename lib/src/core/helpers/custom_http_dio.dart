@@ -52,7 +52,7 @@ class CustomHttpDio implements CustomHttp {
     } on CustomException catch (_) {
       rethrow;
     } on DioError catch (e) {
-      _verify401(e.response);
+      _verify401(e.response, e.requestOptions);
       throw CustomException(
         error: e.response,
         message: e.response?.data['message'],
@@ -80,7 +80,7 @@ class CustomHttpDio implements CustomHttp {
     } on CustomException catch (_) {
       rethrow;
     } on DioError catch (e) {
-      _verify401(e.response);
+      _verify401(e.response, e.requestOptions);
       throw CustomException(
         error: e.response,
         message: e.response?.data['message'],
@@ -108,7 +108,7 @@ class CustomHttpDio implements CustomHttp {
     } on CustomException catch (_) {
       rethrow;
     } on DioError catch (e) {
-      _verify401(e.response);
+      _verify401(e.response, e.requestOptions);
       throw CustomException(
         error: e.response,
         message: e.response?.data['message'],
@@ -136,7 +136,7 @@ class CustomHttpDio implements CustomHttp {
     } on CustomException catch (_) {
       rethrow;
     } on DioError catch (e) {
-      _verify401(e.response);
+      _verify401(e.response, e.requestOptions);
       throw CustomException(
         error: e.response,
         message: e.response?.data['message'],
@@ -147,10 +147,11 @@ class CustomHttpDio implements CustomHttp {
     }
   }
 
-  void _verify401(Response? response) {
-    if (response?.statusCode == 401) {
+  void _verify401(Response? response, RequestOptions requestOptions) {
+    if (response?.statusCode == 401 && !requestOptions.path.contains('login')) {
       // TODO:Implementar aviso de erro
       Modular.to.navigate('/');
+      Modular.get<AuthModel>().clear();
     }
   }
 }

@@ -258,7 +258,7 @@ class AuthModel {
           ),
           LeadingMenuItem(
             title: 'Suporte ',
-            route: '/',
+            route: '/user/support',
             icon: Image.asset('assets/icon/suporte.png', height: 28, width: 28),
           ),
         ]);
