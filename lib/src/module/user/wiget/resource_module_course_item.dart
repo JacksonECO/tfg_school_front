@@ -50,8 +50,7 @@ class ResourceModuleCourseItem extends StatelessWidget {
         };
         showFunction = () async {
           if (await ModalAlert.showContent(
-              title: '${resource.title}',
-              content: resource.content)) {}
+              title: '${resource.title}', content: resource.content)) {}
         };
         break;
       case 'file':
@@ -92,36 +91,40 @@ class ResourceModuleCourseItem extends StatelessWidget {
 
     return Row(
       children: [
-        InkWell(
-          onTap: () async {
-            await showFunction();
-          },
-          child: Padding(
-            padding: const EdgeInsets.only(left: 40.0, top: 10),
-            child: Row(
-              children: [
-                Container(
-                  padding: const EdgeInsets.all(5),
-                  decoration: BoxDecoration(
-                      color: color,
-                      borderRadius: const BorderRadius.all(Radius.circular(6))),
-                  child: Image.asset(
-                    'assets/icon/${resource.type}-resource.png',
-                    height: 30,
+        Expanded(
+          child: InkWell(
+            onTap: () async {
+              await showFunction();
+            },
+            child: Padding(
+              padding: const EdgeInsets.only(left: 40.0, top: 10),
+              child: Row(
+                children: [
+                  Container(
+                    padding: const EdgeInsets.all(5),
+                    decoration: BoxDecoration(
+                        color: color,
+                        borderRadius:
+                            const BorderRadius.all(Radius.circular(6))),
+                    child: Image.asset(
+                      'assets/icon/${resource.type}-resource.png',
+                      height: 30,
+                    ),
                   ),
-                ),
-                Container(
-                  margin: const EdgeInsets.all(10),
-                  child: Text(
-                    resource.title,
-                    style: context.style.text,
+                  Expanded(
+                    child: Container(
+                      margin: const EdgeInsets.all(10),
+                      child: Text(
+                        resource.title,
+                        style: context.style.text,
+                      ),
+                    ),
                   ),
-                ),
-              ],
+                ],
+              ),
             ),
           ),
         ),
-        const Spacer(),
         if (auth.role == AuthRoleEnum.teacher)
           Row(
             children: [
