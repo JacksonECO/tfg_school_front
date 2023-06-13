@@ -80,6 +80,15 @@ class _SubjectWidgetState extends State<SubjectWidget> with TickerProviderStateM
             ),
             const Spacer(),
             IconButton(
+              icon: const Icon(
+                Icons.delete,
+                size: 24,
+              ),
+              onPressed: () {
+                widget.controller.removeSubject(widget.index);
+              },
+            ),
+            IconButton(
               icon: RotationTransition(
                 turns: iconController,
                 child: RotationTransition(

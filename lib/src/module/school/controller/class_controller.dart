@@ -135,13 +135,13 @@ abstract class _ClassControllerBase with Store {
 
   Future<void> save() {
     if (newClass) {
-      return register();
+      return _register();
     } else {
-      return update();
+      return _update();
     }
   }
 
-  Future<void> register() async {
+  Future<void> _register() async {
     try {
       if (form.currentState!.validate()) {
         await _service.register(classModel);
@@ -166,7 +166,7 @@ abstract class _ClassControllerBase with Store {
     }
   }
 
-  Future<void> update() async {
+  Future<void> _update() async {
     try {
       if (form.currentState!.validate()) {
         await _service.update(classModel);
@@ -189,5 +189,9 @@ abstract class _ClassControllerBase with Store {
         "Falha ao atualizar turma!",
       );
     }
+  }
+
+  void removeSubject(int index) {
+    classModel.subjects.removeAt(index);
   }
 }
