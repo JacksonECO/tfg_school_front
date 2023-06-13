@@ -43,7 +43,7 @@ class _WebState extends State<Web> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp.router(
-      title: 'School',
+      title: 'Blackboard',
       debugShowCheckedModeBanner: false,
       routeInformationParser: Modular.routeInformationParser,
       routerDelegate: Modular.routerDelegate,

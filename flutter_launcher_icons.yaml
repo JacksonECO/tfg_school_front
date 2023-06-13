@@ -1,0 +1,14 @@
+# flutter pub run flutter_launcher_icons
+
+flutter_launcher_icons:
+  android: false
+  ios: false
+  web:
+    generate: true
+    image_path: "assets/icon/black-board-logo.png"
+    background_color: "#000000"
+    theme_color: "#000000"
+  windows:
+    generate: false
+  macos:
+    generate: false
