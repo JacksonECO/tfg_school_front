@@ -197,7 +197,7 @@ class AuthModel {
           icon: CircleAvatar(
             backgroundImage: userPhoto != null
                 ? NetworkImage(userPhoto!)
-                : const AssetImage('assect/icon/default-profile.png') as ImageProvider,
+                : const AssetImage('assets/icon/default-profile.png') as ImageProvider,
             radius: 14,
           ),
         ),

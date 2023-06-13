@@ -139,7 +139,7 @@ class UserModel {
       classId: map['classId'] != null ? map['classId'] as int : null,
       name: map['name'] != null ? map['name'] as String : null,
       registration: map['registration'] != null ? map['registration'] as String : null,
-      birthDate: DateTime.tryParse(map['birth_date'] as String? ?? ''),
+      birthDate: DateTime.tryParse(map['birthDate'] as String? ?? ''),
       role: AuthRoleEnum.fromName(map['role'] as String?),
       phone: map['phone'] != null ? map['phone'] as String : null,
       email: map['email'] != null ? map['email'] as String : null,

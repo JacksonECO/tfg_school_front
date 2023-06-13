@@ -32,12 +32,14 @@ class HeaderModuleCourse extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            Text(
-              module.title,
-              style: context.style.poppinsBold.copyWith(fontSize: 22),
+            Flexible(
+              child: Text(
+                module.title,
+                style: context.style.poppinsBold.copyWith(fontSize: 22),
+              ),
             ),
-            const Spacer(),
             if (auth.role == AuthRoleEnum.teacher)
               Row(
                 children: [
@@ -78,7 +80,7 @@ class HeaderModuleCourse extends StatelessWidget {
                     icon: Icons.close,
                     onPressed: () async {
                       if (await ModalAlert.showConfirmRemove(
-                          'Deseja remover o recurso: ${module.title}')) {
+                          'Deseja remover o recurso: ${module.title}?')) {
                         await controller.deleteModule(module.id, subjectId);
                       }
                     },

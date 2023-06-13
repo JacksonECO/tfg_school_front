@@ -4,6 +4,7 @@ import 'package:flutter_modular/flutter_modular.dart';
 import 'package:mobx/mobx.dart';
 
 import 'package:tfg_front/src/model/auth_model.dart';
+import 'package:tfg_front/src/model/news_model.dart';
 import 'package:tfg_front/src/model/subject_model.dart';
 import 'package:tfg_front/src/model/subject_news_model.dart';
 import 'package:tfg_front/src/service/news_service.dart';
@@ -28,6 +29,10 @@ abstract class NewsControllerBase with Store {
   @readonly
   List<SubjectNewsModel> _allNews = [];
 
+  set setAllNews(List<SubjectNewsModel> newsList) {
+    _allNews = newsList;
+  }
+
   @action
   Future<bool> loadSubjects() async {
     try {
@@ -49,9 +54,34 @@ abstract class NewsControllerBase with Store {
   Future<void> loadNews(SubjectModel subject) async {
     try {
       var newsBySubject = await _newsService.find(subject.id!);
-      _allNews.add(SubjectNewsModel.news(news: newsBySubject, subject: subject));
+      _allNews
+          .add(SubjectNewsModel.news(news: newsBySubject, subject: subject));
     } catch (e, s) {
       log('Erro ao buscar notícias', error: e, stackTrace: s);
+    }
+  }
+
+  Future<void> removeNews(NewsModel news) async {
+    try {
+      await _newsService.delete(news);
+    } catch (e, s) {
+      log('Erro ao excluir notícia', error: e, stackTrace: s);
+    }
+  }
+
+  Future<void> addNews(NewsModel news) async {
+    try {
+      await _newsService.add(news);
+    } catch (e, s) {
+      log('Erro ao adicionar notícia', error: e, stackTrace: s);
+    }
+  }
+
+    Future<void> updateNews(NewsModel news) async {
+    try {
+      await _newsService.update(news);
+    } catch (e, s) {
+      log('Erro ao atualizar notícia', error: e, stackTrace: s);
     }
   }
 }
