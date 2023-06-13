@@ -8,9 +8,13 @@ import 'package:tfg_front/src/components/modal_alert.dart';
 import 'package:tfg_front/src/components/not_found.dart';
 import 'package:tfg_front/src/model/auth_model.dart';
 import 'package:tfg_front/src/model/auth_role_enum.dart';
+import 'package:tfg_front/src/model/menu_floating_item.dart';
+import 'package:tfg_front/src/module/user/controller/news_controller.dart';
+import 'package:tfg_front/src/module/user/wiget/floating_menu.dart';
 import 'package:tfg_front/src/module/user/wiget/header_module_course_widget.dart';
 import 'package:tfg_front/src/core/helpers/context_extension.dart';
 import 'package:tfg_front/src/module/user/controller/course_controller.dart';
+import 'package:tfg_front/src/module/user/wiget/modal_news_widget.dart';
 import 'package:tfg_front/src/module/user/wiget/resource_module_course_item.dart';
 
 class CoursePage extends StatefulWidget {
@@ -28,7 +32,7 @@ class _CoursePageState extends State<CoursePage> {
   final TextEditingController titleModuleEC = TextEditingController();
   final TextEditingController descriptionModuleEC = TextEditingController();
   final auth = Modular.get<AuthModel>();
-
+  
   @override
   void initState() {
     WidgetsBinding.instance.addPostFrameCallback((_) async {
@@ -38,6 +42,7 @@ class _CoursePageState extends State<CoursePage> {
       await controller.loadSubject(widget.subjectId);
       await controller.loadModules(widget.subjectId);
     });
+    FloatingMenu.listOptions = floatingMenuOptionsList();
     super.initState();
   }
 
@@ -112,7 +117,7 @@ class _CoursePageState extends State<CoursePage> {
     }
 
     return CustomPage(
-      showFloatingButton: true,
+      showFloatingButton: auth.role == AuthRoleEnum.teacher ?  true : false,
       body: [
         controller.status == CourseStateStatus.loading
             ? (Column(
@@ -158,5 +163,19 @@ class _CoursePageState extends State<CoursePage> {
                   ),
       ],
     );
+  }
+
+  List<MenuFloatingItem> floatingMenuOptionsList () {
+    final List<MenuFloatingItem> listOptions = [];
+    listOptions.add(MenuFloatingItem(
+      title: 'Notícias',
+      iconPath: 'assets/icon/alert-dark.png',
+      handleShow: () async {
+        final NewsController newsController = NewsController();
+        await newsController.loadNews(controller.subject!);
+        ModalNewsWidget().showNews(context, newsController.allNews[0].news!);
+      },
+    ));
+    return listOptions;
   }
 }

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:tfg_front/src/module/user/wiget/floating_menu.dart';
 
 import 'package:tfg_front/src/components/leading_menu_widget.dart';
 import 'package:tfg_front/src/core/helpers/context_extension.dart';
@@ -14,7 +15,6 @@ class CustomPage extends StatelessWidget {
   final bool showAppBar;
   final bool showFooter;
   final bool showFloatingButton;
-
   const CustomPage({
     this.body,
     this.slivers,
@@ -24,7 +24,7 @@ class CustomPage extends StatelessWidget {
     this.showLeading = true,
     this.showAppBar = false,
     this.showFooter = false,
-    super.key, 
+    super.key,
     this.showFloatingButton = false,
   });
 
@@ -36,7 +36,9 @@ class CustomPage extends StatelessWidget {
               backgroundColor: context.colors.primary,
               shape: const CircleBorder(),
               child: const Icon(Icons.more_vert),
-              onPressed: () {},
+              onPressed: () {
+                FloatingMenu.showFloatingMenu();
+              },
             )
           : null,
       body: CustomScrollView(

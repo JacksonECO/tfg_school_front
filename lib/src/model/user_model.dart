@@ -138,7 +138,8 @@ class UserModel {
       schoolId: map['schoolId'] != null ? map['schoolId'] as int : null,
       classId: map['classId'] != null ? map['classId'] as int : null,
       name: map['name'] != null ? map['name'] as String : null,
-      registration: map['registration'] != null ? map['registration'] as String : null,
+      registration:
+          map['registration'] != null ? map['registration'] as String : null,
       birthDate: DateTime.tryParse(map['birthDate'] as String? ?? ''),
       role: AuthRoleEnum.fromName(map['role'] as String?),
       phone: map['phone'] != null ? map['phone'] as String : null,
@@ -146,7 +147,9 @@ class UserModel {
       cpf: map['cpf'] != null ? map['cpf'] as String : null,
       rg: map['rg'] != null ? map['rg'] as String : null,
       password: map['password'] != null ? map['password'] as String : null,
-      profilePicture: map['profile_picture'] != null ? map['profile_picture'] as String : null,
+      profilePicture: map['profile_picture'] != null
+          ? map['profile_picture'] as String
+          : null,
       // cep: map['cep'] != null ? map['cep'] as String : null,
       address: map['address'] != null ? map['address'] as String : null,
       city: map['city'] != null ? map['city'] as String : null,
@@ -210,4 +213,5 @@ class UserModel {
         createdAt.hashCode ^
         updatedAt.hashCode;
   }
+
 }

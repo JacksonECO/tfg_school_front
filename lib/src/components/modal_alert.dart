@@ -35,16 +35,18 @@ class ModalAlert {
           context: Constants.context,
           builder: (BuildContext context) {
             return Container(
-              constraints: const BoxConstraints(maxWidth: 200),
               padding: const EdgeInsets.all(80),
               child: AlertDialog(
                 backgroundColor: context.colors.secondary,
                 titlePadding: const EdgeInsets.only(
-                    bottom: 38, left: 100, right: 100, top: 38),
+                    bottom: 38, left: 50, right: 50, top: 38),
                 buttonPadding: const EdgeInsets.only(left: 8, right: 8),
-                title: Text(
-                  title,
-                  style: context.style.poppinsRegular.copyWith(fontSize: 28),
+                title: ConstrainedBox(
+                  constraints: const BoxConstraints(maxWidth: 600),
+                  child: Text(
+                    title,
+                    style: context.style.poppinsRegular.copyWith(fontSize: 24),
+                  ),
                 ),
                 actionsAlignment: MainAxisAlignment.center,
                 actions: [
@@ -78,16 +80,16 @@ class ModalAlert {
           context: Constants.context,
           builder: (BuildContext context) {
             return Container(
-              constraints: const BoxConstraints(maxWidth: 500),
+              constraints: const BoxConstraints(minWidth: 400, maxWidth: 500),
               padding: const EdgeInsets.all(80),
               child: AlertDialog(
                 backgroundColor: context.colors.secondary,
                 titlePadding: const EdgeInsets.only(
-                    bottom: 38, left: 100, right: 100, top: 38),
+                    bottom: 38, left: 50, right: 50, top: 38),
                 buttonPadding: const EdgeInsets.only(left: 8, right: 8),
                 title: Text(
                   title,
-                  style: context.style.poppinsRegular.copyWith(fontSize: 28),
+                  style: context.style.poppinsRegular.copyWith(fontSize: 24),
                   textAlign: TextAlign.center,
                 ),
                 content: SingleChildScrollView(
@@ -96,7 +98,7 @@ class ModalAlert {
                       Padding(
                         padding: const EdgeInsets.only(bottom: 20.0),
                         child: SizedBox(
-                          width: context.width * 0.6,
+                          width: context.width * 0.45,
                           child: Text(
                             content,
                             style: context.style.text,
@@ -131,23 +133,26 @@ class ModalAlert {
           context: Constants.context,
           builder: (BuildContext context) {
             return Container(
-              constraints: const BoxConstraints(maxWidth: 600),
+              constraints: const BoxConstraints(maxWidth: 700),
               padding: const EdgeInsets.all(80),
               child: AlertDialog(
                 backgroundColor: context.colors.secondary,
                 titlePadding: const EdgeInsets.only(
-                    bottom: 38, left: 100, right: 100, top: 38),
+                    bottom: 38, left: 50, right: 50, top: 38),
                 buttonPadding: const EdgeInsets.only(left: 8, right: 8),
-                title: Text(
-                  title,
-                  style: context.style.poppinsRegular.copyWith(fontSize: 28),
-                  textAlign: TextAlign.center,
+                title: ConstrainedBox(
+                  constraints: const BoxConstraints(maxWidth: 500),
+                  child: Text(
+                    title,
+                    style: context.style.poppinsRegular.copyWith(fontSize: 24),
+                    textAlign: TextAlign.center,
+                  ),
                 ),
                 actions: [
                   Form(
                     key: formKey,
                     child: SizedBox(
-                      width: 600,
+                      width: 700,
                       child: Column(
                         children: [
                           TextFormField(
@@ -178,6 +183,8 @@ class ModalAlert {
                           ),
                           TextFormField(
                             controller: contentEC,
+                            minLines: 1,
+                            maxLines: 8,
                             validator:
                                 Validatorless.required('Campo obrigatório'),
                             decoration: InputDecoration(
@@ -193,6 +200,7 @@ class ModalAlert {
                               fillColor: context.colors.inputAlertModal,
                               filled: true,
                               hintStyle: context.style.poppinsRegular,
+                              contentPadding: const EdgeInsets.symmetric(vertical: 20.0, horizontal: 20.0),
                             ),
                             style: context.style.poppinsRegular,
                           ),
@@ -217,7 +225,8 @@ class ModalAlert {
                                     text: 'Confirmar',
                                     height: 50,
                                     withBorder: false,
-                                    onPressed: () => formSubmit(context, formKey)),
+                                    onPressed: () =>
+                                        formSubmit(context, formKey)),
                               ],
                             ),
                           )

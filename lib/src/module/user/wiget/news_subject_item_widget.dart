@@ -70,14 +70,17 @@ class _NewsSubjectItemWidgetState extends State<NewsSubjectItemWidget> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Text(
-                      getNews.title,
-                      style: context.style.poppinsSemiBold.copyWith(
-                        fontSize: 16,
+                    Flexible(
+                      child: Text(
+                        getNews.title,
+                        style: context.style.poppinsSemiBold.copyWith(
+                          fontSize: 16,
+                        ),
                       ),
                     ),
-                    const Spacer(),
+
                     Text(
                       'Data de publicação: ${formatter.format(getNews.updatedAt!)}',
                       style: context.style.poppinsItalic.copyWith(
