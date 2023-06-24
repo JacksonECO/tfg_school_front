@@ -50,7 +50,10 @@ class SubjectModel {
       'className': className,
       'name': name,
       'color': color,
-      'times': times?.map((DateCustom e) => e.toMap()).toList(),
+      'times': times
+          ?.where((element) => element.weekDay != WeekDayEnum.empty)
+          .map((DateCustom e) => e.toMap())
+          .toList(),
       'picture': picture,
       'createdAt': createdAt?.millisecondsSinceEpoch,
       'updatedAt': updatedAt?.millisecondsSinceEpoch,

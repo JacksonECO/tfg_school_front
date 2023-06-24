@@ -112,6 +112,7 @@ class _SubjectWidgetState extends State<SubjectWidget> with TickerProviderStateM
           child: Column(
             children: [
               Row(
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Flexible(
                     child: InputRegister(
