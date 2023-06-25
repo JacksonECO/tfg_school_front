@@ -1,5 +1,6 @@
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:tfg_front/mocks/services/attendance_service_mock.dart';
 import 'package:tfg_front/src/core/helpers/custom_http_dio.dart';
 import 'package:tfg_front/src/model/auth_model.dart';
 import 'package:tfg_front/src/module/forgot_password/forgot_password_module.dart';
@@ -24,6 +25,7 @@ class WebModule extends Module {
         Bind.factory((i) => ClassService()),
         Bind.factory((i) => NewsService()),
         Bind.factory((i) => SubjectService()),
+        Bind.factory((i) => AttendanceServiceMock()),
         Bind.factory((i) => ModuleCourseService()),
         Bind.singleton((i) => AuthModel.cookie()),
       ];
@@ -33,7 +35,9 @@ class WebModule extends Module {
         ModuleRoute('/', module: HomeModule(), transition: TransitionType.noTransition),
         ModuleRoute('/school', module: SchoolModule(), transition: TransitionType.noTransition),
         ModuleRoute('/user', module: UserModule(), transition: TransitionType.noTransition),
-        ModuleRoute('/forgot-password', module: ForgotPasswordModule(), transition: TransitionType.noTransition),
-        ModuleRoute('/reset-password', module: ResetPasswordModule(), transition: TransitionType.noTransition),
+        ModuleRoute('/forgot-password',
+            module: ForgotPasswordModule(), transition: TransitionType.noTransition),
+        ModuleRoute('/reset-password',
+            module: ResetPasswordModule(), transition: TransitionType.noTransition),
       ];
 }

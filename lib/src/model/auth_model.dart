@@ -61,13 +61,6 @@ class AuthModel {
   }
 
   factory AuthModel.fromMap(Map<String, dynamic> map) {
-    String? photo;
-    if (map['photoUrl'] is String?) {
-      photo = map['photoUrl'] as String?;
-    } else {
-      photo = map['photoUrl']['url'];
-    }
-
     return AuthModel(
       userId: map['userId'] as int?,
       userName: map['userName'] as String?,
@@ -212,7 +205,12 @@ class AuthModel {
             icon: Image.asset('assets/icon/courses-icon.png', height: 28, width: 28),
           ),
           LeadingMenuItem(
-            title: 'Suporte ',
+            title: 'Presenças - 1',
+            route: '/user/attendance/1',
+            icon: Image.asset('assets/icon/courses-icon.png', height: 28, width: 28),
+          ),
+          LeadingMenuItem(
+            title: 'Suporte',
             route: '/user/support',
             icon: Image.asset('assets/icon/suporte.png', height: 28, width: 28),
           ),

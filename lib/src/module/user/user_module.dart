@@ -1,10 +1,13 @@
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:tfg_front/src/components/custom_page.dart';
+import 'package:tfg_front/src/module/user/controller/attendance_controller.dart';
 import 'package:tfg_front/src/module/user/controller/course_controller.dart';
 import 'package:tfg_front/src/module/user/controller/courses_controller.dart';
+import 'package:tfg_front/src/module/user/controller/list_attendance_controller.dart';
 import 'package:tfg_front/src/module/user/controller/news_controller.dart';
 import 'package:tfg_front/src/module/user/pages/course_page.dart';
 import 'package:tfg_front/src/module/user/pages/courses_page.dart';
+import 'package:tfg_front/src/module/user/pages/list_attendance_page.dart';
 import 'package:tfg_front/src/module/user/pages/news_page.dart';
 
 class UserModule extends Module {
@@ -13,11 +16,12 @@ class UserModule extends Module {
   static const String newsRoute = '${initialRoute}news';
   static const String coursesRoute = '${initialRoute}courses';
   static const String courseRoute = '${initialRoute}course';
+  static const String attendanceRoute = '${initialRoute}attendance';
 
   @override
   List<Bind> get binds => [
-    Bind.lazySingleton((i) => CourseController()),
-  ];
+        Bind.lazySingleton((i) => CourseController()),
+      ];
 
   @override
   List<ModularRoute> get routes => [
@@ -41,6 +45,15 @@ class UserModule extends Module {
           courseRoute.split('/user').last + '/:id',
           child: (_, args) => CoursePage(
             subjectId: int.parse(args.params['id']),
+          ),
+        ),
+        ChildRoute(
+          attendanceRoute.split('/user').last + '/:id',
+          child: (_, args) => ListAttendancePage(
+            controller: ListAttendanceController(
+              subjectId: int.parse(args.params['id']),
+            ),
+            attendanceController: AttendanceController.new,
           ),
         ),
       ];
