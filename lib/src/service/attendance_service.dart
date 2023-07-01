@@ -1,12 +1,15 @@
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:tfg_front/src/core/helpers/custom_exception.dart';
 import 'package:tfg_front/src/core/helpers/custom_http.dart';
+import 'package:tfg_front/src/model/auth_role_enum.dart';
 import 'package:tfg_front/src/model/pagination_data.dart';
 import 'package:tfg_front/src/module/user/model/attendance_model.dart';
 import 'package:tfg_front/src/module/user/model/user_attendance_model.dart';
+import 'package:tfg_front/src/service/user_service.dart';
 
 class AttendanceService {
   final _dio = Modular.get<CustomHttp>();
+  final _userService = Modular.get<UserService>();
 
   Future<AttendanceModel> getAttendance(int id) async {
     final response = await _dio.get<Map<String, dynamic>>('/attendance/$id');
@@ -14,18 +17,30 @@ class AttendanceService {
   }
 
   Future<List<UserAttendanceModel>> getAttendanceUsers(int classId) async {
-    return <UserAttendanceModel>[];
+    final listUser = await _userService.getUsers(classId: classId, AuthRoleEnum.student);
+
+    return listUser
+        .map<UserAttendanceModel>(
+          (e) => UserAttendanceModel(
+            userId: e.id!,
+            userName: e.name!,
+            userRegistration: e.registration!,
+            isPresent: true,
+          ),
+        )
+        .toList();
   }
 
   Future<PaginationData<AttendanceModel>> getAttendancePaginated(
     PaginationData<AttendanceModel> pagination,
+    int subjectId,
   ) async {
     Map? response = await _dio.get<Map?>(
       '/attendance/paginated',
       queryParameters: {
+        'subjectId': subjectId,
         'rowsPerPage': pagination.rowsPerPage,
         'page': pagination.page,
-        'search': pagination.search,
       },
     ).then((value) => value.data);
 
@@ -56,7 +71,7 @@ class AttendanceService {
 
     if (data == null) {
       throw CustomException(
-        message: 'Erro ao registrar attendance',
+        message: 'Erro ao registrar chamada',
         error: data,
         stackTrace: StackTrace.current,
       );

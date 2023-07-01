@@ -12,7 +12,9 @@ class AttendanceServiceMock implements AttendanceService {
 
   @override
   Future<PaginationData<AttendanceModel>> getAttendancePaginated(
-      PaginationData<AttendanceModel> pagination) async {
+    PaginationData<AttendanceModel> pagination,
+    int subjectId,
+  ) async {
     await _delay();
 
     return PaginationData<AttendanceModel>(
@@ -20,7 +22,7 @@ class AttendanceServiceMock implements AttendanceService {
         AttendanceModel(
           id: 0,
           schoolId: 1,
-          classId: 1,
+          subjectId: 1,
           date: DateTime.now().subtract(const Duration(days: 0)),
           totalLesson: 1,
           users: listUser(true),
@@ -28,7 +30,7 @@ class AttendanceServiceMock implements AttendanceService {
         AttendanceModel(
           id: 1,
           schoolId: 1,
-          classId: 1,
+          subjectId: 1,
           date: DateTime.now().subtract(const Duration(days: 1)),
           totalLesson: 2,
           users: listUser(true),
@@ -36,7 +38,7 @@ class AttendanceServiceMock implements AttendanceService {
         AttendanceModel(
           id: 2,
           schoolId: 1,
-          classId: 1,
+          subjectId: 1,
           date: DateTime.now().subtract(const Duration(days: 2)),
           totalLesson: 3,
           users: listUser(true),
@@ -44,7 +46,7 @@ class AttendanceServiceMock implements AttendanceService {
         AttendanceModel(
           id: 3,
           schoolId: 1,
-          classId: 1,
+          subjectId: 1,
           date: DateTime.now().subtract(const Duration(days: 3)),
           totalLesson: 14,
           users: listUser(true),
@@ -57,7 +59,7 @@ class AttendanceServiceMock implements AttendanceService {
   }
 
   @override
-  Future<List<UserAttendanceModel>> getAttendanceUsers(int classId) async {
+  Future<List<UserAttendanceModel>> getAttendanceUsers(int subjectId) async {
     await _delay();
 
     return listUser(false);

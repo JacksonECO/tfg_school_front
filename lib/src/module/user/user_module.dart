@@ -48,10 +48,11 @@ class UserModule extends Module {
           ),
         ),
         ChildRoute(
-          attendanceRoute.split('/user').last + '/:id',
+          attendanceRoute.split('/user').last + '/:class/:subject',
           child: (_, args) => ListAttendancePage(
             controller: ListAttendanceController(
-              subjectId: int.parse(args.params['id']),
+              classId: int.parse(args.params['class']),
+              subjectId: int.parse(args.params['subject']),
             ),
             attendanceController: AttendanceController.new,
           ),

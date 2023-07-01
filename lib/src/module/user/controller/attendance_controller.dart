@@ -14,6 +14,7 @@ class AttendanceController {
 
   AttendanceController({
     required this.subjectId,
+    required this.classId,
     int? attendanceId,
     AttendanceModel? attendanceModel,
   }) {
@@ -24,6 +25,7 @@ class AttendanceController {
       this.attendanceModel = AttendanceModel(id: attendanceId);
       newAttendance = false;
     } else {
+      this.attendanceModel = AttendanceModel.empty(subjectId: subjectId);
       newAttendance = true;
     }
   }
@@ -32,6 +34,7 @@ class AttendanceController {
 
   late final bool newAttendance;
   late final int subjectId;
+  late final int classId;
   final form = GlobalKey<FormState>();
   bool _hasDate = false;
 
@@ -49,7 +52,7 @@ class AttendanceController {
 
   Future<List<UserAttendanceModel>> _getAttendanceUsers() async {
     try {
-      final list = await _service.getAttendanceUsers(subjectId);
+      final list = await _service.getAttendanceUsers(classId);
       if (list.isEmpty) {
         Modular.to.pop();
         ModalAlert.show(

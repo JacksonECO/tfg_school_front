@@ -205,8 +205,8 @@ class AuthModel {
             icon: Image.asset('assets/icon/courses-icon.png', height: 28, width: 28),
           ),
           LeadingMenuItem(
-            title: 'Presenças - 1',
-            route: '/user/attendance/1',
+            title: 'Presenças - subject:6',
+            route: '/user/attendance/3/6',
             icon: Image.asset('assets/icon/courses-icon.png', height: 28, width: 28),
           ),
           LeadingMenuItem(

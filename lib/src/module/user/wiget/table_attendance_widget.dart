@@ -15,6 +15,7 @@ class TableAttendanceWidget extends StatefulWidget {
   final ListAttendanceController controller;
   final AttendanceController Function({
     required int subjectId,
+    required int classId,
     int? attendanceId,
     AttendanceModel? attendanceModel,
   }) attendanceController;
@@ -88,6 +89,7 @@ class _TableAttendanceWidgetState extends State<TableAttendanceWidget> {
                       onPressed: () async {
                         var elementController = widget.attendanceController(
                           subjectId: widget.controller.subjectId,
+                          classId: widget.controller.classId,
                           attendanceModel: widget.controller.data.index(index)?.copyWith(),
                         );
 

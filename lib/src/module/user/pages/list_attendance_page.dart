@@ -15,6 +15,7 @@ class ListAttendancePage extends StatelessWidget {
 
   final AttendanceController Function({
     required int subjectId,
+    required int classId,
     int? attendanceId,
     AttendanceModel? attendanceModel,
   }) attendanceController;
@@ -34,7 +35,10 @@ class ListAttendancePage extends StatelessWidget {
             title: 'Aula',
             onAdd: () async {
               if (await AttendanceWidget.showModal(
-                    attendanceController: attendanceController(subjectId: controller.subjectId),
+                    attendanceController: attendanceController(
+                      classId: controller.classId,
+                      subjectId: controller.subjectId,
+                    ),
                   ) ==
                   true) {
                 controller.goTo(1);
