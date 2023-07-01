@@ -6,7 +6,7 @@ import 'package:tfg_front/src/core/formatter/date_input_formatter.dart';
 import 'package:tfg_front/src/module/user/controller/attendance_controller.dart';
 import 'package:tfg_front/src/core/helpers/constants.dart';
 import 'package:tfg_front/src/core/helpers/context_extension.dart';
-import 'package:tfg_front/src/module/user/wiget/table_attendance_users_widget.dart';
+import 'package:tfg_front/src/module/user/widget/table_attendance_users_widget.dart';
 import 'package:validatorless/validatorless.dart';
 
 class AttendanceWidget extends StatelessWidget {

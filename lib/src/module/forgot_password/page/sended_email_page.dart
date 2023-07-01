@@ -51,7 +51,7 @@ class ConfirmResetEmail extends StatelessWidget {
                   ),
                   Center(
                     child: Container(
-                      padding: EdgeInsets.all(50.0),
+                      padding: const EdgeInsets.all(50.0),
                       child: Column(
                         children: [
                           Padding(

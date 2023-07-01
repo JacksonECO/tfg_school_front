@@ -1,11 +1,8 @@
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:tfg_front/src/core/helpers/custom_http.dart';
-import 'package:tfg_front/src/model/dissert_resouce_model.dart';
 import 'package:tfg_front/src/model/file_resource_model.dart';
-import 'package:tfg_front/src/model/fill_the_blanks_resouce_model.dart';
 import 'package:tfg_front/src/model/link_resouce_model.dart';
 import 'package:tfg_front/src/model/module_course_model.dart';
-import 'package:tfg_front/src/model/quiz_resouce_model.dart';
 import 'package:tfg_front/src/model/text_resource.model.dart';
 
 class ModuleCourseService {
@@ -32,7 +29,7 @@ class ModuleCourseService {
             case 'link':
               resources.add(LinkResourceModel.fromMap(value));
               break;
-            /*case 'quiz': TODO
+            /*case 'quiz': TODO: Implementar
             resources.add(QuizResourceModel.fromMap(value));
             break;
           case 'dissert':

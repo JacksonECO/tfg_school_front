@@ -76,15 +76,21 @@ class AttendanceServiceMock implements AttendanceService {
   }
 
   @override
-  Future<void> delete(int id) {
-    // TODO: implement delete
-    throw UnimplementedError();
+  Future<void> delete(int id) async {
+    await _delay();
   }
 
   @override
-  Future<AttendanceModel> getAttendance(int id) {
-    // TODO: implement getAttendance
-    throw UnimplementedError();
+  Future<AttendanceModel> getAttendance(int id) async {
+    await _delay();
+    return AttendanceModel(
+      id: 3,
+      schoolId: 1,
+      subjectId: 1,
+      date: DateTime.now().subtract(const Duration(days: 3)),
+      totalLesson: 14,
+      users: listUser(true),
+    );
   }
 
   bool present(bool isRandom) {

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:tfg_front/src/module/user/wiget/floating_menu.dart';
+import 'package:tfg_front/src/module/user/widget/floating_menu.dart';
 
 import 'package:tfg_front/src/components/leading_menu_widget.dart';
 import 'package:tfg_front/src/core/helpers/context_extension.dart';

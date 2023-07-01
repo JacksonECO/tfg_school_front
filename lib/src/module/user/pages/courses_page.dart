@@ -8,7 +8,7 @@ import 'package:tfg_front/src/core/helpers/debouncer.dart';
 import 'package:tfg_front/src/core/theme/theme_config.dart';
 import 'package:tfg_front/src/model/filter_course_enum.dart';
 import 'package:tfg_front/src/module/user/controller/courses_controller.dart';
-import 'package:tfg_front/src/module/user/wiget/course_item_widget.dart';
+import 'package:tfg_front/src/module/user/widget/course_item_widget.dart';
 
 class CoursesPage extends StatefulWidget {
   final CoursesController controller;

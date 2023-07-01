@@ -10,12 +10,12 @@ import 'package:tfg_front/src/model/auth_model.dart';
 import 'package:tfg_front/src/model/auth_role_enum.dart';
 import 'package:tfg_front/src/model/menu_floating_item.dart';
 import 'package:tfg_front/src/module/user/controller/news_controller.dart';
-import 'package:tfg_front/src/module/user/wiget/floating_menu.dart';
-import 'package:tfg_front/src/module/user/wiget/header_module_course_widget.dart';
+import 'package:tfg_front/src/module/user/widget/floating_menu.dart';
+import 'package:tfg_front/src/module/user/widget/header_module_course_widget.dart';
 import 'package:tfg_front/src/core/helpers/context_extension.dart';
 import 'package:tfg_front/src/module/user/controller/course_controller.dart';
-import 'package:tfg_front/src/module/user/wiget/modal_news_widget.dart';
-import 'package:tfg_front/src/module/user/wiget/resource_module_course_item.dart';
+import 'package:tfg_front/src/module/user/widget/modal_news_widget.dart';
+import 'package:tfg_front/src/module/user/widget/resource_module_course_item.dart';
 
 class CoursePage extends StatefulWidget {
   final int subjectId;
