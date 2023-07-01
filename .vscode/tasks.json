@@ -1,0 +1,21 @@
+{
+	"version": "2.0.0",
+	"tasks": [
+		{
+			"type": "flutter",
+			"command": "flutter",
+			"args": [
+				"build",
+				"web",
+				"--dart-define=emailSchool=escola1@app.com",
+				"--dart-define=emailUser=professor1-escola1@app.com",
+				"--dart-define=password=123456",
+				"--dart-define=prod=false",
+			],
+			"group": "build",
+			"problemMatcher": [],
+			"label": "flutter build web --dart-define",
+			"detail": ""
+		}
+	]
+}
