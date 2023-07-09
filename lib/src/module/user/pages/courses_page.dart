@@ -59,13 +59,12 @@ class _CoursesPageState extends State<CoursesPage> {
                   height: context.height - 150,
                   decoration: BoxDecoration(
                     color: context.colors.darkBackground,
-                    borderRadius: const BorderRadius.only(
-                        bottomLeft: Radius.circular(20)),
+                    borderRadius: const BorderRadius.only(bottomLeft: Radius.circular(20)),
                   ),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text(
+                      SelectableText(
                         'Filtros',
                         style: context.style.poppinsSemiBold.copyWith(
                           fontSize: 18,
@@ -86,14 +85,14 @@ class _CoursesPageState extends State<CoursesPage> {
                       ),
                       if (widget.controller.allSubjects.isNotEmpty && widget.controller.isStudent())
                         RadioButtonGroup(
-                        title: 'Professor(a)',
-                        filterType: SideFilterCourseEnum.teacherName,
-                        controller: widget.controller,
-                        options: widget.controller.filterTeacherOptions,
-                      ),
-                        const SizedBox(
-                          height: 20,
+                          title: 'Professor(a)',
+                          filterType: SideFilterCourseEnum.teacherName,
+                          controller: widget.controller,
+                          options: widget.controller.filterTeacherOptions,
                         ),
+                      const SizedBox(
+                        height: 20,
+                      ),
                       RadioButtonGroup(
                         title: 'Data de Modificação',
                         filterType: SideFilterCourseEnum.orderDate,
@@ -105,8 +104,7 @@ class _CoursesPageState extends State<CoursesPage> {
                 ),
                 Expanded(
                   child: Container(
-                    constraints: BoxConstraints(
-                        minWidth: 300, maxHeight: context.height - 150),
+                    constraints: BoxConstraints(minWidth: 300, maxHeight: context.height - 150),
                     padding: EdgeInsets.all(context.height * .08),
                     child: SingleChildScrollView(
                       child: Column(
@@ -157,50 +155,42 @@ class _CoursesPageState extends State<CoursesPage> {
                                     ),
                                     Padding(
                                       padding: const EdgeInsets.only(top: 16),
-                                      child: Text(
+                                      child: SelectableText(
                                         'Buscando Cursos...',
                                         style: context.style.poppinsMedium,
                                       ),
                                     ),
                                   ],
                                 ))
-                              : widget.controller.status ==
-                                      CoursesStateStatus.error
+                              : widget.controller.status == CoursesStateStatus.error
                                   ? (Padding(
                                       padding: const EdgeInsets.only(top: 16),
-                                      child: Text(
+                                      child: SelectableText(
                                         widget.controller.messageError!,
                                         style: context.style.poppinsMedium,
                                       ),
                                     ))
                                   : widget.controller.allSubjects.isEmpty
                                       ? (Padding(
-                                          padding:
-                                              const EdgeInsets.only(top: 16),
-                                          child: Text(
+                                          padding: const EdgeInsets.only(top: 16),
+                                          child: SelectableText(
                                             'Não há disciplinas para a turma',
                                             style: context.style.poppinsMedium,
                                           ),
                                         ))
                                       : Column(
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.end,
+                                          crossAxisAlignment: CrossAxisAlignment.end,
                                           children: [
-                                            if (widget.controller
-                                                .isSomeFilterEnabled())
-                                              Text(
+                                            if (widget.controller.isSomeFilterEnabled())
+                                              SelectableText(
                                                 'Resultados da Busca: ${widget.controller.totalSeachItens}',
-                                                style:
-                                                    context.style.poppinsMedium,
+                                                style: context.style.poppinsMedium,
                                               ),
                                             const SizedBox(
                                               height: 10,
                                             ),
-                                            ...widget
-                                                .controller.filteredSubjects
-                                                .map((subject) =>
-                                                    CourseItemWidget(
-                                                        subject: subject))
+                                            ...widget.controller.filteredSubjects
+                                                .map((subject) => CourseItemWidget(subject: subject))
                                                 .toList()
                                           ],
                                         )
@@ -217,6 +207,5 @@ class _CoursesPageState extends State<CoursesPage> {
     );
   }
 
-  OutlineInputBorder get border =>
-      ThemeConfig.border.copyWith(borderRadius: BorderRadius.circular(8));
+  OutlineInputBorder get border => ThemeConfig.border.copyWith(borderRadius: BorderRadius.circular(8));
 }

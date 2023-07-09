@@ -135,7 +135,7 @@ class _CoursePageState extends State<CoursePage> {
                   ),
                   Padding(
                     padding: const EdgeInsets.only(top: 16),
-                    child: Text(
+                    child: SelectableText(
                       'Buscando Cursos...',
                       style: context.style.poppinsMedium,
                     ),

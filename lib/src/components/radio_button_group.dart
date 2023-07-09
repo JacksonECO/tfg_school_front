@@ -29,14 +29,13 @@ class _RadioButtonGroupState extends State<RadioButtonGroup> {
     List<ListTile> group = widget.options
         .map(
           (e) => ListTile(
-            title: Text(e,
+            title: SelectableText(e,
                 style: context.style.poppinsLight.copyWith(
                   fontSize: 14,
                 )),
             leading: Radio<String>(
               value: e,
-              activeColor: MaterialStateColor.resolveWith(
-                  (states) => context.colors.primary),
+              activeColor: MaterialStateColor.resolveWith((states) => context.colors.primary),
               groupValue: _value,
               onChanged: (String? value) {
                 setState(() {
@@ -48,10 +47,10 @@ class _RadioButtonGroupState extends State<RadioButtonGroup> {
                       widget.controller.filterTeacherName = value;
                       break;
                     case SideFilterCourseEnum.className:
-                    widget.controller.filterClassName = value;
+                      widget.controller.filterClassName = value;
                       break;
                     case SideFilterCourseEnum.orderDate:
-                    widget.controller.filterOrderDate = value;
+                      widget.controller.filterOrderDate = value;
                       break;
                   }
                   widget.controller.filterSubjects();
@@ -66,7 +65,7 @@ class _RadioButtonGroupState extends State<RadioButtonGroup> {
       children: [
         Align(
           alignment: Alignment.topLeft,
-          child: Text(
+          child: SelectableText(
             widget.title,
             style: context.style.poppinsMedium.copyWith(
               fontSize: 14,

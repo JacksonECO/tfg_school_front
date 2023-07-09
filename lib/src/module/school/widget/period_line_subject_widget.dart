@@ -36,7 +36,7 @@ class PeriodLineSubjectWidget extends StatelessWidget {
             options: WeekDayEnum.values
                 .map((e) => DropdownMenuItem(
                       value: e,
-                      child: Text(e.title),
+                      child: SelectableText(e.title),
                     ))
                 .toList(),
             initialValue: dateCustom.weekDay ?? WeekDayEnum.empty,

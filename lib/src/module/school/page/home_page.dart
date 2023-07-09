@@ -15,7 +15,7 @@ class HomePage extends StatelessWidget {
             future: controllerProfile.getSchool,
             builder: (context, snapshot) {
               if (snapshot.hasError) {
-                return const Text('Não foi possível carregar os dados da escola');
+                return const SelectableText('Não foi possível carregar os dados da escola');
               }
               if (!snapshot.hasData) {
                 return const Expanded(child: Center(child: CircularProgressIndicator()));

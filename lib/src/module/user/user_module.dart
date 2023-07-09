@@ -1,5 +1,4 @@
 import 'package:flutter_modular/flutter_modular.dart';
-import 'package:tfg_front/src/components/custom_page.dart';
 import 'package:tfg_front/src/module/user/controller/attendance_controller.dart';
 import 'package:tfg_front/src/module/user/controller/course_controller.dart';
 import 'package:tfg_front/src/module/user/controller/courses_controller.dart';
@@ -65,7 +64,7 @@ class UserModule extends Module {
         ),
         ChildRoute(
           supportRoute.split('/user').last,
-          child: (_, args) => SupportPage(),
+          child: (_, args) => const SupportPage(),
         ),
       ];
 }

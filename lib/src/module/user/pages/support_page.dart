@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
-import 'package:tfg_front/src/components/click.dart';
 import 'package:tfg_front/src/components/crud_viewer.dart';
 import 'package:tfg_front/src/components/custom_page.dart';
 import 'package:tfg_front/src/core/helpers/context_extension.dart';
@@ -32,7 +31,7 @@ class _SupportPageState extends State<SupportPage> {
           builder: (context, snapshot) {
             if (snapshot.hasError) {
               return Center(
-                child: Text(
+                child: SelectableText(
                   'Não foi carregar a página',
                   style: context.style.poppinsMedium,
                 ),
@@ -56,7 +55,7 @@ class _SupportPageState extends State<SupportPage> {
                     ),
                     Padding(
                       padding: const EdgeInsets.only(top: 16),
-                      child: Text(
+                      child: SelectableText(
                         'Carregando...',
                         style: context.style.poppinsMedium,
                       ),
@@ -66,7 +65,7 @@ class _SupportPageState extends State<SupportPage> {
               );
             }
             return CrudViewer(title: 'Suporte', body: [
-              Text(
+              SelectableText(
                 'Entre em Contato Conosco',
                 textAlign: TextAlign.center,
                 style: context.style.poppinsRegular.copyWith(
@@ -79,7 +78,7 @@ class _SupportPageState extends State<SupportPage> {
                 thickness: 3,
               ),
               const SizedBox(height: 12),
-              Text(
+              SelectableText(
                 'Para obter suporte entre com contato por algum dos seguintes canais:',
                 style: context.style.poppinsLight.copyWith(
                   fontSize: 18,
@@ -166,7 +165,7 @@ class _SupportPageState extends State<SupportPage> {
             ),
           ),
           child: Center(
-            child: Text(
+            child: SelectableText(
               title,
               style: context.style.poppinsBold.copyWith(
                 fontSize: 18,

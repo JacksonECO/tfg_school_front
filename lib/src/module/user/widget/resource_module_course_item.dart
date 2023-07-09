@@ -26,49 +26,35 @@ class ResourceModuleCourseItem extends StatelessWidget {
     Function showFunction = () {};
 
     removeFunction() async {
-      if (await ModalAlert.showConfirmRemove(
-          'Deseja remover o recurso: ${resource.title}?')) {
+      if (await ModalAlert.showConfirmRemove('Deseja remover o recurso: ${resource.title}?')) {
         await controller.removeResource(resource);
       }
     }
 
     switch (resource.type) {
       case 'text':
-        TextEditingController titleEC =
-            TextEditingController(text: resource.title);
-        TextEditingController contentEC =
-            TextEditingController(text: resource.content);
+        TextEditingController titleEC = TextEditingController(text: resource.title);
+        TextEditingController contentEC = TextEditingController(text: resource.content);
         color = CustomColors.i.primary;
         editFunction = () async {
-          if (await ModalAlert.showTitleContent(
-              title: 'Recurso: ${resource.title}',
-              titleEC: titleEC,
-              contentEC: contentEC)) {
-            await controller.updateResourceText(
-                resource, titleEC.text, contentEC.text);
+          if (await ModalAlert.showTitleContent(title: 'Recurso: ${resource.title}', titleEC: titleEC, contentEC: contentEC)) {
+            await controller.updateResourceText(resource, titleEC.text, contentEC.text);
           }
         };
         showFunction = () async {
-          if (await ModalAlert.showContent(
-              title: '${resource.title}', content: resource.content)) {}
+          if (await ModalAlert.showContent(title: '${resource.title}', content: resource.content)) {}
         };
         break;
       case 'file':
         color = CustomColors.i.primary;
         break;
       case 'link':
-        TextEditingController titleEC =
-            TextEditingController(text: resource.title);
-        TextEditingController linkEC =
-            TextEditingController(text: resource.link);
+        TextEditingController titleEC = TextEditingController(text: resource.title);
+        TextEditingController linkEC = TextEditingController(text: resource.link);
         color = CustomColors.i.primary;
         editFunction = () async {
-          if (await ModalAlert.showTitleContent(
-              title: 'Recurso: ${resource.title}',
-              titleEC: titleEC,
-              contentEC: linkEC)) {
-            await controller.updateResourceLink(
-                resource, titleEC.text, linkEC.text);
+          if (await ModalAlert.showTitleContent(title: 'Recurso: ${resource.title}', titleEC: titleEC, contentEC: linkEC)) {
+            await controller.updateResourceLink(resource, titleEC.text, linkEC.text);
           }
         };
         showFunction = () async {
@@ -102,10 +88,7 @@ class ResourceModuleCourseItem extends StatelessWidget {
                 children: [
                   Container(
                     padding: const EdgeInsets.all(5),
-                    decoration: BoxDecoration(
-                        color: color,
-                        borderRadius:
-                            const BorderRadius.all(Radius.circular(6))),
+                    decoration: BoxDecoration(color: color, borderRadius: const BorderRadius.all(Radius.circular(6))),
                     child: Image.asset(
                       'assets/icon/${resource.type}-resource.png',
                       height: 30,

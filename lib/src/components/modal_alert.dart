@@ -15,8 +15,8 @@ class ModalAlert {
       context: Constants.context,
       builder: (BuildContext context) {
         return AlertDialog(
-          title: Text(title),
-          content: Text(message),
+          title: SelectableText(title),
+          content: SelectableText(message),
           actions: [
             TextButton(
               child: const Text('OK'),
@@ -38,12 +38,11 @@ class ModalAlert {
               padding: const EdgeInsets.all(80),
               child: AlertDialog(
                 backgroundColor: context.colors.secondary,
-                titlePadding: const EdgeInsets.only(
-                    bottom: 38, left: 50, right: 50, top: 38),
+                titlePadding: const EdgeInsets.only(bottom: 38, left: 50, right: 50, top: 38),
                 buttonPadding: const EdgeInsets.only(left: 8, right: 8),
                 title: ConstrainedBox(
                   constraints: const BoxConstraints(maxWidth: 600),
-                  child: Text(
+                  child: SelectableText(
                     title,
                     style: context.style.poppinsRegular.copyWith(fontSize: 24),
                   ),
@@ -72,10 +71,7 @@ class ModalAlert {
         false;
   }
 
-  static Future<bool> showContent(
-      {required String title,
-      required String content,
-      String? description = 'Descrição'}) async {
+  static Future<bool> showContent({required String title, required String content, String? description = 'Descrição'}) async {
     return await showDialog<bool>(
           context: Constants.context,
           builder: (BuildContext context) {
@@ -84,10 +80,9 @@ class ModalAlert {
               padding: const EdgeInsets.all(80),
               child: AlertDialog(
                 backgroundColor: context.colors.secondary,
-                titlePadding: const EdgeInsets.only(
-                    bottom: 38, left: 50, right: 50, top: 38),
+                titlePadding: const EdgeInsets.only(bottom: 38, left: 50, right: 50, top: 38),
                 buttonPadding: const EdgeInsets.only(left: 8, right: 8),
-                title: Text(
+                title: SelectableText(
                   title,
                   style: context.style.poppinsRegular.copyWith(fontSize: 24),
                   textAlign: TextAlign.center,
@@ -99,7 +94,7 @@ class ModalAlert {
                         padding: const EdgeInsets.only(bottom: 20.0),
                         child: SizedBox(
                           width: context.width * 0.45,
-                          child: Text(
+                          child: SelectableText(
                             content,
                             style: context.style.text,
                             textAlign: TextAlign.center,
@@ -137,12 +132,11 @@ class ModalAlert {
               padding: const EdgeInsets.all(80),
               child: AlertDialog(
                 backgroundColor: context.colors.secondary,
-                titlePadding: const EdgeInsets.only(
-                    bottom: 38, left: 50, right: 50, top: 38),
+                titlePadding: const EdgeInsets.only(bottom: 38, left: 50, right: 50, top: 38),
                 buttonPadding: const EdgeInsets.only(left: 8, right: 8),
                 title: ConstrainedBox(
                   constraints: const BoxConstraints(maxWidth: 500),
-                  child: Text(
+                  child: SelectableText(
                     title,
                     style: context.style.poppinsRegular.copyWith(fontSize: 24),
                     textAlign: TextAlign.center,
@@ -159,8 +153,7 @@ class ModalAlert {
                             controller: titleEC,
                             validator: Validatorless.multiple([
                               Validatorless.required('Campo obrigatório'),
-                              Validatorless.max(
-                                  255, 'Nº máximo de caracteres ultrapassado')
+                              Validatorless.max(255, 'Nº máximo de caracteres ultrapassado')
                             ]),
                             decoration: InputDecoration(
                               border: border,
@@ -185,8 +178,7 @@ class ModalAlert {
                             controller: contentEC,
                             minLines: 1,
                             maxLines: 8,
-                            validator:
-                                Validatorless.required('Campo obrigatório'),
+                            validator: Validatorless.required('Campo obrigatório'),
                             decoration: InputDecoration(
                               border: border,
                               enabledBorder: border,
@@ -214,8 +206,7 @@ class ModalAlert {
                                   text: 'Cancelar',
                                   height: 50,
                                   withBorder: false,
-                                  onPressed: () =>
-                                      Navigator.of(context).pop(false),
+                                  onPressed: () => Navigator.of(context).pop(false),
                                 ),
                                 const SizedBox(
                                   width: 20,
@@ -225,8 +216,7 @@ class ModalAlert {
                                     text: 'Confirmar',
                                     height: 50,
                                     withBorder: false,
-                                    onPressed: () =>
-                                        formSubmit(context, formKey)),
+                                    onPressed: () => formSubmit(context, formKey)),
                               ],
                             ),
                           )
@@ -242,8 +232,7 @@ class ModalAlert {
         false;
   }
 
-  static Future<bool> showAddResouce(
-      int moduleId, CourseController controller) async {
+  static Future<bool> showAddResouce(int moduleId, CourseController controller) async {
     List<CourseResourceOption> options = [
       CourseResourceOption(
         type: 'text',
@@ -283,10 +272,9 @@ class ModalAlert {
               constraints: const BoxConstraints(maxWidth: 800),
               child: AlertDialog(
                 backgroundColor: context.colors.secondary,
-                titlePadding: const EdgeInsets.only(
-                    bottom: 40, left: 50, right: 50, top: 40),
+                titlePadding: const EdgeInsets.only(bottom: 40, left: 50, right: 50, top: 40),
                 buttonPadding: const EdgeInsets.only(left: 8, right: 8),
-                title: Text(
+                title: SelectableText(
                   'Selecione o Resurso que deseja inserir',
                   style: context.style.poppinsRegular.copyWith(fontSize: 28),
                 ),
@@ -324,6 +312,5 @@ class ModalAlert {
         false;
   }
 
-  static OutlineInputBorder get border =>
-      ThemeConfig.border.copyWith(borderRadius: BorderRadius.circular(8));
+  static OutlineInputBorder get border => ThemeConfig.border.copyWith(borderRadius: BorderRadius.circular(8));
 }

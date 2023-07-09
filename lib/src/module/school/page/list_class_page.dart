@@ -35,7 +35,7 @@ class ListClassPage extends StatelessWidget {
             builder: (context, snapshot) {
               if (snapshot.hasError) {
                 return const Center(
-                  child: Text('Não foi possível pegar as turmas'),
+                  child: SelectableText('Não foi possível pegar as turmas'),
                 );
               }
 

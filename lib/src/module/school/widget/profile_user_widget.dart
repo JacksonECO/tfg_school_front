@@ -43,7 +43,7 @@ class ProfileUserWidget extends StatelessWidget {
         builder: (context, snapshot) {
           if (snapshot.hasError) {
             return Center(
-              child: Text(
+              child: SelectableText(
                 'Erro ao carregar dados',
                 style: context.style.interRegular.copyWith(
                   fontSize: 16,
@@ -75,7 +75,7 @@ class ProfileUserWidget extends StatelessWidget {
                       Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Text(
+                          SelectableText(
                             controller.newUser
                                 ? 'Cadastrar novo ${controller.typeUser}'
                                 : 'Editar Perfil do ${controller.typeUser}',
@@ -84,7 +84,7 @@ class ProfileUserWidget extends StatelessWidget {
                             ),
                           ),
                           const SizedBox(height: 8),
-                          Text(
+                          SelectableText(
                             'Preencha com os dados abaixo',
                             style: context.style.interRegular.copyWith(fontSize: 16),
                           ),
@@ -113,7 +113,7 @@ class ProfileUserWidget extends StatelessWidget {
                               crossAxisAlignment: CrossAxisAlignment.center,
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
-                                Text(
+                                SelectableText(
                                   'Perfil:',
                                   style: context.style.poppinsMedium.copyWith(fontSize: 14),
                                 ),
@@ -127,8 +127,7 @@ class ProfileUserWidget extends StatelessWidget {
                                       fit: BoxFit.cover,
                                     ),
                                   )
-                                else if (controller.user.profilePicture != null &&
-                                    controller.user.profilePicture != '')
+                                else if (controller.user.profilePicture != null && controller.user.profilePicture != '')
                                   Click(
                                     onTap: controller.getImage,
                                     child: Image.network(
@@ -205,10 +204,9 @@ class ProfileUserWidget extends StatelessWidget {
                                           children: [
                                             Padding(
                                               padding: const EdgeInsets.only(left: 10, bottom: 4),
-                                              child: Text(
+                                              child: SelectableText(
                                                 'Turma',
-                                                style: context.style.poppinsRegular
-                                                    .copyWith(fontSize: 14),
+                                                style: context.style.poppinsRegular.copyWith(fontSize: 14),
                                               ),
                                             ),
                                             Observer(builder: (_) {
@@ -227,12 +225,11 @@ class ProfileUserWidget extends StatelessWidget {
                                                 items: controller.classes.map((ClassModel value) {
                                                   return DropdownMenuItem<ClassModel>(
                                                     value: value,
-                                                    child: Text(value.name!),
+                                                    child: SelectableText(value.name!),
                                                   );
                                                 }).toList(),
                                                 onChanged: (v) => controller.user.classId = v?.id,
-                                                validator:
-                                                    Validatorless.required('Campo obrigatório'),
+                                                validator: Validatorless.required('Campo obrigatório'),
                                               );
                                             }),
                                           ],
@@ -287,9 +284,7 @@ class ProfileUserWidget extends StatelessWidget {
                                   validator: Validatorless.multiple([
                                     Validatorless.required('Campo obrigatório'),
                                     Validatorless.min(14, 'CPF inválido'),
-                                    Constants.prod
-                                        ? Validatorless.cpf('CPF inválido')
-                                        : (_) => null,
+                                    Constants.prod ? Validatorless.cpf('CPF inválido') : (_) => null,
                                   ]),
                                   inputFormatters: [
                                     FilteringTextInputFormatter.digitsOnly,

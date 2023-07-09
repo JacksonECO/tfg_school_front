@@ -34,13 +34,13 @@ class ConfirmResetEmail extends StatelessWidget {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Text(
+                        SelectableText(
                           'Recuperação de Senha',
                           style: context.style.poppinsRegular.copyWith(
                             fontSize: 30,
                           ),
                         ),
-                        Text(
+                        SelectableText(
                           'Enviamos um e-mail com instruções para redefinir sua senha',
                           style: context.style.poppinsRegular.copyWith(
                             fontSize: 14,
@@ -61,7 +61,7 @@ class ConfirmResetEmail extends StatelessWidget {
                               height: 200,
                             ),
                           ),
-                          Text(
+                          SelectableText(
                             'Verifique seu endereço de e-mail e siga o passo a passo',
                             style: context.style.poppinsRegular,
                             textAlign: TextAlign.center,

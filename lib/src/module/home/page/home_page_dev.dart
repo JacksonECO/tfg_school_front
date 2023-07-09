@@ -19,7 +19,7 @@ class _HomePageState extends State<HomePageDev> {
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
-        title: const Text(
+        title: const SelectableText(
           'Acho que deveria ser uma tela de apresentação do sistema, com marketing de venda',
         ),
       ),
@@ -27,29 +27,29 @@ class _HomePageState extends State<HomePageDev> {
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
-            Text(Modular.get<AuthModel>().toJson()),
+            SelectableText(Modular.get<AuthModel>().toJson()),
             ElevatedButton(
-              child: const Text('User'),
+              child: const SelectableText('User'),
               onPressed: () => Navigator.pushNamed(context, UserModule.initialRoute),
             ),
             const SizedBox(height: 35),
             ElevatedButton(
-              child: const Text('School'),
+              child: const SelectableText('School'),
               onPressed: () => Navigator.pushNamed(context, SchoolModule.initialRoute),
             ),
             const SizedBox(height: 35),
             ElevatedButton(
-              child: const Text('Login School'),
+              child: const SelectableText('Login School'),
               onPressed: () => Navigator.pushNamed(context, HomeModule.loginSchoolRoute),
             ),
             const SizedBox(height: 35),
             ElevatedButton(
-              child: const Text('Login User'),
+              child: const SelectableText('Login User'),
               onPressed: () => Navigator.pushNamed(context, HomeModule.loginUserRoute),
             ),
             const SizedBox(height: 35),
             ElevatedButton(
-              child: const Text('EasyLoading'),
+              child: const SelectableText('EasyLoading'),
               onPressed: () {
                 EasyLoading.show();
                 Future.delayed(const Duration(seconds: 5), () {

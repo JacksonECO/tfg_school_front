@@ -82,13 +82,13 @@ class _ResetPasswordPageState extends State<ResetPasswordPage> {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Text(
+                        SelectableText(
                           'Recuperação de Senha',
                           style: context.style.poppinsRegular.copyWith(
                             fontSize: 30,
                           ),
                         ),
-                        Text(
+                        SelectableText(
                           'Preencha os dados abaixo',
                           style: context.style.poppinsRegular.copyWith(
                             fontSize: 14,

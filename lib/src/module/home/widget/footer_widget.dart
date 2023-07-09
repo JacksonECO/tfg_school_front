@@ -16,7 +16,7 @@ class FooterWidget extends StatelessWidget {
         color: context.colors.backgroundSecondary,
         padding: EdgeInsets.symmetric(horizontal: context.width * 0.07, vertical: max(40, context.width * 0.05)),
         child: Column(mainAxisSize: MainAxisSize.min, children: [
-          Text(
+          SelectableText(
             'Trabalho FINAL de Graduação'.toUpperCase(),
             style: context.style.poppinsBlack.copyWith(
               fontSize: 26,
@@ -25,7 +25,7 @@ class FooterWidget extends StatelessWidget {
             textAlign: TextAlign.center,
           ),
           const SizedBox(height: 8),
-          Text(
+          SelectableText(
             'Este trabalho foi feito com muito amor e dedicação para a conclusão do curso de Engenharia de Computação da UNIFEI - Universidade Federal de Itajubá.',
             style: context.style.interRegular.copyWith(
               fontSize: 16,
@@ -80,7 +80,7 @@ class FooterWidget extends StatelessWidget {
             thickness: 2,
           ),
           const SizedBox(height: 18),
-          Text(
+          SelectableText(
             'Todos os Direitos Reservados © 2023',
             style: context.style.interRegular.copyWith(fontSize: 18, color: Colors.white),
           ),
@@ -94,7 +94,7 @@ class FooterWidget extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.start,
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text(
+        SelectableText(
           title,
           style: context.style.interRegular.copyWith(fontSize: 16, color: context.colors.greenBlue),
         ),
@@ -130,7 +130,7 @@ class FooterWidget extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.start,
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text(
+        SelectableText(
           'Social',
           style: context.style.interRegular.copyWith(fontSize: 16, color: context.colors.greenBlue),
         ),
@@ -139,35 +139,39 @@ class FooterWidget extends StatelessWidget {
           children: [
             Column(
               children: git
-                  .map((link) => Click(
-                        onTap: () {
-                          launchUrl(Uri(
-                            scheme: 'https',
-                            path: link,
-                          ));
-                        },
-                        child: Padding(
-                          padding: const EdgeInsets.symmetric(vertical: 5),
-                          child: Image.asset('assets/icon/gitHub-logo.png', height: 30),
-                        ),
-                      ))
+                  .map(
+                    (link) => Click(
+                      onTap: () {
+                        launchUrl(Uri(
+                          scheme: 'https',
+                          path: link,
+                        ));
+                      },
+                      child: Padding(
+                        padding: const EdgeInsets.symmetric(vertical: 5),
+                        child: Image.asset('assets/icon/gitHub-logo.png', height: 30),
+                      ),
+                    ),
+                  )
                   .toList(),
             ),
             const SizedBox(width: 12),
             Column(
               children: linkedIn
-                  .map((link) => Click(
-                        onTap: () {
-                          launchUrl(Uri(
-                            scheme: 'https',
-                            path: link,
-                          ));
-                        },
-                        child: Padding(
-                          padding: const EdgeInsets.symmetric(vertical: 5),
-                          child: Image.asset('assets/icon/linkedIn-logo.png', height: 30),
-                        ),
-                      ))
+                  .map(
+                    (link) => Click(
+                      onTap: () {
+                        launchUrl(Uri(
+                          scheme: 'https',
+                          path: link,
+                        ));
+                      },
+                      child: Padding(
+                        padding: const EdgeInsets.symmetric(vertical: 5),
+                        child: Image.asset('assets/icon/linkedIn-logo.png', height: 30),
+                      ),
+                    ),
+                  )
                   .toList(),
             )
           ],

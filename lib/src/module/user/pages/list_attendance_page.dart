@@ -51,7 +51,7 @@ class ListAttendancePage extends StatelessWidget {
             builder: (context, snapshot) {
               if (snapshot.hasError) {
                 return const Center(
-                  child: Text('Não foi possível carregar a página'),
+                  child: SelectableText('Não foi possível carregar a página'),
                 );
               }
 

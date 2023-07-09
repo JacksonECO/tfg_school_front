@@ -39,7 +39,7 @@ class AttendanceWidget extends StatelessWidget {
         builder: (context, snapshot) {
           if (snapshot.hasError) {
             return Center(
-              child: Text(
+              child: SelectableText(
                 'Erro ao carregar dados',
                 style: context.style.interRegular.copyWith(
                   fontSize: 16,
@@ -71,14 +71,14 @@ class AttendanceWidget extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       mainAxisSize: MainAxisSize.min,
                       children: [
-                        Text(
+                        SelectableText(
                           controller.newAttendance ? 'Cadastrar Presenças' : 'Editar Presenças',
                           style: context.style.poppinsRegular.copyWith(
                             fontSize: 30,
                           ),
                         ),
                         const SizedBox(height: 8),
-                        Text(
+                        SelectableText(
                           'Preencha com os dados abaixo',
                           style: context.style.interRegular.copyWith(fontSize: 12),
                         ),
@@ -120,10 +120,8 @@ class AttendanceWidget extends StatelessWidget {
                             Flexible(
                               child: InputRegister(
                                 title: 'Quantidade de aulas',
-                                initialValue:
-                                    controller.attendanceModel.totalLesson?.toString() ?? '1',
-                                onChanged: (v) =>
-                                    controller.attendanceModel.totalLesson = int.tryParse(v) ?? 1,
+                                initialValue: controller.attendanceModel.totalLesson?.toString() ?? '1',
+                                onChanged: (v) => controller.attendanceModel.totalLesson = int.tryParse(v) ?? 1,
                                 validator: Validatorless.required('Campo obrigatório'),
                               ),
                             )

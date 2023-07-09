@@ -40,17 +40,15 @@ class LoginWidget extends StatelessWidget {
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text(
+                    SelectableText(
                       controller.isSchool ? 'Portal da escola' : 'Portal Escolar',
                       style: context.style.poppinsMedium.copyWith(
                         fontSize: 26,
                       ),
                     ),
                     const SizedBox(height: 8),
-                    Text(
-                      controller.isSchool
-                          ? 'Exclusivo para diretores e reitores'
-                          : 'Faça login para continuar',
+                    SelectableText(
+                      controller.isSchool ? 'Exclusivo para diretores e reitores' : 'Faça login para continuar',
                       style: context.style.interRegular.copyWith(fontSize: 16),
                     ),
                   ],
@@ -74,10 +72,8 @@ class LoginWidget extends StatelessWidget {
                     onFieldSubmitted: (_) => controller.login(),
                     hintText: controller.isSchool ? 'escola@host.com' : 'usuario@host.com',
                     onChanged: (v) => controller.email = v,
-                    validator: Validatorless.multiple([
-                      Validatorless.required('Campo obrigatório'),
-                      Validatorless.email('Email inválido')
-                    ]),
+                    validator: Validatorless.multiple(
+                        [Validatorless.required('Campo obrigatório'), Validatorless.email('Email inválido')]),
                   ),
                   InputRegister(
                     title: 'Senha',

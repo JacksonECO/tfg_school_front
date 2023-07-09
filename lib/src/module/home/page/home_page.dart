@@ -43,13 +43,13 @@ class _HomePageState extends State<HomePage> {
             children: [
               ConstrainedBox(
                 constraints: const BoxConstraints(maxWidth: 800),
-                child: Text(
+                child: SelectableText(
                   'Eleve o sistema da sua Escola para um novo nível',
                   style: context.style.poppinsBold.copyWith(fontSize: min(45, max(30, context.width * 0.05))),
                 ),
               ),
               const SizedBox(height: 18),
-              Text(
+              SelectableText(
                 'Com o BlackBoard você terá um sistema escolar centralizado. Dessa forma, os diferentes usuários que fazem parte do processo de aprendizagem, poderão fazer uso de uma única plataforma, tanto para administração acadêmica, quanto para ministração e consumo de cursos.',
                 style: context.style.poppinsRegular.copyWith(fontSize: 20),
               ),
@@ -72,7 +72,7 @@ class _HomePageState extends State<HomePage> {
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
-          Text(
+          SelectableText(
             'Porque escolher a plataforma BlackBoard?',
             style: context.style.poppinsBold.copyWith(fontSize: min(45, max(30, context.width * 0.05))),
             textAlign: TextAlign.center,
@@ -126,14 +126,14 @@ class _HomePageState extends State<HomePage> {
                   height: 22,
                 ),
                 const SizedBox(width: 6),
-                Text(
+                SelectableText(
                   title,
                   style: CustomTextStyle.i.poppinsBold.copyWith(fontSize: 20),
                 ),
               ],
             ),
           ),
-          Text(
+          SelectableText(
             description,
             style: CustomTextStyle.i.poppinsRegular.copyWith(fontSize: 16),
           ),

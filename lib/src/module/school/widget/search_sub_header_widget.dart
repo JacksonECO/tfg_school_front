@@ -46,7 +46,7 @@ class _SearchSubHeaderWidgetState extends State<SearchSubHeaderWidget> {
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            Text(
+                            SelectableText(
                               'Procurar ${widget.title}',
                               style: context.style.interSemiBold.copyWith(letterSpacing: 0.5),
                             ),
@@ -94,6 +94,5 @@ class _SearchSubHeaderWidgetState extends State<SearchSubHeaderWidget> {
     );
   }
 
-  OutlineInputBorder get border =>
-      ThemeConfig.border.copyWith(borderRadius: BorderRadius.circular(8));
+  OutlineInputBorder get border => ThemeConfig.border.copyWith(borderRadius: BorderRadius.circular(8));
 }

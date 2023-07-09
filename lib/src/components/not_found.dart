@@ -24,7 +24,7 @@ class NotFound extends StatelessWidget {
       ),
       child: Column(
         children: [
-          Text(
+          SelectableText(
             'Ops!',
             style: context.style.poppinsBlack.copyWith(fontSize: 20),
           ),
@@ -35,7 +35,7 @@ class NotFound extends StatelessWidget {
               height: 400,
             ),
           ),
-          Text(
+          SelectableText(
             'Parece que o recurso que você está procurando não existe...',
             style: context.style.poppinsMedium.copyWith(fontSize: 14),
           )
