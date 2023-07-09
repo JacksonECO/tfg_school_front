@@ -9,8 +9,8 @@
       "request": "launch",
       "type": "dart",
       "args": [
-        "--dart-define=emailSchool=escola@app.com",
-        "--dart-define=emailUser=user@app.com",
+        "--dart-define=emailSchool=escola1@app.com",
+				"--dart-define=emailUser=professor1-escola1@app.com",
         "--dart-define=password=123456",
         "--dart-define=urlBase=http://localhost:3333/api",
         "--dart-define=prod=false",

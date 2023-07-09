@@ -77,8 +77,7 @@ class AuthModel {
 
   String toJson() => json.encode(toMap());
 
-  factory AuthModel.fromJson(String source) =>
-      AuthModel.fromMap(json.decode(source) as Map<String, dynamic>);
+  factory AuthModel.fromJson(String source) => AuthModel.fromMap(json.decode(source) as Map<String, dynamic>);
 
   @override
   String toString() {
@@ -202,11 +201,6 @@ class AuthModel {
           LeadingMenuItem(
             title: 'Meus Cursos',
             route: '/user/courses',
-            icon: Image.asset('assets/icon/courses-icon.png', height: 28, width: 28),
-          ),
-          LeadingMenuItem(
-            title: 'Presenças - subject:6',
-            route: '/user/attendance/3/6',
             icon: Image.asset('assets/icon/courses-icon.png', height: 28, width: 28),
           ),
           LeadingMenuItem(
