@@ -167,11 +167,6 @@ class AuthModel {
             : Image.asset('assets/icon/black-board-logo.png', height: 32, width: 32),
         canSelect: false,
       ),
-      LeadingMenuItem(
-        title: 'Página Inicial',
-        route: userId == null ? '/school/' : '/user/',
-        icon: Image.asset('assets/icon/home.png', height: 28, width: 28),
-      ),
     ]);
     menu.bottom.addAll([
       LeadingMenuItem(
@@ -214,6 +209,11 @@ class AuthModel {
         break;
       case AuthRoleEnum.admin:
         menu.top.addAll([
+          LeadingMenuItem(
+            title: 'Página Inicial',
+            route: userId == null ? '/school/' : '/user/',
+            icon: Image.asset('assets/icon/home.png', height: 28, width: 28),
+          ),
           LeadingMenuItem(
             title: 'Professores',
             route: SchoolModule.listTeacherRoute,
