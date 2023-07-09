@@ -15,6 +15,7 @@ class Button extends StatefulWidget {
   final double? width;
   final TextStyle? textStyles;
   final Widget? prefixIcon;
+  final BorderSide? borderSide;
 
   const Button({
     required this.text,
@@ -27,6 +28,7 @@ class Button extends StatefulWidget {
     this.withBorder = true,
     this.borderRadius = 10,
     this.prefixIcon,
+    this.borderSide,
     super.key,
   });
 
@@ -90,37 +92,28 @@ class _ButtonState extends State<Button> {
         style: ElevatedButton.styleFrom(
           backgroundColor: widget.color,
           shape: RoundedRectangleBorder(
-            borderRadius: widget.withRadius
-                ? BorderRadius.circular(widget.borderRadius)
-                : BorderRadius.zero,
-            side: widget.withBorder
-                ? const BorderSide(color: Colors.black, width: 1)
-                : BorderSide.none,
+            borderRadius: widget.withRadius ? BorderRadius.circular(widget.borderRadius) : BorderRadius.zero,
+            side: widget.borderSide ?? (widget.withBorder ? const BorderSide(color: Colors.black, width: 1) : BorderSide.none),
           ),
           surfaceTintColor: Colors.white,
         ),
         child: _isLoading
             ? SizedBox.square(
-                dimension: min<double>(
-                        widget.height, widget.width ?? double.infinity) -
-                    15,
+                dimension: min<double>(widget.height, widget.width ?? double.infinity) - 15,
                 child: CircularProgressIndicator.adaptive(
                   strokeWidth: 3,
                   backgroundColor: Colors.transparent,
-                  valueColor: AlwaysStoppedAnimation<Color>(
-                      widget.color.computeLuminance() > 0.5
-                          ? Colors.black
-                          : Colors.white),
+                  valueColor: AlwaysStoppedAnimation<Color>(widget.color.computeLuminance() > 0.5 ? Colors.black : Colors.white),
                 ),
               )
             : (widget.prefixIcon == null
                 ? FittedBox(
-                  child: Text(
-                    widget.text,
-                    style: widget.textStyles ?? context.style.buttonAction,
-                    textAlign: TextAlign.center,
-                  ),
-                )
+                    child: Text(
+                      widget.text,
+                      style: widget.textStyles ?? context.style.buttonAction,
+                      textAlign: TextAlign.center,
+                    ),
+                  )
                 : Row(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [

@@ -30,6 +30,7 @@ class ProfileWidget extends StatelessWidget {
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
+        mainAxisSize: MainAxisSize.min,
         children: [
           Container(
             decoration: BoxDecoration(
@@ -167,7 +168,7 @@ class ProfileWidget extends StatelessWidget {
                           ]),
                           inputFormatters: [
                             FilteringTextInputFormatter.digitsOnly,
-                            CnpjInputFormatter()
+                            CnpjInputFormatter(),
                           ],
                         ),
                       ),
