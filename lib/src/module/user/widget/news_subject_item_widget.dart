@@ -47,7 +47,7 @@ class _NewsSubjectItemWidgetState extends State<NewsSubjectItemWidget> {
       children: [
         Align(
           alignment: Alignment.topLeft,
-          child: Text(
+          child: SelectableText(
             widget.newsItem.name!,
             style: context.style.title,
           ),
@@ -73,15 +73,14 @@ class _NewsSubjectItemWidgetState extends State<NewsSubjectItemWidget> {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Flexible(
-                      child: Text(
+                      child: SelectableText(
                         getNews.title,
                         style: context.style.poppinsSemiBold.copyWith(
                           fontSize: 16,
                         ),
                       ),
                     ),
-
-                    Text(
+                    SelectableText(
                       'Data de publicação: ${formatter.format(getNews.updatedAt!)}',
                       style: context.style.poppinsItalic.copyWith(
                         fontSize: 14,
@@ -92,7 +91,7 @@ class _NewsSubjectItemWidgetState extends State<NewsSubjectItemWidget> {
                 const SizedBox(
                   height: 14,
                 ),
-                Text(
+                SelectableText(
                   getNews.description,
                   style: context.style.poppinsRegular.copyWith(
                     fontSize: 14,

@@ -29,7 +29,7 @@ class InputOptionsRegister<T> extends StatelessWidget {
         children: [
           Padding(
             padding: const EdgeInsets.only(left: 10, bottom: 4),
-            child: Text(
+            child: SelectableText(
               title,
               style: context.style.poppinsRegular.copyWith(fontSize: 14),
             ),

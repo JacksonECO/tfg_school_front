@@ -39,6 +39,7 @@ class FloatingMenu {
                                 item.iconPath,
                                 height: 24,
                                 width: 24,
+                                color: Colors.black,
                               ),
                               const SizedBox(
                                 width: 20,

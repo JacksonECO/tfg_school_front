@@ -21,6 +21,7 @@ abstract class _ProfileControllerBase with Store {
   final ImagePicker _imagePicker = Modular.get<ImagePicker>();
 
   _ProfileControllerBase({
+    // ignore: unused_element
     this.newSchool = true,
   });
 

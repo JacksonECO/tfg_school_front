@@ -59,7 +59,7 @@ class _TableAttendanceUsersWidgetState extends State<TableAttendanceUsersWidget>
                     );
                   }),
                   const SizedBox(width: 8),
-                  const Text('Presença'),
+                  const SelectableText('Presença'),
                 ],
               ),
             ),
@@ -80,7 +80,7 @@ class _TableAttendanceUsersWidgetState extends State<TableAttendanceUsersWidget>
                     );
                   }),
                   const SizedBox(width: 8),
-                  const Text('Falta'),
+                  const SelectableText('Falta'),
                 ],
               ),
             ),
@@ -115,7 +115,7 @@ class _TableAttendanceUsersWidgetState extends State<TableAttendanceUsersWidget>
                     );
                   }),
                   const SizedBox(width: 8),
-                  const Text('Presença'),
+                  const SelectableText('Presença'),
                 ],
               ),
               Row(
@@ -135,7 +135,7 @@ class _TableAttendanceUsersWidgetState extends State<TableAttendanceUsersWidget>
                     );
                   }),
                   const SizedBox(width: 8),
-                  const Text('Falta'),
+                  const SelectableText('Falta'),
                 ],
               ),
             ],

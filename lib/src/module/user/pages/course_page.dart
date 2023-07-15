@@ -10,12 +10,12 @@ import 'package:tfg_front/src/model/auth_model.dart';
 import 'package:tfg_front/src/model/auth_role_enum.dart';
 import 'package:tfg_front/src/model/menu_floating_item.dart';
 import 'package:tfg_front/src/module/user/controller/news_controller.dart';
-import 'package:tfg_front/src/module/user/wiget/floating_menu.dart';
-import 'package:tfg_front/src/module/user/wiget/header_module_course_widget.dart';
+import 'package:tfg_front/src/module/user/widget/floating_menu.dart';
+import 'package:tfg_front/src/module/user/widget/header_module_course_widget.dart';
 import 'package:tfg_front/src/core/helpers/context_extension.dart';
 import 'package:tfg_front/src/module/user/controller/course_controller.dart';
-import 'package:tfg_front/src/module/user/wiget/modal_news_widget.dart';
-import 'package:tfg_front/src/module/user/wiget/resource_module_course_item.dart';
+import 'package:tfg_front/src/module/user/widget/modal_news_widget.dart';
+import 'package:tfg_front/src/module/user/widget/resource_module_course_item.dart';
 
 class CoursePage extends StatefulWidget {
   final int subjectId;
@@ -32,7 +32,7 @@ class _CoursePageState extends State<CoursePage> {
   final TextEditingController titleModuleEC = TextEditingController();
   final TextEditingController descriptionModuleEC = TextEditingController();
   final auth = Modular.get<AuthModel>();
-  
+
   @override
   void initState() {
     WidgetsBinding.instance.addPostFrameCallback((_) async {
@@ -49,6 +49,8 @@ class _CoursePageState extends State<CoursePage> {
   @override
   void dispose() {
     statusDisposer();
+    titleModuleEC.dispose();
+    descriptionModuleEC.dispose();
     super.dispose();
   }
 
@@ -70,20 +72,20 @@ class _CoursePageState extends State<CoursePage> {
         }
         if (auth.role == AuthRoleEnum.teacher) {
           listModuleWidgets.add(Padding(
-          padding: const EdgeInsets.only(top: 15.0),
-          child: Align(
-            alignment: Alignment.topRight,
-            child: SizedBox(
-              width: 200,
-              child: Button.blue(
-                text: 'Adicionar Recurso',
-                onPressed: () async {
-                  await ModalAlert.showAddResouce(module.id, controller);
-                },
+            padding: const EdgeInsets.only(top: 15.0),
+            child: Align(
+              alignment: Alignment.topRight,
+              child: SizedBox(
+                width: 200,
+                child: Button.blue(
+                  text: 'Adicionar Recurso',
+                  onPressed: () async {
+                    await ModalAlert.showAddResouce(module.id, controller);
+                  },
+                ),
               ),
             ),
-          ),
-        ));
+          ));
         }
         if (index != controller.modulesCourse.length - 1) {
           listModuleWidgets.add(const SizedBox(
@@ -94,30 +96,29 @@ class _CoursePageState extends State<CoursePage> {
       }
       if (auth.role == AuthRoleEnum.teacher) {
         listModuleWidgets.add(Container(
-        width: 200,
-        margin: const EdgeInsets.only(top: 20),
-        child: Button.green(
-          text: 'Adicionar Módulo',
-          onPressed: () async {
-            if (await ModalAlert.showTitleContent(
-              title: 'Criar Módulo',
-              titleEC: titleModuleEC,
-              contentEC: descriptionModuleEC,
-            )) {
-              await controller.createModule(titleModuleEC.text,
-                  descriptionModuleEC.text, widget.subjectId);
-              titleModuleEC.clear();
-              descriptionModuleEC.clear();
-            }
-          },
-        ),
-      ));
+          width: 200,
+          margin: const EdgeInsets.only(top: 20),
+          child: Button.green(
+            text: 'Adicionar Módulo',
+            onPressed: () async {
+              if (await ModalAlert.showTitleContent(
+                title: 'Criar Módulo',
+                titleEC: titleModuleEC,
+                contentEC: descriptionModuleEC,
+              )) {
+                await controller.createModule(titleModuleEC.text, descriptionModuleEC.text, widget.subjectId);
+                titleModuleEC.clear();
+                descriptionModuleEC.clear();
+              }
+            },
+          ),
+        ));
       }
       return listModuleWidgets;
     }
 
     return CustomPage(
-      showFloatingButton: auth.role == AuthRoleEnum.teacher ?  true : false,
+      showFloatingButton: auth.role == AuthRoleEnum.teacher ? true : false,
       body: [
         controller.status == CourseStateStatus.loading
             ? (Column(
@@ -134,7 +135,7 @@ class _CoursePageState extends State<CoursePage> {
                   ),
                   Padding(
                     padding: const EdgeInsets.only(top: 16),
-                    child: Text(
+                    child: SelectableText(
                       'Buscando Cursos...',
                       style: context.style.poppinsMedium,
                     ),
@@ -165,7 +166,7 @@ class _CoursePageState extends State<CoursePage> {
     );
   }
 
-  List<MenuFloatingItem> floatingMenuOptionsList () {
+  List<MenuFloatingItem> floatingMenuOptionsList() {
     final List<MenuFloatingItem> listOptions = [];
     listOptions.add(MenuFloatingItem(
       title: 'Notícias',
@@ -176,6 +177,17 @@ class _CoursePageState extends State<CoursePage> {
         ModalNewsWidget().showNews(context, newsController.allNews[0].news!);
       },
     ));
+
+    if (auth.role == AuthRoleEnum.teacher) {
+      listOptions.add(MenuFloatingItem(
+        title: 'Lista de Presença',
+        iconPath: 'assets/icon/class.png',
+        handleShow: () async {
+          controller.subject;
+          Navigator.of(context).pushNamed('/user/attendance/${controller.subject!.classId}/${controller.subject!.id}');
+        },
+      ));
+    }
     return listOptions;
   }
 }

@@ -11,7 +11,7 @@ class AttendanceModel extends _AttendanceModelBase with _$AttendanceModel {
   AttendanceModel({
     super.id,
     super.schoolId,
-    super.classId,
+    super.subjectId,
     super.date,
     super.totalLesson,
     super.users,
@@ -19,10 +19,11 @@ class AttendanceModel extends _AttendanceModelBase with _$AttendanceModel {
     super.updatedAt,
   });
 
-  factory AttendanceModel.empty() {
+  factory AttendanceModel.empty({int? subjectId}) {
     return AttendanceModel(
       date: DateTime.now(),
       totalLesson: 1,
+      subjectId: subjectId,
     );
   }
 
@@ -30,12 +31,12 @@ class AttendanceModel extends _AttendanceModelBase with _$AttendanceModel {
     return AttendanceModel(
       id: map['id'] != null ? map['id'] as int : null,
       schoolId: map['schoolId'] != null ? map['schoolId'] as int : null,
-      classId: map['classId'] != null ? map['classId'] as int : null,
+      subjectId: map['subjectId'] != null ? map['subjectId'] as int : null,
       date: map['date'] != null ? DateTime.parse(map['date'] as String) : null,
       totalLesson: map['totalLesson'] != null ? map['totalLesson'] as int : null,
-      users: map['users'] != null
+      users: map['students'] != null
           ? List<UserAttendanceModel>.from(
-              (map['users'] as List).map<UserAttendanceModel?>(
+              (map['students'] as List).map<UserAttendanceModel?>(
                 (x) => UserAttendanceModel.fromMap(x as Map<String, dynamic>),
               ),
             )
@@ -52,7 +53,7 @@ class AttendanceModel extends _AttendanceModelBase with _$AttendanceModel {
 abstract class _AttendanceModelBase with Store {
   int? id;
   int? schoolId;
-  int? classId;
+  int? subjectId;
   @observable
   DateTime? date = DateTime.now();
   @observable
@@ -86,7 +87,7 @@ abstract class _AttendanceModelBase with Store {
   _AttendanceModelBase({
     this.id,
     this.schoolId,
-    this.classId,
+    this.subjectId,
     this.date,
     this.totalLesson,
     this.users = const [],
@@ -97,7 +98,7 @@ abstract class _AttendanceModelBase with Store {
   AttendanceModel copyWith({
     int? id,
     int? schoolId,
-    int? classId,
+    int? subjectId,
     DateTime? date,
     int? totalLesson,
     List<UserAttendanceModel>? users,
@@ -107,7 +108,7 @@ abstract class _AttendanceModelBase with Store {
     return AttendanceModel(
       id: id ?? this.id,
       schoolId: schoolId ?? this.schoolId,
-      classId: classId ?? this.classId,
+      subjectId: subjectId ?? this.subjectId,
       date: date ?? this.date,
       totalLesson: totalLesson ?? this.totalLesson,
       users: users ?? List.from(this.users.map((x) => x.copyWith())),
@@ -120,10 +121,10 @@ abstract class _AttendanceModelBase with Store {
     return <String, dynamic>{
       'id': id,
       'schoolId': schoolId,
-      'classId': classId,
+      'subjectId': subjectId,
       'date': date?.millisecondsSinceEpoch,
       'totalLesson': totalLesson,
-      'users': users.map((x) => x.toMap()).toList(),
+      'students': users.map((x) => x.toMap()).toList(),
       'createdAt': createdAt?.millisecondsSinceEpoch,
       'updatedAt': updatedAt?.millisecondsSinceEpoch,
     };
@@ -133,7 +134,7 @@ abstract class _AttendanceModelBase with Store {
 
   @override
   String toString() {
-    return 'AttendanceModel(id: $id, schoolId: $schoolId, classId: $classId, date: $date, totalLesson: $totalLesson, users: $users, createdAt: $createdAt, updatedAt: $updatedAt)';
+    return 'AttendanceModel(id: $id, schoolId: $schoolId, subjectId: $subjectId, date: $date, totalLesson: $totalLesson, users: $users, createdAt: $createdAt, updatedAt: $updatedAt)';
   }
 
   @override
@@ -142,7 +143,7 @@ abstract class _AttendanceModelBase with Store {
 
     return other.id == id &&
         other.schoolId == schoolId &&
-        other.classId == classId &&
+        other.subjectId == subjectId &&
         other.date == date &&
         other.totalLesson == totalLesson &&
         listEquals(other.users, users) &&
@@ -154,7 +155,7 @@ abstract class _AttendanceModelBase with Store {
   int get hashCode {
     return id.hashCode ^
         schoolId.hashCode ^
-        classId.hashCode ^
+        subjectId.hashCode ^
         date.hashCode ^
         totalLesson.hashCode ^
         users.hashCode ^

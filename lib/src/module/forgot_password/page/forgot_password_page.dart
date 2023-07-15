@@ -82,13 +82,13 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Text(
+                        SelectableText(
                           'Recuperação de Senha',
                           style: context.style.poppinsRegular.copyWith(
                             fontSize: 30,
                           ),
                         ),
-                        Text(
+                        SelectableText(
                           'Preencha os dados abaixo e te enviaremos um e-mail de recuperação',
                           style: context.style.poppinsRegular.copyWith(
                             fontSize: 14,

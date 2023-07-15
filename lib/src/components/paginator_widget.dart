@@ -53,16 +53,14 @@ class _Pages extends StatelessWidget {
       return const IconButton(
         highlightColor: Colors.transparent,
         hoverColor: Colors.transparent,
-        icon: Text('...'),
+        icon: SelectableText('...'),
         onPressed: null,
       );
     }
 
     return IconButton(
-      style: index == currentPage
-          ? ButtonStyle(backgroundColor: MaterialStateProperty.all(Colors.white12))
-          : null,
-      icon: Text(index.toString()),
+      style: index == currentPage ? ButtonStyle(backgroundColor: MaterialStateProperty.all(Colors.white12)) : null,
+      icon: SelectableText(index.toString()),
       onPressed: () => goTo(index),
     );
   }

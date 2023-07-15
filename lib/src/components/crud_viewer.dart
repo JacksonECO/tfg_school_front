@@ -36,7 +36,7 @@ class CrudViewer extends StatelessWidget {
               ),
             ),
             padding: const EdgeInsets.fromLTRB(50.0, 10.0, 50.0, 10.0),
-            child: Text(
+            child: SelectableText(
               title,
               style: context.style.title,
             ),
@@ -63,8 +63,7 @@ class CrudViewer extends StatelessWidget {
               ),
             ],
           ),
-          constraints:
-              BoxConstraints(minWidth: 300, maxHeight: context.height - 150),
+          constraints: BoxConstraints(minWidth: 300, maxHeight: context.height - 150),
           child: hasScroll
               ? SingleChildScrollView(
                   child: Column(
@@ -72,7 +71,7 @@ class CrudViewer extends StatelessWidget {
                         ? body
                         : [
                             Center(
-                              child: Text(
+                              child: SelectableText(
                                 'Nenhum dado registrado',
                                 style: context.style.poppinsMedium,
                               ),
@@ -85,7 +84,7 @@ class CrudViewer extends StatelessWidget {
                       ? body
                       : [
                           Center(
-                            child: Text(
+                            child: SelectableText(
                               'Nenhum dado registrado',
                               style: context.style.poppinsMedium,
                             ),

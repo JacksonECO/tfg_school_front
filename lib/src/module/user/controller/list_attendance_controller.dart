@@ -9,9 +9,11 @@ import 'package:tfg_front/src/service/attendance_service.dart';
 class ListAttendanceController {
   final AttendanceService _service = Modular.get<AttendanceService>();
   final int subjectId;
+  final int classId;
 
   ListAttendanceController({
     required this.subjectId,
+    required this.classId,
   });
 
   bool _hasData = false;
@@ -31,7 +33,7 @@ class ListAttendanceController {
 
     try {
       EasyLoading.show();
-      _pagination = await _service.getAttendancePaginated(_pagination);
+      _pagination = await _service.getAttendancePaginated(_pagination, subjectId);
       EasyLoading.dismiss();
     } catch (e, s) {
       log('Erro future', error: e, stackTrace: s);
@@ -44,7 +46,8 @@ class ListAttendanceController {
   Future<void> goTo(int? page) async {
     try {
       EasyLoading.show();
-      _pagination = await _service.getAttendancePaginated(_pagination.copyWith(page: page));
+      _pagination =
+          await _service.getAttendancePaginated(_pagination.copyWith(page: page), subjectId);
       EasyLoading.dismiss();
     } catch (e, s) {
       log('Erro toPage', error: e, stackTrace: s);

@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 enum AuthRoleEnum {
   admin('Administrador'),
   teacher('Professor'),
@@ -13,8 +15,8 @@ enum AuthRoleEnum {
       return AuthRoleEnum.values.firstWhere((e) {
         return e.name == valueName;
       });
-    } catch (e) {
-      print(e);
+    } catch (e, s) {
+      log('AuthRoleEnum.fromName', error: e, stackTrace: s);
       return null;
     }
   }

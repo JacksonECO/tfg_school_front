@@ -38,7 +38,7 @@ class ClassWidget extends StatelessWidget {
         builder: (context, snapshot) {
           if (snapshot.hasError) {
             return Center(
-              child: Text(
+              child: SelectableText(
                 'Erro ao carregar dados',
                 style: context.style.interRegular.copyWith(
                   fontSize: 16,
@@ -70,14 +70,14 @@ class ClassWidget extends StatelessWidget {
                       Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Text(
+                          SelectableText(
                             controller.newClass ? 'Cadastrar nova Turma' : 'Editar Turma',
                             style: context.style.poppinsRegular.copyWith(
                               fontSize: 30,
                             ),
                           ),
                           const SizedBox(height: 8),
-                          Text(
+                          SelectableText(
                             'Preencha com os dados abaixo',
                             style: context.style.interRegular.copyWith(fontSize: 12),
                           ),

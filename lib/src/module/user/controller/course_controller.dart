@@ -36,7 +36,7 @@ abstract class CourseControllerBase with Store {
   @readonly
   List<dynamic> _resources = [];
 
-  Uuid uuid = Uuid();
+  Uuid uuid = const Uuid();
 
   final _subjectService = Modular.get<SubjectService>();
   final _moduleCourseService = Modular.get<ModuleCourseService>();
@@ -70,17 +70,11 @@ abstract class CourseControllerBase with Store {
   }
 
   @action
-  Future<void> createModule(
-      String title, String description, int subjectId) async {
+  Future<void> createModule(String title, String description, int subjectId) async {
     try {
       _status = CourseStateStatus.loading;
-      await _moduleCourseService.create(
-          title,
-          description,
-          subjectId,
-          _modulesCourse.isNotEmpty
-              ? _modulesCourse[_modulesCourse.length - 1].ordenation + 1
-              : 1);
+      await _moduleCourseService.create(title, description, subjectId,
+          _modulesCourse.isNotEmpty ? _modulesCourse[_modulesCourse.length - 1].ordenation + 1 : 1);
       await loadSubject(subjectId);
       await loadModules(subjectId);
       _status = CourseStateStatus.loaded;
@@ -129,16 +123,15 @@ abstract class CourseControllerBase with Store {
       }
       _status = CourseStateStatus.loaded;
     } catch (e, s) {
-      log('Erro ao atualzar módulo', error: e, stackTrace: s);
+      log('Erro ao atualizar módulo', error: e, stackTrace: s);
       _status = CourseStateStatus.error;
-      _messageError = 'Erro ao atualzar módulo';
+      _messageError = 'Erro ao atualizar módulo';
     }
   }
 
   //ordenation should always start in 1
   @action
-  Future<void> handleUpModule(
-      int moduleId, int subjectId, int ordenation) async {
+  Future<void> handleUpModule(int moduleId, int subjectId, int ordenation) async {
     try {
       if (ordenation > _modulesCourse[0].ordenation) {
         int index = 0, indexTarget = 0;
@@ -159,15 +152,14 @@ abstract class CourseControllerBase with Store {
             ordenation: ordenation);
       }
     } catch (e, s) {
-      log('Erro ao atualzar ordem do módulo', error: e, stackTrace: s);
+      log('Erro ao atualizar ordem do módulo', error: e, stackTrace: s);
       _status = CourseStateStatus.error;
-      _messageError = 'Erro ao atualzar ordem do módulo';
+      _messageError = 'Erro ao atualizar ordem do módulo';
     }
   }
 
   @action
-  Future<void> handleDownModule(
-      int moduleId, int subjectId, int ordenation) async {
+  Future<void> handleDownModule(int moduleId, int subjectId, int ordenation) async {
     try {
       if (ordenation < _modulesCourse[_modulesCourse.length - 1].ordenation) {
         int index = 0, indexTarget = 0;
@@ -187,45 +179,41 @@ abstract class CourseControllerBase with Store {
             ordenation: ordenation);
       }
     } catch (e, s) {
-      log('Erro ao atualzar ordem do módulo', error: e, stackTrace: s);
+      log('Erro ao atualizar ordem do módulo', error: e, stackTrace: s);
       _status = CourseStateStatus.error;
-      _messageError = 'Erro ao atualzar ordem do módulo';
+      _messageError = 'Erro ao atualizar ordem do módulo';
     }
   }
 
   List<dynamic> resourcesByModel(int modelId) {
     List<dynamic> listResources = [];
-    int index = 0;
+    // int index = 0;
     for (var resource in _resources) {
       if (resource.moduleId == modelId) {
         listResources.add(resource);
-        index++;
+        // index++;
       }
     }
     return listResources;
   }
 
   String appendResources({dynamic newResource, required int moduleId}) {
-    String allresources = '';
+    String allResources = '';
     int suffix = 1;
     int index = 0;
-    
+
     for (var resource in resourcesByModel(moduleId)) {
       if (resource.moduleId == moduleId) {
         if (suffix == 1) {
-          allresources +=
-              '{"resource${suffix.toString()}":' + resource.toJson();
+          allResources += '{"resource${suffix.toString()}":' + resource.toJson();
           if (resourcesByModel(moduleId).length == 1 && newResource == null) {
-            allresources += '}';
+            allResources += '}';
           }
         } else {
-          if (newResource != null ||
-              index != resourcesByModel(moduleId).length - 1) {
-            allresources +=
-                ',"resource${suffix.toString()}":' + resource.toJson();
+          if (newResource != null || index != resourcesByModel(moduleId).length - 1) {
+            allResources += ',"resource${suffix.toString()}":' + resource.toJson();
           } else if (index == resourcesByModel(moduleId).length - 1) {
-            allresources +=
-                ',"resource${suffix.toString()}":' + resource.toJson() + '}';
+            allResources += ',"resource${suffix.toString()}":' + resource.toJson() + '}';
           }
         }
         suffix++;
@@ -234,19 +222,16 @@ abstract class CourseControllerBase with Store {
     }
     if (newResource != null) {
       if (suffix == 1) {
-        allresources +=
-            '{"resource${suffix.toString()}":' + newResource.toJson() + '}';
+        allResources += '{"resource${suffix.toString()}":' + newResource.toJson() + '}';
       } else {
-        allresources +=
-            ',"resource${suffix.toString()}":' + newResource.toJson() + '}';
+        allResources += ',"resource${suffix.toString()}":' + newResource.toJson() + '}';
       }
     }
-    return allresources;
+    return allResources;
   }
 
   @action
-  Future<void> addResourceText(
-      String title, String content, int moduleId) async {
+  Future<void> addResourceText(String title, String content, int moduleId) async {
     try {
       _status = CourseStateStatus.loading;
       TextResourceModel resource = TextResourceModel(
@@ -269,9 +254,9 @@ abstract class CourseControllerBase with Store {
           subjectId: _modulesCourse[indexTarget].subjectId);
       _status = CourseStateStatus.loaded;
     } catch (e, s) {
-      log('Erro aoadicionar recurso ao módulo', error: e, stackTrace: s);
+      log('Erro ao adicionar recurso ao módulo', error: e, stackTrace: s);
       _status = CourseStateStatus.error;
-      _messageError = 'Erro aoadicionar recurso ao módulo';
+      _messageError = 'Erro ao adicionar recurso ao módulo';
     }
   }
 
@@ -280,11 +265,7 @@ abstract class CourseControllerBase with Store {
     try {
       _status = CourseStateStatus.loading;
       LinkResourceModel resource = LinkResourceModel(
-          type: 'link',
-          title: title,
-          link: link,
-          moduleId: moduleId,
-          id: uuid.v4());
+          type: 'link', title: title, link: link, moduleId: moduleId, id: uuid.v4());
 
       int index = 0, indexTarget = 0;
       for (var module in _modulesCourse) {
@@ -322,10 +303,8 @@ abstract class CourseControllerBase with Store {
       await updateModule(
         moduleId: editResource.moduleId,
         content: appendResources(moduleId: editResource.moduleId),
-        subjectId: _modulesCourse
-            .where((module) => module.id == editResource.moduleId)
-            .first
-            .subjectId,
+        subjectId:
+            _modulesCourse.where((module) => module.id == editResource.moduleId).first.subjectId,
       );
       _status = CourseStateStatus.loaded;
     } catch (e, s) {
@@ -335,8 +314,7 @@ abstract class CourseControllerBase with Store {
     }
   }
 
-  Future<void> updateResourceLink(
-      LinkResourceModel editResource, String title, String link) async {
+  Future<void> updateResourceLink(LinkResourceModel editResource, String title, String link) async {
     try {
       _status = CourseStateStatus.loading;
 
@@ -353,10 +331,8 @@ abstract class CourseControllerBase with Store {
       await updateModule(
         moduleId: editResource.moduleId,
         content: appendResources(moduleId: editResource.moduleId),
-        subjectId: _modulesCourse
-            .where((module) => module.id == editResource.moduleId)
-            .first
-            .subjectId,
+        subjectId:
+            _modulesCourse.where((module) => module.id == editResource.moduleId).first.subjectId,
       );
       _status = CourseStateStatus.loaded;
     } catch (e, s) {
@@ -383,10 +359,8 @@ abstract class CourseControllerBase with Store {
         content: resourcesByModel(excludeResource.moduleId).isNotEmpty
             ? appendResources(moduleId: excludeResource.moduleId)
             : '{}',
-        subjectId: _modulesCourse
-            .where((module) => module.id == excludeResource.moduleId)
-            .first
-            .subjectId,
+        subjectId:
+            _modulesCourse.where((module) => module.id == excludeResource.moduleId).first.subjectId,
       );
       _status = CourseStateStatus.loaded;
     } catch (e, s) {

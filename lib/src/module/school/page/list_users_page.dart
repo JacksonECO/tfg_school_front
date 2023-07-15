@@ -12,8 +12,7 @@ import 'package:tfg_front/src/module/school/widget/table_user_widget.dart';
 
 class ListUsersPage extends StatelessWidget {
   final ListUsersController controller;
-  final ProfileUserController Function({required bool isStudent, int? userId})
-      profileUserControllerType;
+  final ProfileUserController Function({required bool isStudent, int? userId}) profileUserControllerType;
   const ListUsersPage({
     required this.controller,
     required this.profileUserControllerType,
@@ -44,7 +43,7 @@ class ListUsersPage extends StatelessWidget {
               builder: (context, snapshot) {
                 if (snapshot.hasError) {
                   return const Center(
-                    child: Text('Não foi possível pegar os alunos'),
+                    child: SelectableText('Não foi possível pegar os alunos'),
                   );
                 }
 

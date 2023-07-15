@@ -14,7 +14,7 @@ class CourseItemWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     final DateFormat formatter = DateFormat('dd/MM/yyyy HH:mm');
     return InkWell(
-      onTap:() => Modular.to.navigate('${UserModule.courseRoute}/${subject.id}'),
+      onTap: () => Modular.to.navigate('${UserModule.courseRoute}/${subject.id}'),
       child: Container(
         margin: const EdgeInsets.only(bottom: 20),
         width: double.infinity,
@@ -76,15 +76,10 @@ class CourseItemWidget extends StatelessWidget {
                     const SizedBox(
                       height: 5,
                     ),
+                    BulletListItem(text: 'Professor(a):  ${toBeginningOfSentenceCase(subject.teacherName)}'),
+                    BulletListItem(text: 'Turma: ${toBeginningOfSentenceCase(subject.className)}'),
                     BulletListItem(
-                        text:
-                            'Professor(a):  ${toBeginningOfSentenceCase(subject.teacherName)}'),
-                    BulletListItem(
-                        text:
-                            'Turma: ${toBeginningOfSentenceCase(subject.className)}'),
-                    BulletListItem(
-                      text:
-                          'Última modificação: ${formatter.format(subject.updatedAt!)}',
+                      text: 'Última modificação: ${formatter.format(subject.updatedAt!)}',
                     ),
                   ],
                 ),

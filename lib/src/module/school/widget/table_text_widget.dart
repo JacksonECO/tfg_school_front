@@ -17,7 +17,7 @@ class TableTextWidget extends StatelessWidget {
       padding: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 20.0),
       constraints: const BoxConstraints(minHeight: 50),
       alignment: alignment,
-      child: Text(
+      child: SelectableText(
         text,
         textAlign: TextAlign.start,
       ),

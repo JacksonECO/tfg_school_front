@@ -74,7 +74,7 @@ class _SubjectWidgetState extends State<SubjectWidget> with TickerProviderStateM
       children: [
         Row(
           children: [
-            Text(
+            SelectableText(
               'Disciplina ${widget.index + 1}',
               style: context.style.interSemiBold.copyWith(fontSize: 14),
             ),
@@ -142,11 +142,9 @@ class _SubjectWidgetState extends State<SubjectWidget> with TickerProviderStateM
                                   child: HueRingPicker(
                                     pickerColor: widget.subject.toColor,
                                     onColorChanged: (v) {
-                                      String value = '#' +
-                                          v.value.toRadixString(16).substring(2).toUpperCase();
+                                      String value = '#' + v.value.toRadixString(16).substring(2).toUpperCase();
 
-                                      widget.controller.classModel.subjects[widget.index].color =
-                                          value;
+                                      widget.controller.classModel.subjects[widget.index].color = value;
                                       colorController.text = value;
                                     },
                                     enableAlpha: false,
@@ -170,7 +168,7 @@ class _SubjectWidgetState extends State<SubjectWidget> with TickerProviderStateM
                         options: widget.controller.teachers
                             .map((e) => DropdownMenuItem(
                                   value: e,
-                                  child: Text(e.name ?? ''),
+                                  child: SelectableText(e.name ?? ''),
                                 ))
                             .toList(),
                         initialValue: widget.controller.getTeacher(widget.index),

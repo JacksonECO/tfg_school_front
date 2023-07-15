@@ -9,12 +9,13 @@ import 'package:tfg_front/src/module/school/widget/table_text_widget.dart';
 import 'package:tfg_front/src/module/user/controller/attendance_controller.dart';
 import 'package:tfg_front/src/module/user/controller/list_attendance_controller.dart';
 import 'package:tfg_front/src/module/user/model/attendance_model.dart';
-import 'package:tfg_front/src/module/user/wiget/attendance_widget.dart';
+import 'package:tfg_front/src/module/user/widget/attendance_widget.dart';
 
 class TableAttendanceWidget extends StatefulWidget {
   final ListAttendanceController controller;
   final AttendanceController Function({
     required int subjectId,
+    required int classId,
     int? attendanceId,
     AttendanceModel? attendanceModel,
   }) attendanceController;
@@ -65,21 +66,33 @@ class _TableAttendanceWidgetState extends State<TableAttendanceWidget> {
               color: index.isEven ? context.colors.backgroundPrimary : const Color(0xFF424162),
             ),
             children: [
-              Observer(builder: (_) {
-                return TableTextWidget(widget.controller.data.index(index)?.date?.date ?? '');
-              }),
-              Observer(builder: (_) {
-                return TableTextWidget(
-                    widget.controller.data.index(index)?.totalLesson.toString() ?? '');
-              }),
-              Observer(builder: (_) {
-                return TableTextWidget(
-                    widget.controller.data.index(index)?.totalPresent.toString() ?? '');
-              }),
-              Observer(builder: (_) {
-                return TableTextWidget(
-                    widget.controller.data.index(index)?.totalAbsent.toString() ?? '');
-              }),
+              Observer(
+                warnWhenNoObservables: false,
+                builder: (_) {
+                  return TableTextWidget(widget.controller.data.index(index)?.date?.date ?? '');
+                },
+              ),
+              Observer(
+                warnWhenNoObservables: false,
+                builder: (_) {
+                  return TableTextWidget(
+                      widget.controller.data.index(index)?.totalLesson.toString() ?? '');
+                },
+              ),
+              Observer(
+                warnWhenNoObservables: false,
+                builder: (_) {
+                  return TableTextWidget(
+                      widget.controller.data.index(index)?.totalPresent.toString() ?? '');
+                },
+              ),
+              Observer(
+                warnWhenNoObservables: false,
+                builder: (_) {
+                  return TableTextWidget(
+                      widget.controller.data.index(index)?.totalAbsent.toString() ?? '');
+                },
+              ),
               const SizedBox(),
               widget.controller.data.index(index)?.id == null
                   ? const TableTextWidget('')
@@ -88,6 +101,7 @@ class _TableAttendanceWidgetState extends State<TableAttendanceWidget> {
                       onPressed: () async {
                         var elementController = widget.attendanceController(
                           subjectId: widget.controller.subjectId,
+                          classId: widget.controller.classId,
                           attendanceModel: widget.controller.data.index(index)?.copyWith(),
                         );
 

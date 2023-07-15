@@ -9,11 +9,7 @@ class ButtonCourseResouce extends StatelessWidget {
   final CourseController controller;
   final int moduleId;
 
-  const ButtonCourseResouce(
-      {super.key,
-      required this.option,
-      required this.controller,
-      required this.moduleId});
+  const ButtonCourseResouce({super.key, required this.option, required this.controller, required this.moduleId});
 
   @override
   Widget build(BuildContext context) {
@@ -37,12 +33,9 @@ class ButtonCourseResouce extends StatelessWidget {
             break;
           case 'link':
             if (await ModalAlert.showTitleContent(
-                title: 'Recurso Link',
-                titleEC: titleEC,
-                contentEC: contentEC,
-                description: 'Link')) {
-                  await controller.addResourceLink(titleEC.text, contentEC.text, moduleId);
-                }
+                title: 'Recurso Link', titleEC: titleEC, contentEC: contentEC, description: 'Link')) {
+              await controller.addResourceLink(titleEC.text, contentEC.text, moduleId);
+            }
             break;
           case 'quiz':
             break;

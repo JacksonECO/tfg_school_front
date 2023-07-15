@@ -58,9 +58,7 @@ class _LeadingMenuWidgetState extends State<LeadingMenuWidget> {
                 radius: 15,
                 backgroundColor: context.colors.primary,
                 child: Image.asset(
-                  isClose
-                      ? 'assets/icon/double-right-arrows.png'
-                      : 'assets/icon/double-left-arrows.png',
+                  isClose ? 'assets/icon/double-right-arrows.png' : 'assets/icon/double-left-arrows.png',
                   height: 9,
                   width: 9,
                 ),
@@ -85,22 +83,17 @@ class _LeadingMenuWidgetState extends State<LeadingMenuWidget> {
               style: ElevatedButton.styleFrom(
                 elevation: 0,
                 shadowColor: context.colors.primary.withOpacity(0.5),
-                padding: item.canSelect
-                    ? const EdgeInsets.symmetric(vertical: 16, horizontal: 14)
-                    : EdgeInsets.zero,
-                backgroundColor: Modular.args.uri.path == item.route
-                    ? context.colors.primary.withOpacity(0.7)
-                    : Colors.transparent,
+                padding: item.canSelect ? const EdgeInsets.symmetric(vertical: 16, horizontal: 14) : EdgeInsets.zero,
+                backgroundColor:
+                    Modular.args.uri.path == item.route ? context.colors.primary.withOpacity(0.7) : Colors.transparent,
               ),
               child: Row(
-                mainAxisAlignment: isClose
-                    ? MainAxisAlignment.center
-                    : MainAxisAlignment.start,
+                mainAxisAlignment: isClose ? MainAxisAlignment.center : MainAxisAlignment.start,
                 children: [
                   item.icon,
                   if (!isClose) const SizedBox(width: 14),
                   if (!isClose)
-                    Text(
+                    SelectableText(
                       item.title,
                       style: const TextStyle(color: Colors.white),
                     ),
@@ -112,22 +105,19 @@ class _LeadingMenuWidgetState extends State<LeadingMenuWidget> {
                   return;
                 }
                 if (item.route != null) {
-                  Navigator.of(context)
-                      .pushNamedAndRemoveUntil(item.route!, (route) => false);
+                  Navigator.of(context).pushNamedAndRemoveUntil(item.route!, (route) => false);
                 }
               },
             )
           : Padding(
               padding: const EdgeInsets.symmetric(vertical: 0, horizontal: 10),
               child: Row(
-                mainAxisAlignment: isClose
-                    ? MainAxisAlignment.center
-                    : MainAxisAlignment.start,
+                mainAxisAlignment: isClose ? MainAxisAlignment.center : MainAxisAlignment.start,
                 children: [
                   item.icon,
                   if (!isClose) const SizedBox(width: 14),
                   if (!isClose)
-                    Text(
+                    SelectableText(
                       item.title,
                       style: const TextStyle(color: Colors.white),
                     ),
@@ -190,20 +180,20 @@ class LeadingMenu {
 //                         : const Icon(Icons.person, size: 100),
 //                   ),
 //                 ),
-//                 Text(user.name ?? ''),
+//                 SelectableText(user.name ?? ''),
 //                 const SizedBox(height: 6),
 //                 const Divider(height: 0),
 //                 ExpansionTile(
-//                   title: const Text('Alunos'),
+//                   title: const SelectableText('Alunos'),
 //                   children: [
 //                     ListTile(
-//                       title: const Text('Matricular Aluno'),
+//                       title: const SelectableText('Matricular Aluno'),
 //                       onTap: () {
 //                         Modular.to.pushNamed(SchoolModule.studentRoute);
 //                       },
 //                     ),
 //                     ListTile(
-//                       title: const Text('Listar Alunos'),
+//                       title: const SelectableText('Listar Alunos'),
 //                       onTap: () {
 //                         Modular.to.pushNamed(SchoolModule.listStudentsRoute);
 //                       },
@@ -211,17 +201,17 @@ class LeadingMenu {
 //                   ],
 //                 ),
 //                 const ExpansionTile(
-//                   title: Text('Funcionário'),
+//                   title: SelectableText('Funcionário'),
 //                   children: [
-//                     ListTile(title: Text('Adicionar Funcionário')),
-//                     ListTile(title: Text('Listar Funcionários')),
+//                     ListTile(title: SelectableText('Adicionar Funcionário')),
+//                     ListTile(title: SelectableText('Listar Funcionários')),
 //                   ],
 //                 ),
 //                 const ExpansionTile(
-//                   title: Text('Cursos'),
+//                   title: SelectableText('Cursos'),
 //                   children: [
-//                     ListTile(title: Text('Criar Curso')),
-//                     ListTile(title: Text('Listar Curso')),
+//                     ListTile(title: SelectableText('Criar Curso')),
+//                     ListTile(title: SelectableText('Listar Curso')),
 //                   ],
 //                 ),
 //               ],
@@ -231,12 +221,12 @@ class LeadingMenu {
 //                 const SizedBox(height: 50),
 //                 ListTile(
 //                   leading: const Icon(Icons.support_agent),
-//                   title: const Text('Suporte'),
+//                   title: const SelectableText('Suporte'),
 //                   onTap: () {},
 //                 ),
 //                 ListTile(
 //                   leading: const Icon(Icons.settings),
-//                   title: const Text('Configuração'),
+//                   title: const SelectableText('Configuração'),
 //                   onTap: () {},
 //                 ),
 //               ],

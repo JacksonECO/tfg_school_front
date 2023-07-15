@@ -1,14 +1,15 @@
 import 'package:flutter_modular/flutter_modular.dart';
-import 'package:tfg_front/src/components/custom_page.dart';
 import 'package:tfg_front/src/module/user/controller/attendance_controller.dart';
 import 'package:tfg_front/src/module/user/controller/course_controller.dart';
 import 'package:tfg_front/src/module/user/controller/courses_controller.dart';
 import 'package:tfg_front/src/module/user/controller/list_attendance_controller.dart';
 import 'package:tfg_front/src/module/user/controller/news_controller.dart';
+import 'package:tfg_front/src/module/user/controller/support_controller.dart';
 import 'package:tfg_front/src/module/user/pages/course_page.dart';
 import 'package:tfg_front/src/module/user/pages/courses_page.dart';
 import 'package:tfg_front/src/module/user/pages/list_attendance_page.dart';
 import 'package:tfg_front/src/module/user/pages/news_page.dart';
+import 'package:tfg_front/src/module/user/pages/support_page.dart';
 
 class UserModule extends Module {
   static const String initialRoute = '/user/';
@@ -17,17 +18,21 @@ class UserModule extends Module {
   static const String coursesRoute = '${initialRoute}courses';
   static const String courseRoute = '${initialRoute}course';
   static const String attendanceRoute = '${initialRoute}attendance';
+  static const String supportRoute = '${initialRoute}support';
 
   @override
   List<Bind> get binds => [
         Bind.lazySingleton((i) => CourseController()),
+        Bind((i) => SupportController(), isSingleton: false),
       ];
 
   @override
   List<ModularRoute> get routes => [
         ChildRoute(
           initialRoute.split('/user').last,
-          child: (_, __) => const CustomPage(body: []),
+          child: (_, __) => CoursesPage(
+            controller: CoursesController(),
+          ),
         ),
         ChildRoute(
           newsRoute.split('/user').last,
@@ -48,13 +53,18 @@ class UserModule extends Module {
           ),
         ),
         ChildRoute(
-          attendanceRoute.split('/user').last + '/:id',
+          attendanceRoute.split('/user').last + '/:class/:subject',
           child: (_, args) => ListAttendancePage(
             controller: ListAttendanceController(
-              subjectId: int.parse(args.params['id']),
+              classId: int.parse(args.params['class']),
+              subjectId: int.parse(args.params['subject']),
             ),
             attendanceController: AttendanceController.new,
           ),
+        ),
+        ChildRoute(
+          supportRoute.split('/user').last,
+          child: (_, args) => const SupportPage(),
         ),
       ];
 }

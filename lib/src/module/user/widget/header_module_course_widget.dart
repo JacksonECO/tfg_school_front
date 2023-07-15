@@ -23,10 +23,8 @@ class HeaderModuleCourse extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final auth = Modular.get<AuthModel>();
-    final TextEditingController titleEC =
-        TextEditingController(text: module.title);
-    final TextEditingController descriptionEC =
-        TextEditingController(text: module.description);
+    final TextEditingController titleEC = TextEditingController(text: module.title);
+    final TextEditingController descriptionEC = TextEditingController(text: module.description);
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -35,7 +33,7 @@ class HeaderModuleCourse extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             Flexible(
-              child: Text(
+              child: SelectableText(
                 module.title,
                 style: context.style.poppinsBold.copyWith(fontSize: 22),
               ),
@@ -47,16 +45,14 @@ class HeaderModuleCourse extends StatelessWidget {
                     color: context.colors.primary,
                     icon: Icons.keyboard_arrow_up,
                     onPressed: () async {
-                      await controller.handleUpModule(
-                          module.id, subjectId, module.ordenation);
+                      await controller.handleUpModule(module.id, subjectId, module.ordenation);
                     },
                   ),
                   CircleButton(
                     color: context.colors.primary,
                     icon: Icons.keyboard_arrow_down,
                     onPressed: () async {
-                      await controller.handleDownModule(
-                          module.id, subjectId, module.ordenation);
+                      await controller.handleDownModule(module.id, subjectId, module.ordenation);
                     },
                   ),
                   CircleButton(
@@ -64,14 +60,9 @@ class HeaderModuleCourse extends StatelessWidget {
                     icon: Icons.create,
                     onPressed: () async {
                       if (await ModalAlert.showTitleContent(
-                          title: 'Editar recurso: ${module.title}',
-                          titleEC: titleEC,
-                          contentEC: descriptionEC)) {
+                          title: 'Editar recurso: ${module.title}', titleEC: titleEC, contentEC: descriptionEC)) {
                         await controller.updateModule(
-                            moduleId: module.id,
-                            title: titleEC.text,
-                            descripton: descriptionEC.text,
-                            subjectId: subjectId);
+                            moduleId: module.id, title: titleEC.text, descripton: descriptionEC.text, subjectId: subjectId);
                       }
                     },
                   ),
@@ -79,8 +70,7 @@ class HeaderModuleCourse extends StatelessWidget {
                     color: context.colors.error,
                     icon: Icons.close,
                     onPressed: () async {
-                      if (await ModalAlert.showConfirmRemove(
-                          'Deseja remover o recurso: ${module.title}?')) {
+                      if (await ModalAlert.showConfirmRemove('Deseja remover o recurso: ${module.title}?')) {
                         await controller.deleteModule(module.id, subjectId);
                       }
                     },
@@ -92,7 +82,7 @@ class HeaderModuleCourse extends StatelessWidget {
         const Divider(
           thickness: 2,
         ),
-        Text(
+        SelectableText(
           module.description,
           style: context.style.text,
         ),

@@ -18,7 +18,7 @@ class ModalNewsWidget {
       context: context,
       builder: (BuildContext context) {
         return AlertDialog(
-          title: Text(
+          title: SelectableText(
             'Últimas Notícias',
             style: context.style.poppinsRegular.copyWith(fontSize: 28),
             textAlign: TextAlign.center,
@@ -26,30 +26,23 @@ class ModalNewsWidget {
           titlePadding: const EdgeInsets.only(top: 30, bottom: 20),
           backgroundColor: context.colors.secondary,
           content: ConstrainedBox(
-            constraints: const BoxConstraints(
-                minWidth: 600, minHeight: 100, maxHeight: 700),
+            constraints: const BoxConstraints(minWidth: 600, minHeight: 100, maxHeight: 700),
             child: SingleChildScrollView(
               child: Container(
                 padding: const EdgeInsets.fromLTRB(30, 0, 30, 0),
                 child: Column(
-                  crossAxisAlignment: allNews.isEmpty
-                      ? CrossAxisAlignment.center
-                      : CrossAxisAlignment.start,
+                  crossAxisAlignment: allNews.isEmpty ? CrossAxisAlignment.center : CrossAxisAlignment.start,
                   children: [
                     ...allNews.map((news) {
                       return Stack(
                         children: [
                           InkWell(
                             onTap: () async {
-                              final TextEditingController titleEC =
-                                  TextEditingController(text: news.title);
-                              final TextEditingController contentEC =
-                                  TextEditingController(text: news.description);
+                              final TextEditingController titleEC = TextEditingController(text: news.title);
+                              final TextEditingController contentEC = TextEditingController(text: news.description);
                               Navigator.of(context).pop();
                               if (await ModalAlert.showTitleContent(
-                                  title: 'Editar Notícia',
-                                  titleEC: titleEC,
-                                  contentEC: contentEC)) {
+                                  title: 'Editar Notícia', titleEC: titleEC, contentEC: contentEC)) {
                                 NewsModel updateNews = NewsModel(
                                   id: news.id,
                                   title: titleEC.text,
@@ -111,8 +104,7 @@ class ModalNewsWidget {
                               color: context.colors.error,
                               icon: Icons.close,
                               onPressed: () async {
-                                if (await ModalAlert.showConfirmRemove(
-                                    'Deseja remover a notícia: ${news.title}?')) {
+                                if (await ModalAlert.showConfirmRemove('Deseja remover a notícia: ${news.title}?')) {
                                   newsController.removeNews(news);
                                   Navigator.of(context).pop();
                                 }
@@ -128,15 +120,11 @@ class ModalNewsWidget {
                         child: Button.green(
                           text: 'Adicionar Notícia',
                           onPressed: () async {
-                            final TextEditingController titleEC =
-                                TextEditingController();
-                            final TextEditingController contentEC =
-                                TextEditingController();
+                            final TextEditingController titleEC = TextEditingController();
+                            final TextEditingController contentEC = TextEditingController();
                             Navigator.of(context).pop();
                             if (await ModalAlert.showTitleContent(
-                                title: 'Adicionar Notícia',
-                                titleEC: titleEC,
-                                contentEC: contentEC)) {
+                                title: 'Adicionar Notícia', titleEC: titleEC, contentEC: contentEC)) {
                               NewsModel addNews = NewsModel(
                                 title: titleEC.text,
                                 description: contentEC.text,

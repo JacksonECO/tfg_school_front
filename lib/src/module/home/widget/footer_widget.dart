@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:tfg_front/src/components/click.dart';
 import 'package:tfg_front/src/core/helpers/context_extension.dart';
@@ -12,22 +14,24 @@ class FooterWidget extends StatelessWidget {
       alignment: Alignment.bottomCenter,
       child: Container(
         color: context.colors.backgroundSecondary,
-        padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 40), //h24 w32
+        padding: EdgeInsets.symmetric(horizontal: context.width * 0.07, vertical: max(40, context.width * 0.05)),
         child: Column(mainAxisSize: MainAxisSize.min, children: [
-          Text(
+          SelectableText(
             'Trabalho FINAL de Graduação'.toUpperCase(),
             style: context.style.poppinsBlack.copyWith(
               fontSize: 26,
               color: Colors.white,
             ),
+            textAlign: TextAlign.center,
           ),
           const SizedBox(height: 8),
-          Text(
-            'Este trabalho foi feito com muito amor...',
+          SelectableText(
+            'Este trabalho foi feito com muito amor e dedicação para a conclusão do curso de Engenharia de Computação da UNIFEI - Universidade Federal de Itajubá.',
             style: context.style.interRegular.copyWith(
               fontSize: 16,
               color: Colors.white,
             ),
+            textAlign: TextAlign.center,
           ),
           const SizedBox(height: 22),
           Divider(
@@ -35,29 +39,37 @@ class FooterWidget extends StatelessWidget {
             thickness: 2,
           ),
           const SizedBox(height: 18),
+          if (context.width <= 700)
+            Image.asset(
+              'assets/img/unifei-logo.png',
+              height: 150,
+            ),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
-              Image.asset(
-                'assets/img/unifei-logo.png',
-                height: 150,
-              ),
-              listDados(
-                'Desenvolvedores',
-                ['Jackson Galdino', 'Lucas Seraggi', 'Paulo Paiva'],
-                context,
-              ),
+              if (context.width > 700)
+                Image.asset(
+                  'assets/img/unifei-logo.png',
+                  height: 150,
+                ),
+              if (context.width > 500)
+                listDados(
+                  'Desenvolvedores',
+                  ['Jackson Silveira', 'Lucas Seraggi', 'Paulo Paiva'],
+                  context,
+                ),
               listDados(
                 'Contatos',
-                [
-                  'jacksongdas.jackson@gmail.com',
-                  'lucas.seraggi@hotmail.com',
-                  'paulojr.eco@gmail.com'
-                ],
+                ['jacksongdas.jackson@gmail.com', 'lucas.seraggi@hotmail.com', 'paulojr.eco@gmail.com'],
                 context,
               ),
               listSocial(
                 ['github.com/JacksonECO', 'github.com/LucasSeraggi', 'github.com/paulojr-eco'],
+                [
+                  'linkedin.com/in/jackson-silveira/',
+                  'linkedin.com/in/lucas-fernandes-seraggi-296111206',
+                  'linkedin.com/in/paulojr-eco/',
+                ],
                 context,
               ),
             ],
@@ -68,7 +80,7 @@ class FooterWidget extends StatelessWidget {
             thickness: 2,
           ),
           const SizedBox(height: 18),
-          Text(
+          SelectableText(
             'Todos os Direitos Reservados © 2023',
             style: context.style.interRegular.copyWith(fontSize: 18, color: Colors.white),
           ),
@@ -82,7 +94,7 @@ class FooterWidget extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.start,
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text(
+        SelectableText(
           title,
           style: context.style.interRegular.copyWith(fontSize: 16, color: context.colors.greenBlue),
         ),
@@ -113,30 +125,57 @@ class FooterWidget extends StatelessWidget {
     );
   }
 
-  Widget listSocial(List<String> urls, BuildContext context) {
+  Widget listSocial(List<String> git, List<String> linkedIn, BuildContext context) {
     return Column(
       mainAxisAlignment: MainAxisAlignment.start,
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text(
+        SelectableText(
           'Social',
           style: context.style.interRegular.copyWith(fontSize: 16, color: context.colors.greenBlue),
         ),
         const SizedBox(height: 8),
-        ...urls
-            .map((link) => Click(
-                  onTap: () {
-                    launchUrl(Uri(
-                      scheme: 'https',
-                      path: link,
-                    ));
-                  },
-                  child: Padding(
-                    padding: const EdgeInsets.symmetric(vertical: 5),
-                    child: Image.asset('assets/icon/gitHub-logo.png', height: 30),
-                  ),
-                ))
-            .toList(),
+        Row(
+          children: [
+            Column(
+              children: git
+                  .map(
+                    (link) => Click(
+                      onTap: () {
+                        launchUrl(Uri(
+                          scheme: 'https',
+                          path: link,
+                        ));
+                      },
+                      child: Padding(
+                        padding: const EdgeInsets.symmetric(vertical: 5),
+                        child: Image.asset('assets/icon/gitHub-logo.png', height: 30),
+                      ),
+                    ),
+                  )
+                  .toList(),
+            ),
+            const SizedBox(width: 12),
+            Column(
+              children: linkedIn
+                  .map(
+                    (link) => Click(
+                      onTap: () {
+                        launchUrl(Uri(
+                          scheme: 'https',
+                          path: link,
+                        ));
+                      },
+                      child: Padding(
+                        padding: const EdgeInsets.symmetric(vertical: 5),
+                        child: Image.asset('assets/icon/linkedIn-logo.png', height: 30),
+                      ),
+                    ),
+                  )
+                  .toList(),
+            )
+          ],
+        ),
       ],
     );
   }

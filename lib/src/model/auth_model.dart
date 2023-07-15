@@ -77,8 +77,7 @@ class AuthModel {
 
   String toJson() => json.encode(toMap());
 
-  factory AuthModel.fromJson(String source) =>
-      AuthModel.fromMap(json.decode(source) as Map<String, dynamic>);
+  factory AuthModel.fromJson(String source) => AuthModel.fromMap(json.decode(source) as Map<String, dynamic>);
 
   @override
   String toString() {
@@ -168,11 +167,6 @@ class AuthModel {
             : Image.asset('assets/icon/black-board-logo.png', height: 32, width: 32),
         canSelect: false,
       ),
-      LeadingMenuItem(
-        title: 'Página Inicial',
-        route: userId == null ? '/school/' : '/user/',
-        icon: Image.asset('assets/icon/home.png', height: 28, width: 28),
-      ),
     ]);
     menu.bottom.addAll([
       LeadingMenuItem(
@@ -205,11 +199,6 @@ class AuthModel {
             icon: Image.asset('assets/icon/courses-icon.png', height: 28, width: 28),
           ),
           LeadingMenuItem(
-            title: 'Presenças - 1',
-            route: '/user/attendance/1',
-            icon: Image.asset('assets/icon/courses-icon.png', height: 28, width: 28),
-          ),
-          LeadingMenuItem(
             title: 'Suporte',
             route: '/user/support',
             icon: Image.asset('assets/icon/suporte.png', height: 28, width: 28),
@@ -220,6 +209,11 @@ class AuthModel {
         break;
       case AuthRoleEnum.admin:
         menu.top.addAll([
+          LeadingMenuItem(
+            title: 'Página Inicial',
+            route: userId == null ? '/school/' : '/user/',
+            icon: Image.asset('assets/icon/home.png', height: 28, width: 28),
+          ),
           LeadingMenuItem(
             title: 'Professores',
             route: SchoolModule.listTeacherRoute,

@@ -3,7 +3,7 @@ import 'package:tfg_front/src/components/crud_viewer.dart';
 import 'package:tfg_front/src/components/custom_page.dart';
 import 'package:tfg_front/src/core/helpers/context_extension.dart';
 import 'package:tfg_front/src/module/user/controller/news_controller.dart';
-import 'package:tfg_front/src/module/user/wiget/news_subject_item_widget.dart';
+import 'package:tfg_front/src/module/user/widget/news_subject_item_widget.dart';
 
 class NewsPage extends StatefulWidget {
   final NewsController controller;
@@ -15,7 +15,6 @@ class NewsPage extends StatefulWidget {
 }
 
 class _NewsPageState extends State<NewsPage> {
-
   @override
   Widget build(BuildContext context) {
     return CustomPage(
@@ -28,12 +27,12 @@ class _NewsPageState extends State<NewsPage> {
                 title: 'Notícias',
                 body: widget.controller.allNews
                     .where((e) => e.news != null && e.news!.isNotEmpty)
-                    .map((e) => NewsSubjectItemWidget(newsItem: e)) 
+                    .map((e) => NewsSubjectItemWidget(newsItem: e))
                     .toList(),
               );
             } else if (snapshot.hasError) {
               return Center(
-                child: Text(
+                child: SelectableText(
                   'Não foi carregar as notícias',
                   style: context.style.poppinsMedium,
                 ),
@@ -53,7 +52,7 @@ class _NewsPageState extends State<NewsPage> {
                   ),
                   Padding(
                     padding: const EdgeInsets.only(top: 16),
-                    child: Text(
+                    child: SelectableText(
                       'Buscando Notícias...',
                       style: context.style.poppinsMedium,
                     ),

@@ -70,9 +70,13 @@ class UserService {
     );
   }
 
-  Future<List<UserModel>> getUsers(AuthRoleEnum type) async {
+  Future<List<UserModel>> getUsers(
+    AuthRoleEnum type, {
+    int? classId,
+  }) async {
     final temp = await _dio.get<List>('/user', queryParameters: {
       'role': type.name,
+      'class_id': classId,
     }).then((value) {
       return value.data;
     });

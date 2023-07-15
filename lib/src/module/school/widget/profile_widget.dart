@@ -30,6 +30,7 @@ class ProfileWidget extends StatelessWidget {
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
+        mainAxisSize: MainAxisSize.min,
         children: [
           Container(
             decoration: BoxDecoration(
@@ -44,14 +45,14 @@ class ProfileWidget extends StatelessWidget {
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text(
+                    SelectableText(
                       controller.newSchool ? 'Cadastro' : 'Perfil',
                       style: context.style.poppinsMedium.copyWith(
                         fontSize: 26,
                       ),
                     ),
                     const SizedBox(height: 8),
-                    Text(
+                    SelectableText(
                       controller.newSchool ? 'Preencha seus dados abaixo' : 'Edite os dados abaixo',
                       style: context.style.interRegular.copyWith(fontSize: 16),
                     ),
@@ -75,7 +76,7 @@ class ProfileWidget extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.center,
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        Text(
+                        SelectableText(
                           'Logotipo:',
                           style: context.style.poppinsRegular.copyWith(fontSize: 14),
                         ),
@@ -167,7 +168,7 @@ class ProfileWidget extends StatelessWidget {
                           ]),
                           inputFormatters: [
                             FilteringTextInputFormatter.digitsOnly,
-                            CnpjInputFormatter()
+                            CnpjInputFormatter(),
                           ],
                         ),
                       ),
