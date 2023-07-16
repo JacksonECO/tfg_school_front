@@ -3,13 +3,16 @@ import 'package:tfg_front/src/module/user/controller/attendance_controller.dart'
 import 'package:tfg_front/src/module/user/controller/course_controller.dart';
 import 'package:tfg_front/src/module/user/controller/courses_controller.dart';
 import 'package:tfg_front/src/module/user/controller/list_attendance_controller.dart';
+import 'package:tfg_front/src/module/user/controller/module_course_controller.dart';
 import 'package:tfg_front/src/module/user/controller/news_controller.dart';
 import 'package:tfg_front/src/module/user/controller/support_controller.dart';
 import 'package:tfg_front/src/module/user/pages/course_page.dart';
 import 'package:tfg_front/src/module/user/pages/courses_page.dart';
 import 'package:tfg_front/src/module/user/pages/list_attendance_page.dart';
+import 'package:tfg_front/src/module/user/pages/module_course_page.dart';
 import 'package:tfg_front/src/module/user/pages/news_page.dart';
 import 'package:tfg_front/src/module/user/pages/support_page.dart';
+import 'package:tfg_front/src/module/user/service/module_course_service.dart';
 
 class UserModule extends Module {
   static const String initialRoute = '/user/';
@@ -22,8 +25,11 @@ class UserModule extends Module {
 
   @override
   List<Bind> get binds => [
+        Bind.factory((i) => ModuleCourseService()),
+        //
         Bind.lazySingleton((i) => CourseController()),
-        Bind((i) => SupportController(), isSingleton: false),
+        Bind.factory((i) => ModuleCouseController()),
+        Bind.factory((i) => SupportController()),
       ];
 
   @override
@@ -47,9 +53,16 @@ class UserModule extends Module {
           ),
         ),
         ChildRoute(
-          courseRoute.split('/user').last + '/:id',
+          courseRoute.split('/user').last + '2/:id',
           child: (_, args) => CoursePage(
             subjectId: int.parse(args.params['id']),
+          ),
+        ),
+        ChildRoute(
+          courseRoute.split('/user').last + '/:id',
+          child: (_, args) => ModuleCousePage(
+            subjectId: int.parse(args.params['id']),
+            subjectName: 'Material',
           ),
         ),
         ChildRoute(

@@ -64,6 +64,7 @@ class CrudViewer extends StatelessWidget {
             ],
           ),
           constraints: BoxConstraints(minWidth: 300, maxHeight: context.height - 150),
+          height: context.height - 150,
           child: hasScroll
               ? SingleChildScrollView(
                   child: Column(

@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:tfg_front/src/module/user/widget/floating_menu.dart';
 
 import 'package:tfg_front/src/components/leading_menu_widget.dart';
-import 'package:tfg_front/src/core/helpers/context_extension.dart';
 
 class CustomPage extends StatelessWidget {
   final List<Widget>? body;
@@ -14,33 +12,25 @@ class CustomPage extends StatelessWidget {
   final bool showLeading;
   final bool showAppBar;
   final bool showFooter;
-  final bool showFloatingButton;
+  final Widget? floatingActionButton;
+
   const CustomPage({
     this.body,
     this.slivers,
     this.appBar,
     this.footer,
     this.leading,
+    this.floatingActionButton,
     this.showLeading = true,
     this.showAppBar = false,
     this.showFooter = false,
     super.key,
-    this.showFloatingButton = false,
   });
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      floatingActionButton: showFloatingButton
-          ? FloatingActionButton(
-              backgroundColor: context.colors.primary,
-              shape: const CircleBorder(),
-              child: const Icon(Icons.more_vert),
-              onPressed: () {
-                FloatingMenu.showFloatingMenu();
-              },
-            )
-          : null,
+      floatingActionButton: floatingActionButton,
       body: CustomScrollView(
         slivers: [
           if (body != null) ...[
