@@ -93,7 +93,7 @@ class _LeadingMenuWidgetState extends State<LeadingMenuWidget> {
                   item.icon,
                   if (!isClose) const SizedBox(width: 14),
                   if (!isClose)
-                    SelectableText(
+                    Text(
                       item.title,
                       style: const TextStyle(color: Colors.white),
                     ),
@@ -117,7 +117,7 @@ class _LeadingMenuWidgetState extends State<LeadingMenuWidget> {
                   item.icon,
                   if (!isClose) const SizedBox(width: 14),
                   if (!isClose)
-                    SelectableText(
+                    Text(
                       item.title,
                       style: const TextStyle(color: Colors.white),
                     ),

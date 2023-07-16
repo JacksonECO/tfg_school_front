@@ -4,12 +4,12 @@ import 'package:tfg_front/src/core/helpers/context_extension.dart';
 import 'package:tfg_front/src/model/course_resource_option.dart';
 import 'package:tfg_front/src/module/user/controller/course_controller.dart';
 
-class ButtonCourseResouce extends StatelessWidget {
+class ButtonCourseResource extends StatelessWidget {
   final CourseResourceOption option;
   final CourseController controller;
   final int moduleId;
 
-  const ButtonCourseResouce({super.key, required this.option, required this.controller, required this.moduleId});
+  const ButtonCourseResource({super.key, required this.option, required this.controller, required this.moduleId});
 
   @override
   Widget build(BuildContext context) {

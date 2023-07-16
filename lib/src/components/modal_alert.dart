@@ -293,7 +293,7 @@ class ModalAlert {
                             mainAxisSpacing: 5,
                             crossAxisCount: 3,
                             children: <Widget>[
-                              ...options.map((e) => ButtonCourseResouce(
+                              ...options.map((e) => ButtonCourseResource(
                                     option: e,
                                     controller: controller,
                                     moduleId: moduleId,

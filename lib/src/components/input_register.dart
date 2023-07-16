@@ -13,6 +13,7 @@ class InputRegister extends StatelessWidget {
   final String? initialValue;
   final Color? prefixColor;
   final bool enabled;
+  final int? maxLines;
   final void Function(String)? onChanged;
   final void Function()? onTap;
   final void Function(String)? onFieldSubmitted;
@@ -31,6 +32,7 @@ class InputRegister extends StatelessWidget {
     this.onFieldSubmitted,
     this.prefixColor,
     this.enabled = true,
+    this.maxLines = 1,
     super.key,
   });
 
@@ -59,6 +61,7 @@ class InputRegister extends StatelessWidget {
             controller: controller,
             keyboardType: keyboardType,
             onFieldSubmitted: onFieldSubmitted,
+            maxLines: maxLines,
             decoration: InputDecoration(
               enabledBorder: OutlineInputBorder(
                 borderSide: BorderSide.none,

@@ -36,9 +36,8 @@ class WebModule extends Module {
         ModuleRoute('/', module: HomeModule(), transition: TransitionType.noTransition),
         ModuleRoute('/school', module: SchoolModule(), transition: TransitionType.noTransition),
         ModuleRoute('/user', module: UserModule(), transition: TransitionType.noTransition),
-        ModuleRoute('/forgot-password',
-            module: ForgotPasswordModule(), transition: TransitionType.noTransition),
-        ModuleRoute('/reset-password',
-            module: ResetPasswordModule(), transition: TransitionType.noTransition),
+        ModuleRoute('/forgot-password', module: ForgotPasswordModule(), transition: TransitionType.noTransition),
+        ModuleRoute('/reset-password', module: ResetPasswordModule(), transition: TransitionType.noTransition),
+        // WildcardRoute(child: (_, args) => NotFoundPage()),
       ];
 }

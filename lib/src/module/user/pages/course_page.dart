@@ -118,7 +118,16 @@ class _CoursePageState extends State<CoursePage> {
     }
 
     return CustomPage(
-      showFloatingButton: auth.role == AuthRoleEnum.teacher ? true : false,
+      floatingActionButton: auth.role == AuthRoleEnum.teacher
+          ? FloatingActionButton(
+              backgroundColor: context.colors.primary,
+              shape: const CircleBorder(),
+              child: const Icon(Icons.more_vert),
+              onPressed: () {
+                FloatingMenu.showFloatingMenu();
+              },
+            )
+          : null,
       body: [
         controller.status == CourseStateStatus.loading
             ? (Column(

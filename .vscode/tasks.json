@@ -10,7 +10,8 @@
 				"--dart-define=emailSchool=escola1@app.com",
 				"--dart-define=emailUser=professor1-escola1@app.com",
 				"--dart-define=password=123456",
-				"--dart-define=prod=false"
+				"--dart-define=prod=false",
+				"--web-renderer=html",
 			],
 			"group": "build",
 			"problemMatcher": [],
