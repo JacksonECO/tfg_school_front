@@ -243,11 +243,11 @@ class AuthModel {
             route: '/user/news',
             icon: Image.asset('assets/icon/alert.png', height: 28, width: 28),
           ),
-          LeadingMenuItem(
-            title: 'Cronograma',
-            route: '/user/schedule',
-            icon: Image.asset('assets/icon/schedule.png', height: 28, width: 28),
-          ),
+          // LeadingMenuItem(
+          //   title: 'Cronograma',
+          //   route: '/user/schedule',
+          //   icon: Image.asset('assets/icon/schedule.png', height: 28, width: 28),
+          // ),
           LeadingMenuItem(
             title: 'Suporte ',
             route: '/user/support',
