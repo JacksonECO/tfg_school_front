@@ -244,11 +244,6 @@ class AuthModel {
             icon: Image.asset('assets/icon/courses-icon.png', height: 28, width: 28),
           ),
           LeadingMenuItem(
-            title: 'Cronograma',
-            route: '/user/schedule',
-            icon: Image.asset('assets/icon/schedule.png', height: 28, width: 28),
-          ),
-          LeadingMenuItem(
             title: 'Suporte ',
             route: '/user/support',
             icon: Image.asset('assets/icon/suporte.png', height: 28, width: 28),
