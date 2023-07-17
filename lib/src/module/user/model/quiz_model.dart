@@ -7,10 +7,10 @@ part 'quiz_model.g.dart';
 
 class QuizModel extends _QuizModelBase with _$QuizModel {
   QuizModel({
-    required super.question,
-    required super.indexSolution,
-    super.possibleSolution = const ['', '', '', ''],
-  });
+    super.question = '',
+    super.indexSolution = 0,
+    List<String>? possibleSolution,
+  }) : super(possibleSolution: possibleSolution ?? ['', '', '', '']);
 
   factory QuizModel.fromMap(Map<String, dynamic> map) {
     try {

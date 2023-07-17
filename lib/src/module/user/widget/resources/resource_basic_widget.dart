@@ -141,6 +141,7 @@ class _ResourceBasicWidgetState extends State<ResourceBasicWidget> {
                           controller: contentEC,
                           title: widget.module.type == ItemModuleCourseEnum.link ? 'URL' : 'Conteúdo',
                           hintText: widget.module.type == ItemModuleCourseEnum.link ? 'https://google.com.br' : '',
+                          maxLines: widget.module.type == ItemModuleCourseEnum.link ? 1 : 10,
                           validator: Validatorless.multiple([
                             Validatorless.required('Campo obrigatório'),
                             if (widget.module.type == ItemModuleCourseEnum.link)

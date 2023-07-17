@@ -4,19 +4,22 @@ import 'package:flutter_modular/flutter_modular.dart';
 import 'package:tfg_front/src/components/button.dart';
 import 'package:tfg_front/src/components/crud_viewer.dart';
 import 'package:tfg_front/src/components/custom_page.dart';
+import 'package:tfg_front/src/core/helpers/constants.dart';
 import 'package:tfg_front/src/core/helpers/context_extension.dart';
+import 'package:tfg_front/src/model/menu_floating_item.dart';
+import 'package:tfg_front/src/model/subject_model.dart';
 import 'package:tfg_front/src/module/user/controller/module_course_controller.dart';
+import 'package:tfg_front/src/module/user/controller/news_controller.dart';
 import 'package:tfg_front/src/module/user/model/module_course_model.dart';
+import 'package:tfg_front/src/module/user/widget/modal_news_widget.dart';
 import 'package:tfg_front/src/module/user/widget/module_course_widget.dart';
 import 'package:tfg_front/src/module/user/widget/modules_course_widget.dart';
 
 class ModuleCousePage extends StatefulWidget {
   final ModuleCouseController? controller;
-  final int subjectId;
-  final String subjectName;
+  final SubjectModel subject;
   const ModuleCousePage({
-    required this.subjectId,
-    required this.subjectName,
+    required this.subject,
     this.controller,
     super.key,
   });
@@ -31,16 +34,24 @@ class _ModuleCousePageState extends State<ModuleCousePage> {
   @override
   void initState() {
     controller = widget.controller ?? Modular.get<ModuleCouseController>();
-    controller.subjectId = widget.subjectId;
+    controller.subject = widget.subject;
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
     return CustomPage(
+      floatingActionButton: FloatingActionButton(
+        backgroundColor: context.colors.primary,
+        shape: const CircleBorder(),
+        child: const Icon(Icons.more_vert),
+        onPressed: () {
+          showFloatingMenu();
+        },
+      ),
       body: [
         CrudViewer(
-          title: widget.subjectName,
+          title: widget.subject.name ?? '',
           hasScroll: true,
           body: [
             FutureBuilder(
@@ -125,7 +136,7 @@ class _ModuleCousePageState extends State<ModuleCousePage> {
       module: ModuleCourseModel(
         title: '',
         description: '',
-        subjectId: widget.subjectId,
+        subjectId: widget.subject.id!,
         order: controller.modules.length + 1,
         content: [],
       ),
@@ -133,5 +144,84 @@ class _ModuleCousePageState extends State<ModuleCousePage> {
 
     if (newModule == null) return;
     controller.addModule(newModule);
+  }
+
+  Future showFloatingMenu() {
+    final itens = [
+      MenuFloatingItem(
+        title: 'Notícias',
+        iconPath: 'assets/icon/alert-dark.png',
+        handleShow: () async {
+          final NewsController newsController = NewsController();
+          await newsController.loadNews(controller.subject!);
+          ModalNewsWidget().showNews(context, newsController.allNews[0].news!);
+        },
+      ),
+      if (controller.isProf)
+        MenuFloatingItem(
+          title: 'Lista de Presença',
+          iconPath: 'assets/icon/class.png',
+          handleShow: () async {
+            Navigator.of(context).pushNamed('/user/attendance/${controller.subject!.classId}/${controller.subject!.id}');
+          },
+        )
+    ];
+
+    return showDialog(
+      context: Constants.context,
+      barrierDismissible: true,
+      builder: (BuildContext context) {
+        return SimpleDialog(
+          backgroundColor: Colors.white,
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(12),
+          ),
+          alignment: Alignment.bottomRight,
+          insetPadding: const EdgeInsets.fromLTRB(0, 0, 20, 80),
+          children: [
+            ConstrainedBox(
+              constraints: const BoxConstraints(minWidth: 200, minHeight: 60),
+              child: SingleChildScrollView(
+                child: Container(
+                  padding: const EdgeInsets.fromLTRB(30, 0, 30, 0),
+                  child: Column(
+                    children: itens.map((item) {
+                      return InkWell(
+                        onTap: () {
+                          Navigator.of(context).pop();
+                          item.handleShow();
+                        },
+                        child: Padding(
+                          padding: const EdgeInsets.fromLTRB(0, 15, 0, 15),
+                          child: Row(
+                            children: [
+                              Image.asset(
+                                item.iconPath,
+                                height: 24,
+                                width: 24,
+                                color: Colors.black,
+                              ),
+                              const SizedBox(
+                                width: 20,
+                              ),
+                              Text(
+                                item.title,
+                                style: context.style.poppinsMedium.copyWith(
+                                  color: Colors.black,
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      );
+                    }).toList(),
+                  ),
+                ),
+              ),
+            ),
+          ],
+        );
+      },
+    );
   }
 }

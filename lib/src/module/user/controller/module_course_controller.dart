@@ -6,6 +6,7 @@ import 'package:mobx/mobx.dart';
 import 'package:tfg_front/src/components/modal_alert.dart';
 import 'package:tfg_front/src/model/auth_model.dart';
 import 'package:tfg_front/src/model/auth_role_enum.dart';
+import 'package:tfg_front/src/model/subject_model.dart';
 import 'package:tfg_front/src/module/user/model/item_module_course_model.dart';
 import 'package:tfg_front/src/module/user/model/module_course_model.dart';
 import 'package:tfg_front/src/module/user/service/module_course_service.dart';
@@ -15,13 +16,15 @@ class ModuleCouseController {
   final bool isProf = Modular.get<AuthModel>().role == AuthRoleEnum.teacher;
   bool _hasData = false;
 
-  int subjectId = 0;
+  SubjectModel? subject;
   bool isNew = true;
   ObservableList<ModuleCourseModel> _modules = ObservableList<ModuleCourseModel>();
   List<ModuleCourseModel> get modules => _modules;
   set modules(List<ModuleCourseModel> value) {
     _modules = value.asObservable();
   }
+
+  int get subjectId => subject?.id ?? 0;
 
   Future<bool> get future async {
     if (_hasData) return true;

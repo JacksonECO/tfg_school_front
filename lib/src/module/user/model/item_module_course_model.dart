@@ -26,7 +26,6 @@ abstract class ItemModuleCourseModel extends _ItemModuleCourseModelBase with _$I
       case ItemModuleCourseEnum.quiz:
         return QuizItemModuleCourseModel.fromMap(map);
 
-      case ItemModuleCourseEnum.file:
       default:
         throw UnimplementedError();
     }

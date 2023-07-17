@@ -234,14 +234,14 @@ class AuthModel {
       case AuthRoleEnum.student:
         menu.top.addAll([
           LeadingMenuItem(
-            title: 'Notícias',
-            route: '/user/news',
-            icon: Image.asset('assets/icon/alert.png', height: 28, width: 28),
-          ),
-          LeadingMenuItem(
             title: 'Meus Cursos',
             route: '/user/courses',
             icon: Image.asset('assets/icon/courses-icon.png', height: 28, width: 28),
+          ),
+          LeadingMenuItem(
+            title: 'Notícias',
+            route: '/user/news',
+            icon: Image.asset('assets/icon/alert.png', height: 28, width: 28),
           ),
           LeadingMenuItem(
             title: 'Cronograma',

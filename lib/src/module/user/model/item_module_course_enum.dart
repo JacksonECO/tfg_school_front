@@ -13,11 +13,11 @@ import 'package:url_launcher/url_launcher_string.dart';
 
 enum ItemModuleCourseEnum {
   text('Texto'),
-  file('Arquivo'),
+  // file('Arquivo'),
   link('Link'),
   quiz('Quiz'),
-  dissert('Dissertativo'),
-  fillTheBlanks('Preencher lacunas');
+  dissert('Dissertativo');
+  // fillTheBlanks('Preencher lacunas');
 
   final String title;
   const ItemModuleCourseEnum(this.title);
@@ -36,21 +36,19 @@ enum ItemModuleCourseEnum {
   Color get color {
     switch (this) {
       case ItemModuleCourseEnum.text:
-      case ItemModuleCourseEnum.file:
       case ItemModuleCourseEnum.link:
         return CustomColors.i.backgroundTitle;
 
       case ItemModuleCourseEnum.quiz:
       case ItemModuleCourseEnum.dissert:
-      case ItemModuleCourseEnum.fillTheBlanks:
         return CustomColors.i.greenBlue;
     }
   }
 
   String get pathIcon {
     switch (this) {
-      case ItemModuleCourseEnum.fillTheBlanks:
-        return 'assets/icon/fill-the-blanks-resource.png';
+      // case ItemModuleCourseEnum.fillTheBlanks:
+      //   return 'assets/icon/fill-the-blanks-resource.png';
       default:
         return 'assets/icon/$name-resource.png';
     }
@@ -116,9 +114,7 @@ enum ItemModuleCourseEnum {
           },
         );
 
-      case ItemModuleCourseEnum.file:
       case ItemModuleCourseEnum.dissert:
-      case ItemModuleCourseEnum.fillTheBlanks:
         throw UnimplementedError();
     }
   }

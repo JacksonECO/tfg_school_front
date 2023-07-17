@@ -14,7 +14,7 @@ class CourseItemWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     final DateFormat formatter = DateFormat('dd/MM/yyyy HH:mm');
     return InkWell(
-      onTap: () => Modular.to.navigate('${UserModule.courseRoute}/${subject.id}'),
+      onTap: () => Modular.to.navigate('${UserModule.courseRoute}/${subject.id}', arguments: subject),
       child: Container(
         margin: const EdgeInsets.only(bottom: 20),
         width: double.infinity,

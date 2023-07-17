@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:tfg_front/src/components/button.dart';
 import 'package:tfg_front/src/components/click.dart';
+import 'package:tfg_front/src/components/modal_alert.dart';
 import 'package:tfg_front/src/core/helpers/constants.dart';
 import 'package:tfg_front/src/core/helpers/context_extension.dart';
 import 'package:tfg_front/src/module/user/controller/module_course_controller.dart';
@@ -103,19 +104,19 @@ class ModulesCourseWidget extends StatelessWidget {
           );
         }),
         const SizedBox(height: 4),
-
-        Align(
-          alignment: Alignment.topRight,
-          child: Button(
-            withBorder: false,
-            height: 50,
-            color: context.colors.primary,
-            onPressed: () {
-              showAddResource();
-            },
-            text: 'Adicionar Recurso',
+        if (controller.isProf)
+          Align(
+            alignment: Alignment.topRight,
+            child: Button(
+              withBorder: false,
+              height: 50,
+              color: context.colors.primary,
+              onPressed: () {
+                showAddResource();
+              },
+              text: 'Adicionar Recurso',
+            ),
           ),
-        ),
         // ListView.builder(
         //   // physics: const NeverScrollableScrollPhysics(),
         //   shrinkWrap: true,
@@ -144,22 +145,22 @@ class ModulesCourseWidget extends StatelessWidget {
           ),
           actionsAlignment: MainAxisAlignment.center,
           content: SizedBox(
-            width: 500,
-            height: 400,
+            width: 1,
             child: CustomScrollView(
               primary: false,
               shrinkWrap: true,
               slivers: <Widget>[
                 SliverGrid.count(
-                  crossAxisSpacing: 5,
-                  mainAxisSpacing: 5,
-                  crossAxisCount: 3,
+                  crossAxisSpacing: 2,
+                  mainAxisSpacing: 4,
+                  crossAxisCount: 2,
+                  childAspectRatio: 1.4,
                   children: ItemModuleCourseEnum.values
                       .map(
                         (tipo) => Click(
                           child: Container(
-                            width: 180,
-                            height: 180,
+                            width: 10,
+                            height: 10,
                             padding: const EdgeInsets.all(25),
                             margin: const EdgeInsets.all(10),
                             decoration: BoxDecoration(
@@ -168,6 +169,7 @@ class ModulesCourseWidget extends StatelessWidget {
                             ),
                             child: Column(
                               mainAxisAlignment: MainAxisAlignment.center,
+                              mainAxisSize: MainAxisSize.min,
                               children: [
                                 Image.asset(tipo.pathIcon, height: 40),
                                 const SizedBox(height: 20),
@@ -202,29 +204,15 @@ class ModulesCourseWidget extends StatelessWidget {
           module: BasicItemModuleCourseModel(type: type),
         ).openModal(Constants.context);
         break;
-      case ItemModuleCourseEnum.file:
-        // TODO: Handle this case.
-        break;
+
       case ItemModuleCourseEnum.quiz:
         resource = await ResourceQuizWidget(
-          module: QuizItemModuleCourseModel(
-              type: type,
-              quizzes: [
-                QuizModel(
-                  question: '',
-                  // possibleSolution: [],
-                  indexSolution: 0,
-                )
-              ],
-              title: ''),
+          module: QuizItemModuleCourseModel(type: type, quizzes: [QuizModel()], title: ''),
         ).openModal(Constants.context);
         break;
-      case ItemModuleCourseEnum.dissert:
-        // TODO: Handle this case.
-        break;
-      case ItemModuleCourseEnum.fillTheBlanks:
-        // TODO: Handle this case.
-        break;
+
+      default:
+        ModalAlert.show('Em desenvolvimento', 'Ainda não foi implementado esse recurso');
     }
 
     if (resource == null) return;

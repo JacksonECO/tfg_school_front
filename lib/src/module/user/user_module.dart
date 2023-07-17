@@ -61,8 +61,7 @@ class UserModule extends Module {
         ChildRoute(
           courseRoute.split('/user').last + '/:id',
           child: (_, args) => ModuleCousePage(
-            subjectId: int.parse(args.params['id']),
-            subjectName: 'Material',
+            subject: args.data,
           ),
         ),
         ChildRoute(
