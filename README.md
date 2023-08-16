@@ -10,5 +10,7 @@ Este trabalho apresenta o desenvolvimento de uma aplicação web que integra um 
 Objetiva-se que o presente trabalho seja tido como referência para instituições de ensino que enfrentam desafios semelhantes, e que a aplicação possa ser aprimorada e expandida em trabalhos futuros.
 
 Url para acesso a demo: https://tfg-school.web.app
+
 Figma: https://www.figma.com/file/vUZtqVuzplp3sx58NKUvbC
+
 Projeto do BackEnd: https://github.com/LucasSeraggi/TFG-Backend
